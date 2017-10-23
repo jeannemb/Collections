@@ -38,22 +38,29 @@
 	  </div>
 	</nav>
 	  
-	<div class="container-fluid text-center">    
-	    <div class="col-sm-2 sidenav">
-	    </div>
-	    <div class="page-header" id="banner">
-	          <div class="col-lg-8 text-center">
-	            <h1>Collectr</h1>
-	            <p class="lead">Great for managing collections...</p>
-	            <p>Maybe ill draw a logo for here...</p>
-				<a class="btn btn-primary btn-lg">Start Collecting</a>
-	          </div>
-	    </div>
-	    <div class="col-sm-2 sidenav">
-	            <a class="btn btn-primary btn-md" href="libraryCreation.html">Create a Library</a>
-  				<a class="btn btn-primary btn-md" href="#">Library 1</a>
-	    </div>
-	</div>
+<div class="panel panel-default" style="margin: auto; width: 40%; border: 3px solid; padding: 10px;">
+  <div class="panel-body">
+
+<form class="form-horizontal" style="margin: auto; padding: 10px;">
+
+	  <h2>Create a New Library</h2>
+	  	  <label for="Library Name">Library Name:</label>
+	      <input type="text" class="form-control" id="lName" placeholder="Library Name" name="lName" required>
+	      <label for="Library Type">Type of Library:</label>
+	      <select>
+  			<option style='color: #ffffff' value="text">movies</option>
+  			<option style='color: #ffffff' value="text">comic books</option>
+ 			<option style='color: #ffffff' value="text">books</option>
+  			<option style='color: #ffffff' value="text">coins</option>
+  			<option style='color: #ffffff' value="text">other</option>
+		  </select> 
+		  <label for="other">Other:</label>
+		  <input type="text" class="form-control" id="other" placeholder="Other:" name="other">
+	      <button type="submit" class="btn btn-default">Create</button>
+	    
+</form>
+  </div>
+</div>
 	
 </body>
 </html>
