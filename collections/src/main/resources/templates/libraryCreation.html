@@ -3,17 +3,18 @@
 	<title>Collectr</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
+	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.css"></link>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-
-	<script src="/js/login.js"></script>
-
+	  
+	<script src="/js/index.js"></script>
+	  
 </head>
 <body>
+
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -36,26 +37,30 @@
 	    </div>
 	  </div>
 	</nav>
-<h1> </h1>
+	  
 <div class="panel panel-default" style="margin: auto; width: 40%; border: 3px solid; padding: 10px;">
   <div class="panel-body">
 
 <form class="form-horizontal" style="margin: auto; padding: 10px;">
 
-	  <h2>Login to Collectr</h2>
-	      <label for="email">Email:</label>
-	      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
-	      <label for="pwd">Password:</label>
-	      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required>
-	    <div class="checkbox">
-	      <label><input type="checkbox" name="remember"> Remember me</label>
-	    </div>
-	    <button type="submit" class="btn btn-default">Login</button>
-	    <a href="accountCreation.html">Create New Account</a>
+	  <h2>Create a New Library</h2>
+	  	  <label for="Library Name">Library Name:</label>
+	      <input type="text" class="form-control" id="lName" placeholder="Library Name" name="lName" required>
+	      <label for="Library Type">Type of Library:</label>
+	      <select>
+  			<option style='color: #ffffff' value="text">movies</option>
+  			<option style='color: #ffffff' value="text">comic books</option>
+ 			<option style='color: #ffffff' value="text">books</option>
+  			<option style='color: #ffffff' value="text">coins</option>
+  			<option style='color: #ffffff' value="text">other</option>
+		  </select> 
+		  <label for="other">Other:</label>
+		  <input type="text" class="form-control" id="other" placeholder="Other:" name="other">
+	      <button type="submit" class="btn btn-default">Create</button>
 	    
 </form>
   </div>
 </div>
-
+	
 </body>
 </html>

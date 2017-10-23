@@ -3,17 +3,18 @@
 	<title>Collectr</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
+	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.css"></link>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-
-	<script src="/js/login.js"></script>
-
+	  
+	<script src="/js/index.js"></script>
+	  
 </head>
 <body>
+
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -36,26 +37,23 @@
 	    </div>
 	  </div>
 	</nav>
-<h1> </h1>
-<div class="panel panel-default" style="margin: auto; width: 40%; border: 3px solid; padding: 10px;">
-  <div class="panel-body">
-
-<form class="form-horizontal" style="margin: auto; padding: 10px;">
-
-	  <h2>Login to Collectr</h2>
-	      <label for="email">Email:</label>
-	      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
-	      <label for="pwd">Password:</label>
-	      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required>
-	    <div class="checkbox">
-	      <label><input type="checkbox" name="remember"> Remember me</label>
+	  
+	<div class="container-fluid text-center">    
+	    <div class="col-sm-2 sidenav">
 	    </div>
-	    <button type="submit" class="btn btn-default">Login</button>
-	    <a href="accountCreation.html">Create New Account</a>
-	    
-</form>
-  </div>
-</div>
-
+	    <div class="page-header" id="banner">
+	          <div class="col-lg-8 text-center">
+	            <h1>Collectr</h1>
+	            <p class="lead">Great for managing collections...</p>
+	            <p>Maybe ill draw a logo for here...</p>
+				<a class="btn btn-primary btn-lg">Start Collecting</a>
+	          </div>
+	    </div>
+	    <div class="col-sm-2 sidenav">
+	            <a class="btn btn-primary btn-md" href="libraryCreation.html">Create a Library</a>
+  				<a class="btn btn-primary btn-md" href="#">Library 1</a>
+	    </div>
+	</div>
+	
 </body>
 </html>
