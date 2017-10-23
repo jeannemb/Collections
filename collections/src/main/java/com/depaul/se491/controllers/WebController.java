@@ -11,5 +11,24 @@ public class WebController {
    public String homepage(){
        return "index";
    }
-	
+
+	@RequestMapping(value="/login",method = RequestMethod.GET)
+	public String login(){
+	   return "login";
+	}
+
+	@RequestMapping(value="/about",method = RequestMethod.GET)
+	public String about(){
+	   return "about";
+	}
+
+	@RequestMapping(value="/libraryCreation",method = RequestMethod.GET)
+	public String libraryCreation(){
+	   return "libraryCreation";
+	}
+
+	@RequestMapping(value="/libraryHome",method = RequestMethod.GET)
+	public String libraryHome(){
+	   return "libraryHome";
+	}
 }
