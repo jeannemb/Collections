@@ -21,6 +21,11 @@ public class WebController {
 	public String about(){
 	   return "about";
 	}
+	
+	@RequestMapping(value="/accountCreation",method = RequestMethod.GET)
+	public String accountCreation(){
+	   return "accountCreation";
+	}
 
 	@RequestMapping(value="/libraryCreation",method = RequestMethod.GET)
 	public String libraryCreation(){
