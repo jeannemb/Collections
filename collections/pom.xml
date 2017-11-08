@@ -32,20 +32,32 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
+    <dependency>
+	  <groupId>org.thymeleaf.extras</groupId>
+	  <artifactId>thymeleaf-extras-springsecurity4</artifactId>	
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+    </dependency>
    
     <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
     <!-- This library is needed for database connection -->
 	<dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
 	</dependency>
 
 	<!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
 	<!-- This library is needed for SSH connection -->
 	<dependency>
-    <groupId>com.jcraft</groupId>
-    <artifactId>jsch</artifactId>
-    <version>0.1.54</version>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.54</version>
 	</dependency>
   </dependencies>
   

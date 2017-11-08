@@ -1,8 +1,8 @@
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 	<title>Collectr</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta charset="utf-8" ></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.css"></link>
@@ -22,38 +22,39 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>                        
 	      </button>
-	      <a class="navbar-brand" href="#">Collectr</a>
+	      <a class="navbar-brand" href="/">Collectr</a>
 	    </div>
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">Home</a></li>
-	        <li><a href="about.html">About</a></li>
-	        <li><a href="Index.html">Collections</a></li>
+	        <li class="active"><a href="/">Home</a></li>
+	        <li><a href="about">About</a></li>
+	        <li><a href="libraryHome">Collections</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 	      </ul>
 	    </div>
 	  </div>
 	</nav>
 <h1> </h1>
 <div class="panel panel-default" style="margin: auto; width: 40%; border: 3px solid; padding: 10px;">
-  <div class="panel-body">
-
-<form class="form-horizontal" style="margin: auto; padding: 10px;">
-
-	  <h2>Login to Collectr</h2>
-	      <label for="email">Email:</label>
-	      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required="true"/>
-	      <label for="pwd">Password:</label>
-	      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required="true"/>
+<div class="panel-body">
+<div class="form-horizontal" style="margin: auto; padding: 10px;">
+	<h2>Login to Collectr</h2>
+	<div th:if="${param.error}">Invalid username or password.</div>
+    <div th:if="${param.logout}">You have been logged out.</div>
+    <form th:action="@{/login}" method="post" >
+		<label for="username">Username:</label>
+	    <input type="text" class="form-control" id="username" placeholder="Enter Username" name="username"></input>
+		<label for="password">Password:</label>
+	    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"></input>
 	    <div class="checkbox">
-	      <label><input type="checkbox" name="remember"/> Remember me</label>
+	    	<label><input type="checkbox" name="remember"></input> Remember me</label>
 	    </div>
 	    <button type="submit" class="btn btn-default">Login</button>
-	    <a href="/accountCreation.html">Create New Account</a>
-	    
-</form>
+	</form>
+	<a href="accountCreation">Create New Account</a>
+</div>	
   </div>
 </div>
 
