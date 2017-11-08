@@ -9,10 +9,10 @@ public class Item implements Serializable{
 	private Long genericLibraryId;
 	private String title;
 	private String description;
-	private String owns;
-	private String wantsToOwn;
-	private String complete;
-	private String wantsToCompete;
+	private boolean owns;
+	private boolean wantsToOwn;
+	private boolean complete;
+	private boolean wantsToCompete;
 	
 	public Long getItemId() {
 		return itemId;
@@ -38,28 +38,28 @@ public class Item implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getOwns() {
+	public boolean getOwns() {
 		return owns;
 	}
-	public void setOwns(String owns) {
+	public void setOwns(boolean owns) {
 		this.owns = owns;
 	}
-	public String getWantsToOwn() {
+	public boolean getWantsToOwn() {
 		return wantsToOwn;
 	}
-	public void setWantsToOwn(String wantsToOwn) {
+	public void setWantsToOwn(boolean wantsToOwn) {
 		this.wantsToOwn = wantsToOwn;
 	}
-	public String getComplete() {
+	public boolean getComplete() {
 		return complete;
 	}
-	public void setComplete(String complete) {
+	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
-	public String getWantsToCompete() {
+	public boolean getWantsToCompete() {
 		return wantsToCompete;
 	}
-	public void setWantsToCompete(String wantsToCompete) {
+	public void setWantsToCompete(boolean wantsToCompete) {
 		this.wantsToCompete = wantsToCompete;
 	}
 	
