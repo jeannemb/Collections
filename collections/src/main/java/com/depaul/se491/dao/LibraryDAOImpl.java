@@ -94,7 +94,7 @@ public class LibraryDAOImpl implements LibraryDAO{
 			item.setOwns(rs.getBoolean("owns"));
 			item.setWantsToOwn(rs.getBoolean("wants_to_own"));
 			item.setComplete(rs.getBoolean("complete"));
-			item.setWantsToComplete(rs.getBoolean("wants_to_compete"));
+			item.setWantsToComplete(rs.getBoolean("wants_to_complete"));
 
 			return item;
 		}
@@ -132,7 +132,7 @@ public class LibraryDAOImpl implements LibraryDAO{
 				List movies = template.query(sql, new Object[]{libraryId}, new MoviesRowMapper());
 				DatabaseConnection.closeConnection();
 				return movies;
-			case "Items": 
+			default: 
 				sql = "SELECT * FROM generic_items WHERE generic_library_id = ?";
 				List genericItems = template.query(sql, new Object[]{libraryId}, new GenericItemsRowMapper());
 				DatabaseConnection.closeConnection();
@@ -142,15 +142,14 @@ public class LibraryDAOImpl implements LibraryDAO{
 			DatabaseConnection.closeConnection();
 			return null;
 		}
-		return null;
 	}
 	
-    public static void main( String[] args ) throws SQLException{
-    	LibraryDAOImpl myImpl = new LibraryDAOImpl();
-    	List myList = myImpl.getItemsByLibrary("Items", (long) 9);
-    	for(int i=0; i<myList.size(); i++){
-    		System.out.println(myList.get(i).toString());
-    	}
-	}
+//    public static void main( String[] args ) throws SQLException{
+//    	LibraryDAOImpl myImpl = new LibraryDAOImpl();
+//    	List myList = myImpl.getItemsByLibrary("Items", (long) 9);
+//    	for(int i=0; i<myList.size(); i++){
+//    		System.out.println(myList.get(i).toString());
+//    	}
+//	}
 
 }
