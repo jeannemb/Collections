@@ -1,5 +1,6 @@
 package com.depaul.se491.controllers;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class LibraryController {
 	private LibraryDAO libraryDAO;
 	
 	@RequestMapping(value = "/library", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<List<Library>> getLibraries( @RequestParam(required=true, value="userId") Long userId) {
+	public ResponseEntity<List<Library>> getLibraries( @RequestParam(required=true, value="userId") Long userId) throws SQLException {
 		return new ResponseEntity<>(libraryDAO.getLibrariesByUser(userId), HttpStatus.OK);
 	}
 	

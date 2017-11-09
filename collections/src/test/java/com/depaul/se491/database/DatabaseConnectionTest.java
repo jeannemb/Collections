@@ -2,6 +2,9 @@ package com.depaul.se491.database;
 import static org.junit.Assert.*;
 import java.sql.DriverManager;
 import org.junit.Test;
+import org.springframework.boot.SpringApplication;
+
+import com.depaul.se491.App;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import com.mysql.jdbc.Connection;
@@ -20,7 +23,7 @@ public class DatabaseConnectionTest {
 		// define the remote host (RDS database), remote port, and local port, from the server EC2
 		String rhost = "se491-mysql-collections.cwxyxwc6zgxm.us-east-1.rds.amazonaws.com";
 		int rport = 3306;
-        int lport = 8000;
+        int lport = 9000;
         
         // set up session configuration to ignore SSH connection warning  
         session.setConfig("StrictHostKeyChecking", "no");
@@ -32,7 +35,7 @@ public class DatabaseConnectionTest {
 
         // set up configuration needed to connect to database using JDBC
         String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:8000/collections";
+		String url = "jdbc:mysql://localhost:9000/collections";
 		String username = "collectionsadmin";
 		String password = "collectionsadmin";
 		Class.forName(driver);
@@ -55,5 +58,6 @@ public class DatabaseConnectionTest {
 			fail("Connection Failed");
 		}
 	}
+	
 
 }

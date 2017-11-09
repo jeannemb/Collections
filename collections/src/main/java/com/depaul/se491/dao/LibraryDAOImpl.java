@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
+import com.depaul.se491.connection.DatabaseConnection;
 import com.depaul.se491.domain.Item;
 import com.depaul.se491.domain.Library;
 
@@ -37,11 +39,17 @@ public class LibraryDAOImpl implements LibraryDAO{
 	}
 	
 	@Override
-	public List<Library> getLibrariesByUser(Long userId) {
-
-		String sql = "SELECT * FROM LIBRARIES WHERE USER_ID = ?";
+	public List<Library> getLibrariesByUser(Long userId) throws SQLException {
+		try{
+		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));
+		String sql = "SELECT * FROM libraries WHERE USER_ID = ?";
 		List<Library> libraries = template.query(sql, new Object[]{userId}, new LibraryRowMapper());
+		DatabaseConnection.closeConnection();
 		return libraries;
+		}catch(Exception e){
+			DatabaseConnection.closeConnection();
+			return null;
+		}
 		
 	}
 

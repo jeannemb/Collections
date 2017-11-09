@@ -12,7 +12,7 @@ public class Item implements Serializable{
 	private boolean owns;
 	private boolean wantsToOwn;
 	private boolean complete;
-	private boolean wantsToCompete;
+	private boolean wantsToComplete;
 	
 	public Long getItemId() {
 		return itemId;
@@ -56,11 +56,11 @@ public class Item implements Serializable{
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
-	public boolean getWantsToCompete() {
-		return wantsToCompete;
+	public boolean getWantsToComplete() {
+		return wantsToComplete;
 	}
-	public void setWantsToCompete(boolean wantsToCompete) {
-		this.wantsToCompete = wantsToCompete;
+	public void setWantsToComplete(boolean wantsToComplete) {
+		this.wantsToComplete = wantsToComplete;
 	}
 	
 	
