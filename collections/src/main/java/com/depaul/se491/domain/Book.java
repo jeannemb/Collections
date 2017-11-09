@@ -76,6 +76,12 @@ public class Book implements Serializable{
 	public void setWantsToComplete(boolean wantsToComplete) {
 		this.wantsToComplete = wantsToComplete;
 	}
+	@Override
+	public String toString() {
+		return "Book [itemId=" + itemId + ", booksLibraryId=" + booksLibraryId + ", title=" + title + ", ISBN13="
+				+ ISBN13 + ", ISBN10=" + ISBN10 + ", authors=" + authors + ", owns=" + owns + ", wantsToOwn="
+				+ wantsToOwn + ", complete=" + complete + ", wantsToComplete=" + wantsToComplete + "]";
+	}
 
 	
 }

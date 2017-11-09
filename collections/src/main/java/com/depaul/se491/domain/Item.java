@@ -62,6 +62,12 @@ public class Item implements Serializable{
 	public void setWantsToComplete(boolean wantsToComplete) {
 		this.wantsToComplete = wantsToComplete;
 	}
+	@Override
+	public String toString() {
+		return "Item [itemId=" + itemId + ", genericLibraryId=" + genericLibraryId + ", title=" + title
+				+ ", description=" + description + ", owns=" + owns + ", wantsToOwn=" + wantsToOwn + ", complete="
+				+ complete + ", wantsToComplete=" + wantsToComplete + "]";
+	}
 	
 	
 

@@ -2,9 +2,6 @@ package com.depaul.se491.database;
 import static org.junit.Assert.*;
 import java.sql.DriverManager;
 import org.junit.Test;
-import org.springframework.boot.SpringApplication;
-
-import com.depaul.se491.App;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import com.mysql.jdbc.Connection;

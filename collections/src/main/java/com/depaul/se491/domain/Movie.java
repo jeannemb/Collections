@@ -69,6 +69,12 @@ public class Movie implements Serializable{
 	public void setWantsToComplete(boolean wantsToComplete) {
 		this.wantsToComplete = wantsToComplete;
 	}
+	@Override
+	public String toString() {
+		return "Movie [itemId=" + itemId + ", moviesLibraryId=" + moviesLibraryId + ", title=" + title + ", UPC=" + UPC
+				+ ", actors=" + actors + ", owns=" + owns + ", wantsToOwn=" + wantsToOwn + ", complete=" + complete
+				+ ", wantsToComplete=" + wantsToComplete + "]";
+	}
 	
 	
 }

@@ -26,8 +26,8 @@ public class LibraryController {
 	}
 	
 	@RequestMapping(value = "/items", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<List<Item>> getItems( @RequestParam(required=true, value="libraryId") Long libraryId) {
-		return new ResponseEntity<>(libraryDAO.getItemsByLibrary(libraryId), HttpStatus.OK);
+	public ResponseEntity<List<Item>> getItems( @RequestParam(required=true, value="libraryId") Long libraryId, @RequestParam(required=true, value="libraryType") String librarytype) throws SQLException {
+		return new ResponseEntity<>(libraryDAO.getItemsByLibrary(librarytype, libraryId), HttpStatus.OK);
 	}
 	
 }

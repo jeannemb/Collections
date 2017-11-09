@@ -9,6 +9,6 @@ import com.depaul.se491.domain.Library;
 public interface LibraryDAO {
 	
 	List<Library> getLibrariesByUser(Long userId) throws SQLException;
-	List<Item> getItemsByLibrary(Long libraryId);
+	List getItemsByLibrary(String libraryType, Long libraryId) throws SQLException;
 
 }
