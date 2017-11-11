@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.stereotype.Repository;
 
 import com.depaul.se491.connection.DatabaseConnection;
 import com.depaul.se491.domain.Book;
@@ -14,6 +15,7 @@ import com.depaul.se491.domain.Item;
 import com.depaul.se491.domain.Library;
 import com.depaul.se491.domain.Movie;
 
+@Repository
 public class LibraryDAOImpl implements LibraryDAO{
 
 	private JdbcTemplate template;
