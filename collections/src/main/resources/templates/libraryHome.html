@@ -10,7 +10,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 	  
-	<script src="/js/index.js"></script>
+	<script src="/js/library.js"></script>
+	<script src="/js/getLibraries.js"></script>
 	  
 </head>
 <body>
@@ -51,8 +52,16 @@
 	    </div>
 	    <div class="col-sm-2 sidenav">
 	            <a class="btn btn-primary btn-md" href="libraryCreation.html">Create a Library</a>
-  				<a class="btn btn-primary btn-md" href="#">Library 1</a>
+  				<b class="btn btn-primary btn-md" href="#">Library 1</b>
 	    </div>
+	    <div class="col-sm-7" style="margin:20px 0px 20px 0px">
+		    <button id="getAllLibraries" type="button" class="btn btn-primary">Get All Libraries</button>
+		    <div id="getResultDiv" style="padding:20px 10px 20px 50px">
+	            <ul class="list-group">
+	    	    </ul>
+    	</div>
+	</div>
+	    
 	</div>
 	
 </body>
