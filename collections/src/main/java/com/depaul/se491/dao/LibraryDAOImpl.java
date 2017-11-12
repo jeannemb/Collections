@@ -124,12 +124,12 @@ public class LibraryDAOImpl implements LibraryDAO{
 		try{
 		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));
 		switch (libraryType){
-			case "Books": 
+			case "books": 
 				sql = "SELECT * FROM books WHERE books_library_id = ?";
 				List books = template.query(sql, new Object[]{libraryId}, new BooksRowMapper());
 				DatabaseConnection.closeConnection();
 				return books;
-			case "Movies": 
+			case "movies": 
 				sql = "SELECT * FROM movies WHERE movies_library_id = ?";
 				List movies = template.query(sql, new Object[]{libraryId}, new MoviesRowMapper());
 				DatabaseConnection.closeConnection();
