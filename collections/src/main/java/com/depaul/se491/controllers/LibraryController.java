@@ -6,13 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.depaul.se491.dao.ItemDAO;
 import com.depaul.se491.dao.LibraryDAO;
-import com.depaul.se491.domain.Item;
 import com.depaul.se491.domain.Library;
 
 @RestController
@@ -21,6 +22,9 @@ public class LibraryController {
 	
     @Autowired
 	private LibraryDAO libraryDAO;
+    
+    @Autowired
+    private ItemDAO itemDAO;
 	
 	@RequestMapping(value = "/library", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<List<Library>> getLibraries( @RequestParam(required=true, value="userId") Long userId) throws SQLException {
@@ -29,8 +33,15 @@ public class LibraryController {
 	}
 	
 	@RequestMapping(value = "/items", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<List<Item>> getItems( @RequestParam(required=true, value="libraryId") Long libraryId, @RequestParam(required=true, value="libraryType") String librarytype) throws SQLException {
-		return new ResponseEntity<>(libraryDAO.getItemsByLibrary(librarytype, libraryId), HttpStatus.OK);
+	public ResponseEntity<List> getItems( @RequestParam(required=true, value="libraryId") Long libraryId, @RequestParam(required=true, value="libraryType") String librarytype) throws SQLException {
+		return new ResponseEntity<>(itemDAO.getItemsByLibrary(librarytype, libraryId), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/createlibrary", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<String> createLibrary(@RequestBody Library jsonLibrary) throws SQLException {
+		String result = libraryDAO.creatLibraryForUser(jsonLibrary);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
 	
 }

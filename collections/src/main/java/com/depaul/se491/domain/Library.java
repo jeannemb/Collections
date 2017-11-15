@@ -34,6 +34,10 @@ public class Library implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
+	@Override
+	public String toString() {
+		return "Library [libraryId=" + libraryId + ", userId=" + userId + ", name=" + name + ", type=" + type + "]";
+	}
 	
-
+	
 }
