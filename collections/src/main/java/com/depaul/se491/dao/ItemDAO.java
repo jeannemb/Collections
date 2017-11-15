@@ -14,9 +14,8 @@ import com.depaul.se491.domain.Movie;
 public interface ItemDAO {
 	
 	List getItemsByLibrary(String libraryType, Long libraryId) throws SQLException;
-	String addBooksInlibrary(Book book) throws SQLException;
-	String addMoviesInlibrary(Movie movie) throws SQLException;
-	String addGenericItemInlibrary(Item item) throws SQLException;
-
+	String addBooksInLibrary(Book book) throws SQLException;
+	String addMoviesInLibrary(Movie movie) throws SQLException;
+	String addGenericItemInLibrary(Item item) throws SQLException;
 
 }

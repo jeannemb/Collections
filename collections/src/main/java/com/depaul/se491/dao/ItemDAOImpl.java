@@ -119,7 +119,7 @@ public class ItemDAOImpl implements ItemDAO{
 	}
 	
 	
-	public String addBooksInlibrary(Book book) throws SQLException{
+	public String addBooksInLibrary(Book book) throws SQLException{
 		String sql;
 		try{
 		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));
@@ -137,7 +137,7 @@ public class ItemDAOImpl implements ItemDAO{
 		}		
 	}
 	
-	public String addMoviesInlibrary(Movie movie) throws SQLException{
+	public String addMoviesInLibrary(Movie movie) throws SQLException{
 		String sql;
 		try{
 		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));
@@ -155,7 +155,7 @@ public class ItemDAOImpl implements ItemDAO{
 		}		
 	}
 	
-	public String addGenericItemInlibrary(Item item) throws SQLException{
+	public String addGenericItemInLibrary(Item item) throws SQLException{
 		String sql;
 		try{
 		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));
@@ -184,7 +184,7 @@ public class ItemDAOImpl implements ItemDAO{
 //    	item.setTitle("TEST Item");
 //    	item.setWantsToComplete(true);
 //    	item.setOwns(true);
-//    	String result = myImpl.addGenericItemInlibrary(item);
+//    	String result = myImpl.addGenericItemInLibrary(item);
 //    	System.out.println(result);
 //    	List myList2 = myImpl.getItemsByLibrary("item",(long) 3);
 //    	for(int i=0; i<myList2.size(); i++){
