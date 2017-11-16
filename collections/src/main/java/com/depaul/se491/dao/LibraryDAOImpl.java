@@ -56,7 +56,7 @@ public class LibraryDAOImpl implements LibraryDAO{
 	}
 
 	
-	public String creatLibraryForUser(Library lib) throws SQLException{
+	public String createLibraryForUser(Library lib) throws SQLException{
 		String sql;
 		try{
 		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));

@@ -12,6 +12,6 @@ import com.depaul.se491.domain.Library;
 public interface LibraryDAO {
 	
 	List<Library> getLibrariesByUser(Long userId) throws SQLException;
-	String creatLibraryForUser(Library lib) throws SQLException;
+	String createLibraryForUser(Library lib) throws SQLException;
 
 }

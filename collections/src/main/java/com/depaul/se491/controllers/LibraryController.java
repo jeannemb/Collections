@@ -39,7 +39,7 @@ public class LibraryController {
 	
 	@RequestMapping(value = "/createlibrary", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public ResponseEntity<String> createLibrary(@RequestBody Library jsonLibrary) throws SQLException {
-		String result = libraryDAO.creatLibraryForUser(jsonLibrary);
+		String result = libraryDAO.createLibraryForUser(jsonLibrary);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
