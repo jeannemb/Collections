@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.depaul.se491.dao.ItemDAO;
 import com.depaul.se491.dao.LibraryDAO;
+import com.depaul.se491.domain.Book;
+import com.depaul.se491.domain.Item;
 import com.depaul.se491.domain.Library;
+import com.depaul.se491.domain.Movie;
 
 @RestController
 @RequestMapping(value = "/manage")
@@ -43,5 +46,22 @@ public class LibraryController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/addbook", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<String> addBookInLibrary(@RequestBody Book jsonBook) throws SQLException {
+		String result = itemDAO.addBooksInLibrary(jsonBook);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/addmovie", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<String> addMovieInLibrary(@RequestBody Movie jsonMovie) throws SQLException {
+		String result = itemDAO.addMoviesInLibrary(jsonMovie);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/addgeneric", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	public ResponseEntity<String> addBook(@RequestBody Item jsonItem) throws SQLException {
+		String result = itemDAO.addGenericItemInLibrary(jsonItem);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
 	
 }
