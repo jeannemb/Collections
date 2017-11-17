@@ -11,7 +11,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 	  
 	<script src="/js/index.js"></script>
-	  
+	<script src="/js/addLibrary.js"></script>
+	
 </head>
 <body>
 
@@ -41,21 +42,13 @@
 <div class="panel panel-default" style="margin: auto; width: 40%; border: 3px solid; padding: 10px;">
   <div class="panel-body">
 
-<form class="form-horizontal" style="margin: auto; padding: 10px;">
+<form class="form-horizontal" style="margin: auto; padding: 10px;" id="libraryForm">
 
 	  <h2>Create a New Library</h2>
 	  	  <label for="Library Name">Library Name:</label>
-	      <input type="text" class="form-control" id="lName" placeholder="Library Name" name="lName"/>
+	      <input id="libName" type="text" class="form-control" placeholder="Library Name"/>
 	      <label for="Library Type">Type of Library:</label>
-	      <select>
-  			<option style='color: #ffffff' value="text">movies</option>
-  			<option style='color: #ffffff' value="text">comic books</option>
- 			<option style='color: #ffffff' value="text">books</option>
-  			<option style='color: #ffffff' value="text">coins</option>
-  			<option style='color: #ffffff' value="text">other</option>
-		  </select> 
-		  <label for="other">Other:</label>
-		  <input type="text" class="form-control" id="other" placeholder="Other:" name="other"/>
+	      <input id="libType" type="text" class="form-control" placeholder="Library Type"/>
 	      <button type="submit" class="btn btn-default">Create</button>
 	    
 </form>
