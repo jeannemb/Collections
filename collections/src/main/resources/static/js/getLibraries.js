@@ -37,6 +37,10 @@ $( document ).ready(function() {
 	
 	// GET Items
 	function ajaxGetItems(libId, libType){
+		var oldBtn = document.getElementById("newItem");
+		if (oldBtn != null){
+			oldBtn.parentNode.removeChild(oldBtn);
+		}
 		var URL = "http://localhost:8080/manage/items?libraryId=" + libId + "&libraryType=" + libType;
 		$.ajax({
 			type : "GET",
@@ -56,7 +60,7 @@ $( document ).ready(function() {
 				document.getElementById("buttonGroup").appendChild(button);
 				button.href = "itemCreation";
 				button.addEventListener ("click", function() {
-					window.location.href = "itemCreation" + '#' + libId;
+					window.location.href = "itemCreation" + '#' + libId + "#" + libType;
 				});
 			},
 			error : function(e){
