@@ -9,8 +9,8 @@ $( document ).ready(function() {
     
     function ajaxPost(){
         var formData = {
-        	genericLibraryId : 1,
-           	title            :  $("#itemName").val()
+        	genericLibraryId : window.location.hash.substring(1),
+           	title            : $("#itemName").val()
         }
     	$.ajax({
     		type : "POST",
@@ -34,7 +34,6 @@ $( document ).ready(function() {
         function resetData(){
         	1;
         	$("#itemName").val("");
-        	$("#itemDescription").val("");
         }
     }
 	

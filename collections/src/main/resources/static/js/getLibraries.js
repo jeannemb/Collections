@@ -49,18 +49,21 @@ $( document ).ready(function() {
 				});
 				console.log("Success: ", URL);
 				$("#getResultDiv").html(itemList);
+				console.log("Creating new add item button?");
+				var button = document.createElement("button");
+				button.innerHTML = "Add An Item";
+				button.setAttribute("id", "newItem");
+				document.getElementById("buttonGroup").appendChild(button);
+				button.href = "itemCreation";
+				button.addEventListener ("click", function() {
+					window.location.href = "itemCreation" + '#' + libId;
+				});
 			},
 			error : function(e){
 				$("#getResultDiv").html("<strong>Error3</strong>");
 				console.log("ERROR: Couldn't retrieve Items", URL);
 			}
 		});
-		console.log("Creating new add item button?", URL);
-		var text = document.createTextNode("Add new Item");
-		var button = document.createElement("BUTTON");
-		button.setAttribute("createItem", element.libraryId);
-		button.appendChild(text);
-		button.setAttribute("type", "button");
-		document.getElementById("itemDisplay").appendChild(button);
+
 	}
 })
