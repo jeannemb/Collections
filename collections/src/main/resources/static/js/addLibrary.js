@@ -13,7 +13,6 @@ $( document ).ready(function() {
         	name :  $("#libName").val(),
         	type :  $("#libType").val().toLowerCase()
         }
-    	
     	$.ajax({
     		type : "POST",
     		contentType : "application/json",

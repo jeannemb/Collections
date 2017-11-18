@@ -19,6 +19,7 @@ $( document ).ready(function() {
 					    var btn = document.createElement("BUTTON");
 					    btn.appendChild(t);
 					    btn.setAttribute("id", element.libraryId);
+					    btn.setAttribute("type", "button");
 					    document.getElementById("libraryGroup").appendChild(btn);
 						$("#" + element.libraryId).click(function(event){
 							event.preventDefault();
@@ -54,6 +55,12 @@ $( document ).ready(function() {
 				console.log("ERROR: Couldn't retrieve Items", URL);
 			}
 		});
-
+		console.log("Creating new add item button?", URL);
+		var text = document.createTextNode("Add new Item");
+		var button = document.createElement("BUTTON");
+		button.setAttribute("createItem", element.libraryId);
+		button.appendChild(text);
+		button.setAttribute("type", "button");
+		document.getElementById("itemDisplay").appendChild(button);
 	}
 })

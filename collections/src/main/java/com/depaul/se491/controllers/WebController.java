@@ -36,4 +36,9 @@ public class WebController {
 	public String libraryHome(){
 	   return "libraryHome";
 	}
+	
+	@RequestMapping(value="/itemCreation",method = RequestMethod.GET)
+	public String itemCreation(){
+	   return "itemCreation";
+	}
 }

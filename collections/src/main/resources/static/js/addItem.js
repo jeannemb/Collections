@@ -8,12 +8,9 @@ $( document ).ready(function() {
 	});
     
     function ajaxPost(){
-        function ajaxPost(){
-        	var formData = {
-        		genericLibraryId : 1,
-            	title            :  $("#itemName").val(),
-            	description      :  $("#itemType").val().toLowerCase()
-        	}
+        var formData = {
+        	genericLibraryId : 1,
+           	title            :  $("#itemName").val()
         }
     	$.ajax({
     		type : "POST",
@@ -22,14 +19,14 @@ $( document ).ready(function() {
     	    data : JSON.stringify(formData),
     	    dataType : 'json',
     	    success : function(result) {
-    	    	console.log("Success: ", result.data.name);
+    	    	console.log("Success: ");
 				$("#postResultDiv").html("<p style='background-color:#7FA7B0; color:white; padding:20px 20px 20px 20px'>" + 
 					"Post Successfully! <br>" +
 					"---> Customer's Info: userId = " + 
 					result.data.genericLibraryId + " ,name = " + result.data.title + " ,type = " + result.data.description + "</p>");
     	    },
     	    error : function(e) {
-    	    	console.log("FAILURE: ", result.data.name);
+    	    	console.log("FAILURE: ");
     	    	$("#postResultDiv").html("<strong>Error</strong>");
     	    }
     	});
@@ -37,7 +34,7 @@ $( document ).ready(function() {
         function resetData(){
         	1;
         	$("#itemName").val("");
-        	$("#itemType").val("");
+        	$("#itemDescription").val("");
         }
     }
 	
