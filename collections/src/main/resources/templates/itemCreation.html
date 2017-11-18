@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<title>Collectr</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.css"></link>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	  
+	<script src="/js/index.js"></script>
+	<script src="/js/addItem.js"></script>
+	
+</head>
+<body>
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="/">Collectr</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="/">Home</a></li>
+	        <li><a href="about">About</a></li>
+	        <li><a href="libraryHome">Collections</a></li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+	  
+<div class="panel panel-default" style="margin: auto; width: 40%; border: 3px solid; padding: 10px;">
+  <div class="panel-body">
+
+<form class="form-horizontal" style="margin: auto; padding: 10px;" id="itemForm">
+
+	  <h2>Create a New Item</h2>
+	  	  <label for="Item Name">Item Name:</label>
+	      <input id="itemName" type="text" class="form-control" placeholder="Item Name"/>
+	      <label for="Item Type">Type of Item:</label>
+	      <input id="itemType" type="text" class="form-control" placeholder="Item Type"/>
+	      <label for="Item Type">Type of Item:</label>
+	      <input id="itemType" type="text" class="form-control" placeholder="Item Type"/>
+	      <label for="Item Type">Type of Item:</label>
+	      <input id="itemType" type="text" class="form-control" placeholder="Item Type"/>
+	      <button type="submit" class="btn btn-default">Create</button>
+	    
+</form>
+  </div>
+</div>
+	
+</body>
+</html>
