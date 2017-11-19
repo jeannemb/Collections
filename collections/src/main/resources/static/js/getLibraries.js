@@ -1,11 +1,7 @@
 $( document ).ready(function() {
 	
-	//GET Request
-	$("#getAllLibraries").click(function(event){
-		event.preventDefault();
-		ajaxGet();
-	});
-    
+	ajaxGet();
+
 	//GET Function
 	function ajaxGet(){
 		$.ajax({
@@ -49,7 +45,10 @@ $( document ).ready(function() {
 				$('#getResultDiv ul').empty();
 				var itemList = "";
 				result.forEach(function(element){
-					itemList += element.title + "\n";
+					itemList = itemList + "\r\n" + "Item Name:" + element.title;
+					if (element.description != null){
+						itemList = itemList + " Description:" + element.description; 
+					}
 				});
 				console.log("Success: ", URL);
 				$("#getResultDiv").html(itemList);
