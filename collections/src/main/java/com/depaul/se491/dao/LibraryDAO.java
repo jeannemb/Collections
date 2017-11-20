@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.depaul.se491.domain.Item;
 import com.depaul.se491.domain.Library;
 
 @Service
