@@ -20,7 +20,7 @@ public class ItemDAOTest {
 		try{
 			itemDAO = new ItemDAOImpl();
 			String libraryType = "books";
-			Long libraryId = (long) 23;
+			Long libraryId = (long) 1;
 			List myitem = itemDAO.getItemsByLibrary(libraryType, libraryId);
 			System.out.println(myitem.get(0).toString());
 			assertNotNull(myitem);
@@ -42,7 +42,7 @@ public class ItemDAOTest {
 			assertEquals("SUCCESS",result);
 		}catch(Exception e){
 			System.out.println(e);
-			fail("Getting Libraries Failed");
+			fail("adding book to Library Failed");
 		}
 		
 	}
@@ -53,13 +53,13 @@ public class ItemDAOTest {
 			itemDAO = new ItemDAOImpl();
 			Movie movie = new Movie();
 			movie.setTitle("Junit Testing Movie");
-			Long moviesLibraryId = (long) 24;
+			Long moviesLibraryId = (long) 33;
 			movie.setMoviesLibraryId(moviesLibraryId);
 			String result = itemDAO.addMoviesInLibrary(movie);
 			assertEquals("SUCCESS",result);
 		}catch(Exception e){
 			System.out.println(e);
-			fail("Getting Libraries Failed");
+			fail("adding movie to Library Failed");
 		}
 		
 	}
@@ -70,13 +70,13 @@ public class ItemDAOTest {
 			itemDAO = new ItemDAOImpl();
 			Item item = new Item();
 			item.setTitle("Junit Testing Generic");
-			Long genericLibraryId = (long) 25;
+			Long genericLibraryId = (long) 34;
 			item.setGenericLibraryId(genericLibraryId);
 			String result = itemDAO.addGenericItemInLibrary(item);
 			assertEquals("SUCCESS",result);
 		}catch(Exception e){
 			System.out.println(e);
-			fail("Getting Libraries Failed");
+			fail("adding gernric item to Library Failed");
 		}
 		
 	}

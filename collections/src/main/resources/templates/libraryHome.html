@@ -10,7 +10,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 	  
-	<script src="/js/library.js"></script>
+	<script src="/js/index.js"></script>
 	<script src="/js/getLibraries.js"></script>
 	  
 </head>
@@ -40,30 +40,20 @@
 	</nav>
 	  
 	<div class="container-fluid text-center">    
-	    <div class="col-sm-2 sidenav">
-	    </div>
 	    <div class="page-header" id="banner">
 	          <div class="col-lg-8 text-center">
 	            <h1>Collectr</h1>
-	            <p class="lead">Great for managing collections...</p>
-	            <p>Maybe ill draw a logo for here...</p>
-				<a class="btn btn-primary btn-lg">Start Collecting</a>
 	          </div>
 	    </div>
-	    <div class="col-sm-2 sidenav">
-	            <a class="btn btn-primary btn-md" href="libraryCreation.html">Create a Library</a>
-  				<b class="btn btn-primary btn-md" href="#">Library 1</b>
-	    </div>
-	    <div class="col-sm-7" style="margin:20px 0px 20px 0px" id="libDisplay">
-		    <button id="getAllLibraries" type="button" class="btn btn-primary">Get All Libraries</button>
+	    <div class="col-sm-2" style="margin:20px 0px 20px 0px" id="libDisplay">
 		    <div class="btn-group" id="libraryGroup">
+		    	<a class="btn btn-primary btn-md" href="libraryCreation">Create a Library</a>
             </div> 
-		    <div id="getResultDiv" style="padding:20px 10px 20px 50px">
-	            <ul class="list-group">
-	    	    </ul>
+        </div>
+        <div class="col-sm-7" style="margin:50px 0px 50px 0px" id="itemDisplay">
+    		<textarea id="getResultDiv" rows="20" style="background-color:#222222 ; color:#FFFFFF">
+    	    </textarea>
     	</div>
-	</div>
-	    
 	</div>
 	
 </body>
