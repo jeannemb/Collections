@@ -56,7 +56,7 @@ $( document ).ready(function() {
 				var button = document.createElement("button");
 				button.innerHTML = "Add An Item";
 				button.setAttribute("id", "newItem");
-				document.getElementById("buttonGroup").appendChild(button);
+				document.getElementById("itemDisplay").appendChild(button);
 				button.href = "itemCreation";
 				button.addEventListener ("click", function() {
 					window.location.href = "itemCreation" + '#' + libId + "#" + libType;
