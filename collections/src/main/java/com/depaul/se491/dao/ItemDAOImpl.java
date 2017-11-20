@@ -94,26 +94,21 @@ public class ItemDAOImpl implements ItemDAO{
 	public List<Object> getItemsByLibrary(String libraryType, Long libraryId) throws SQLException {
 		String sql;
 		try{
-		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));
 		switch (libraryType){
 			case "books": 
 				sql = "SELECT * FROM books WHERE books_library_id = ?";
 				List books = template.query(sql, new Object[]{libraryId}, new BooksRowMapper());
-				DatabaseConnection.closeConnection();
 				return books;
 			case "movies": 
 				sql = "SELECT * FROM movies WHERE movies_library_id = ?";
 				List movies = template.query(sql, new Object[]{libraryId}, new MoviesRowMapper());
-				DatabaseConnection.closeConnection();
 				return movies;
 			default: 
 				sql = "SELECT * FROM generic_items WHERE generic_library_id = ?";
 				List genericItems = template.query(sql, new Object[]{libraryId}, new GenericItemsRowMapper());
-				DatabaseConnection.closeConnection();
 				return genericItems;
 		}
 		}catch(Exception e){
-			DatabaseConnection.closeConnection();
 			return null;
 		}
 	}
@@ -122,17 +117,14 @@ public class ItemDAOImpl implements ItemDAO{
 	public String addBooksInLibrary(Book book) throws SQLException{
 		String sql;
 		try{
-		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));
 		sql = "INSERT INTO books (books_library_id, title, ISBN13, ISBN10, authors, owns, wants_to_own, complete, wants_to_complete) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = template.update(sql, new Object[]{book.getBooksLibraryId(),book.getTitle(),
 				book.getISBN13(),book.getISBN10(),book.getAuthors(),
 				book.getOwns(),book.getWantsToOwn(),book.getComplete(),book.getWantsToComplete()});
 		System.out.println(result);
-		DatabaseConnection.closeConnection();
 		return "SUCCESS";
 		}catch(Exception e){
-			DatabaseConnection.closeConnection();
 			return "FAILIED";
 		}		
 	}
@@ -140,17 +132,14 @@ public class ItemDAOImpl implements ItemDAO{
 	public String addMoviesInLibrary(Movie movie) throws SQLException{
 		String sql;
 		try{
-		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));
 		sql = "INSERT INTO movies (movies_library_id, title, UPC, actors, owns, wants_to_own, complete, wants_to_complete) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = template.update(sql, new Object[]{movie.getMoviesLibraryId(),movie.getTitle(),
 				movie.getUPC(),movie.getActors(),
 				movie.getOwns(),movie.getWantsToOwn(),movie.getComplete(),movie.getWantsToComplete()});
 		System.out.println(result);
-		DatabaseConnection.closeConnection();
 		return "SUCCESS";
 		}catch(Exception e){
-			DatabaseConnection.closeConnection();
 			return "FAILIED";
 		}		
 	}
@@ -158,38 +147,16 @@ public class ItemDAOImpl implements ItemDAO{
 	public String addGenericItemInLibrary(Item item) throws SQLException{
 		String sql;
 		try{
-		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));
 		sql = "INSERT INTO generic_items (generic_library_id, title, description, owns, wants_to_own, complete, wants_to_complete) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 		int result = template.update(sql, new Object[]{item.getGenericLibraryId(),item.getTitle(),
 				item.getDescription(),
 				item.getOwns(),item.getWantsToOwn(),item.getComplete(),item.getWantsToComplete()});
 		System.out.println(result);
-		DatabaseConnection.closeConnection();
 		return "SUCCESS";
 		}catch(Exception e){
-			DatabaseConnection.closeConnection();
 			return "FAILIED";
 		}		
 	}
-	
-//    public static void main( String[] args ) throws SQLException{
-//    	LibraryDAOImpl myImpl = new LibraryDAOImpl();
-//    	List myList1 = myImpl.getItemsByLibrary("item",(long) 3);
-//    	for(int i=0; i<myList1.size(); i++){
-//    		System.out.println(myList1.get(i).toString());
-//    	}
-//    	Item item = new Item();
-//    	item.setGenericLibraryId((long) 3);
-//    	item.setTitle("TEST Item");
-//    	item.setWantsToComplete(true);
-//    	item.setOwns(true);
-//    	String result = myImpl.addGenericItemInLibrary(item);
-//    	System.out.println(result);
-//    	List myList2 = myImpl.getItemsByLibrary("item",(long) 3);
-//    	for(int i=0; i<myList2.size(); i++){
-//    		System.out.println(myList2.get(i).toString());
-//    	}
-//	}
 
 }

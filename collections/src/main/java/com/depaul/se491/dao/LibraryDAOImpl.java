@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
@@ -15,6 +18,7 @@ import com.depaul.se491.domain.Library;
 @Repository
 public class LibraryDAOImpl implements LibraryDAO{
 
+	@Autowired
 	private JdbcTemplate template;
 	
 	public JdbcTemplate getTemplate(){
@@ -43,13 +47,11 @@ public class LibraryDAOImpl implements LibraryDAO{
 	@Override
 	public List<Library> getLibrariesByUser(Long userId) throws SQLException {
 		try{
-		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));
 		String sql = "SELECT * FROM libraries WHERE USER_ID = ?";
 		List<Library> libraries = template.query(sql, new Object[]{userId}, new LibraryRowMapper());
-		DatabaseConnection.closeConnection();
 		return libraries;
 		}catch(Exception e){
-			DatabaseConnection.closeConnection();
+			System.out.println(e);
 			return null;
 		}
 		
@@ -59,36 +61,12 @@ public class LibraryDAOImpl implements LibraryDAO{
 	public String creatLibraryForUser(Library lib) throws SQLException{
 		String sql;
 		try{
-		template = new JdbcTemplate(new SingleConnectionDataSource(DatabaseConnection.getConnection(),true));
 		sql = "INSERT INTO libraries (user_id, name, type) VALUES (?, ? ,?)";
 		int result = template.update(sql, new Object[]{lib.getUserId(), lib.getName(),lib.getType()});
-		System.out.println(result);
-		DatabaseConnection.closeConnection();
 		return "SUCCESS";
 		}catch(Exception e){
-			DatabaseConnection.closeConnection();
-			return "FAILIED";
+			return "FAILIED"+e;
 		}		
 	}
-	
-	
-//    public static void main( String[] args ) throws SQLException{
-//    	LibraryDAOImpl myImpl = new LibraryDAOImpl();
-//    	List myList1 = myImpl.getItemsByLibrary("item",(long) 3);
-//    	for(int i=0; i<myList1.size(); i++){
-//    		System.out.println(myList1.get(i).toString());
-//    	}
-//    	Item item = new Item();
-//    	item.setGenericLibraryId((long) 3);
-//    	item.setTitle("TEST Item");
-//    	item.setWantsToComplete(true);
-//    	item.setOwns(true);
-//    	String result = myImpl.addGenericItemInlibrary(item);
-//    	System.out.println(result);
-//    	List myList2 = myImpl.getItemsByLibrary("item",(long) 3);
-//    	for(int i=0; i<myList2.size(); i++){
-//    		System.out.println(myList2.get(i).toString());
-//    	}
-//	}
 
 }
