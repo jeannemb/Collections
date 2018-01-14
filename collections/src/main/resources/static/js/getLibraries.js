@@ -16,6 +16,7 @@ $( document ).ready(function() {
 					    btn.appendChild(t);
 					    btn.setAttribute("id", element.libraryId);
 					    btn.setAttribute("type", "button");
+					    btn.setAttribute("class", "btn btn-primary btn-md");
 					    document.getElementById("libraryGroup").appendChild(btn);
 						$("#" + element.libraryId).click(function(event){
 							event.preventDefault();
@@ -56,6 +57,7 @@ $( document ).ready(function() {
 				var button = document.createElement("button");
 				button.innerHTML = "Add An Item";
 				button.setAttribute("id", "newItem");
+				button.setAttribute("class", "btn btn-primary btn-md");
 				document.getElementById("itemDisplay").appendChild(button);
 				button.href = "itemCreation";
 				button.addEventListener ("click", function() {
