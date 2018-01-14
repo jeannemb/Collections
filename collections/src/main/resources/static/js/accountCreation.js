@@ -2,15 +2,18 @@ var app = angular.module('collection', []);
 app.controller('accountCreation', function($scope, $http) {
 		
 	$scope.create = function(){
-		if($scope.password == $scope.confirmPassword){
+		$scope.clicked = true
+		if($scope.password == $scope.confirmPassword && $scope.firstName != null 
+			&& $scope.lastName != null && $scope.email != null && $scope.password != null){
 			
-		
+			
 			var user = {
 					firstName : $scope.firstName,
 					lastName : $scope.lastName,
 					email : $scope.email,
+					password: $scope.password
 			}
-			
+				
 
 			$http({
 				method: "POST",
@@ -20,20 +23,24 @@ app.controller('accountCreation', function($scope, $http) {
 					'Content-Type': 'application/json'
 				}
 			}).then(_success, _error);
-		
-		
+			
+			
 			function _success(response){
 				$scope.response = response.data
+				$scope.success = true
 			}
-		
+			
 			function _error(response){
 				$scope.response = response.statusText
 
 			}
 
 		}else{
-			$scope.response = "Password must match confirm Password"
+			$scope.response = "Fields mush not be empty and password must match confirm Password"
+
 		}
+		
+
 	};
 	
 	
