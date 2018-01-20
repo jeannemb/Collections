@@ -54,9 +54,25 @@
     	    </div> 
     	</div>
         <div class="col-sm-7" style="margin:50px 0px 50px 0px" id="itemDisplay">
-    		<textarea id="getResultDiv" rows="20" style="background-color:#222222 ; color:#FFFFFF">
-    	    </textarea>
+    	    <table class="table table-hover" id="itemTable">
+			  <thead>
+			    <tr>
+			      <th scope="col">Item Name</th>
+			      <th scope="col">Description</th>
+			      <th scope="col">Select</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr class="table-active">
+			      <th scope="row">Name</th>
+				  <td>Desc</td>
+				  <td><input type="checkbox" name="rowbox" />&nbsp;</td>
+			    </tr>
+			   </tbody>
+			  </table>
+    	    
     	</div>
+
 	</div>
 	
 </body>

@@ -44,15 +44,44 @@ $( document ).ready(function() {
 			url : URL,
 			success: function(result){
 				$('#getResultDiv ul').empty();
-				var itemList = "";
+				var Values = new Array();
+				var x = 0;
 				result.forEach(function(element){
-					itemList = itemList + "\r\n" + "Item Name:" + element.title;
 					if (element.description != null){
-						itemList = itemList + " Description:" + element.description; 
+						Values[x] = [element.title, element.description];
+					} else {
+						Values[x] = [element.title, ""];
 					}
+					x = x + 1;
 				});
-				console.log("Success: ", URL);
-				$("#getResultDiv").html(itemList);
+				console.log("Success: ", URL);	
+				
+				var table = document.getElementById("itemTable");
+				var tbody = document.createElement("tbody");
+		        for (var i = 0 ; i < Values.length; i++) {
+		        	var tr = document.createElement("tr");
+
+					// for each inner array cell create td then text, append checkbox to end
+		        	var l = Values[i].length;
+					for (var j = 0; j <= l; j++) {
+						var td = document.createElement("td");
+					    if (j != l) {
+						    var txt = document.createTextNode(Values[i][j]);
+						    td.appendChild(txt);
+					    } else {
+					    	var checkbox = document.createElement("INPUT");
+					    	checkbox.type = "checkbox";
+					    	td.appendChild(checkbox);
+					    }
+					    tr.appendChild(td);
+					}
+
+					// append row to table
+					tbody.appendChild(tr);
+					table.appendChild(tbody);
+		        }
+				
+				//create new button to add items
 				console.log("Creating new add item button?");
 				var button = document.createElement("button");
 				button.innerHTML = "Add An Item";
