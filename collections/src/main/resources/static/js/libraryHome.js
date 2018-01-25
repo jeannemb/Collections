@@ -2,9 +2,8 @@ var app = angular.module('collection', []);
 
 app.controller('navigationController', function($scope,$http) {
 	var libs = [];
-    var itemsLocal = [];
-	//var libItems = [];
-    var selectedName = "";
+    var selectedLibraryItems = [];
+    var selectedLibraryName = "";
 	$scope.init = function () {
 		$scope.clicked1 = true;
 		$scope.clicked2 = true;
@@ -118,10 +117,10 @@ app.controller('navigationController', function($scope,$http) {
     	
     	$scope.items = libs[0].items;
         $scope.status = libs;
-        selectedName = libs[0].name;
+        selectedLibraryName = libs[0].name;
 		$scope.libraries = {
 			options: libsNames,
-		    selected: selectedName
+		    selected: selectedLibraryName
 		};
     }
      
@@ -131,21 +130,21 @@ app.controller('navigationController', function($scope,$http) {
      		if(libs[i].name == $scope.libraries.selected){
      	    	if(libs[i].type == "books"){
          			$scope.items  = libs[i].items;
-         			itemsLocal = libs[i].items;
+         			selectedLibraryItems = libs[i].items;
      	    		$scope.typeIsBook = true;
      	    		$scope.typeIsMovie = false;
      	    		$scope.typeIsGeneric = false;    		
      	    	}else if (libs[0].type == "movies"){
      	    		$scope.typeIsBook = false;
          			$scope.items  = libs[i].items;
-         			itemsLocal = libs[i].items;
+         			selectedLibraryItems = libs[i].items;
      	    		$scope.typeIsMovie = true;
      	    		$scope.typeIsGeneric = false;
      	    	}else{
      	    		$scope.typeIsBook = false;
      	    		$scope.typeIsMovie = false;
          			$scope.items  = libs[i].items;
-         			itemsLocal = libs[i].items;
+         			selectedLibraryItems = libs[i].items;
      	    		$scope.typeIsGeneric = true;
      	    	}
 
@@ -155,149 +154,15 @@ app.controller('navigationController', function($scope,$http) {
      }
      
      $scope.view = function (id) {
-    	$scope.details = true;
-    	for (i in itemsLocal){
-    		if(itemsLocal[i].itemId == id){
-    			$scope.status = id;
-    			$scope.info = id;
-    		}
-    	}
+
+     }
+     
+     $scope.edit = function (id) {
+
+     }
+     
+     $scope.edit = function (id) {
+
      }
     
 });
-
-//$( document ).ready(function() {
-//
-//	ajaxGet();
-//
-//	//GET Function
-//	function ajaxGet(){
-//		$.ajax({
-//			type : "GET",
-//			url : "http://localhost:8080/manage/library?userId=1",
-//			success: function(result){
-//					$('#getResultDiv ul').empty();
-//					result.forEach(function(element){
-//						var library = library + " " + element.name;
-//						var t = document.createTextNode(element.name);
-//					    var btn = document.createElement("BUTTON");
-//					    btn.appendChild(t);
-//					    btn.setAttribute("id", element.libraryId);
-//					    btn.setAttribute("type", "button");
-//					    btn.setAttribute("class", "btn btn-primary btn-md");
-//					    document.getElementById("libraryGroup").appendChild(btn);
-//						$("#" + element.libraryId).click(function(event){
-//							event.preventDefault();
-//							ajaxGetItems(element.libraryId, element.type);
-//						});
-//					});
-//					console.log("Success: ", result[0].name);
-//			},
-//			error : function(e){
-//				$("#getResultDiv").html("<strong>Error2</strong>");
-//				console.log("ERROR: ", e);
-//			}
-//		});
-//	}
-//
-//	// GET Items
-//	function ajaxGetItems(libId, libType){
-//		var oldBtn = document.getElementById("newItem");
-//		if (oldBtn != null){
-//			oldBtn.parentNode.removeChild(oldBtn);
-//		}
-//		var URL = "http://localhost:8080/manage/items?libraryId=" + libId + "&libraryType=" + libType;
-//		$.ajax({
-//			type : "GET",
-//			url : URL,
-//			success: function(result){
-//				$('#getResultDiv ul').empty();
-//				var Values = new Array();
-//				var x = 0;
-//				result.forEach(function(element){
-//					if (element.description != null){
-//						Values[x] = [element.title, element.description];
-//					} else {
-//						Values[x] = [element.title, ""];
-//					}
-//					x = x + 1;
-//				});
-//				console.log("Success: ", URL);
-//
-//				var table = document.getElementById("itemTable");
-//				var tbody = document.createElement("tbody");
-//		        for (var i = 0 ; i < Values.length; i++) {
-//		        	var tr = document.createElement("tr");
-//
-//					// for each inner array cell create td then text, append checkbox to end
-//		        	var l = Values[i].length;
-//					for (var j = 0; j <= l; j++) {
-//						var td = document.createElement("td");
-//					    if (j != l) {
-//						    var txt = document.createTextNode(Values[i][j]);
-//						    td.appendChild(txt);
-//					    } else {
-//					    	var checkbox = document.createElement("INPUT");
-//					    	checkbox.type = "checkbox";
-//					    	td.appendChild(checkbox);
-//					    }
-//					    tr.appendChild(td);
-//					}
-//
-//					// append row to table
-//					tbody.appendChild(tr);
-//					table.appendChild(tbody);
-//		        }
-//
-//				//create new button to add items
-//				console.log("Creating new add item button?");
-//				var button = document.createElement("button");
-//				button.innerHTML = "Add An Item";
-//				button.setAttribute("id", "newItem");
-//				button.setAttribute("class", "btn btn-primary btn-md");
-//				document.getElementById("itemDisplay").appendChild(button);
-//				button.href = "itemCreation";
-//				button.addEventListener ("click", function() {
-//					window.location.href = "itemCreation" + '#' + libId + "#" + libType;
-//				});
-//			},
-//			error : function(e){
-//				$("#getResultDiv").html("<strong>Error3</strong>");
-//				console.log("ERROR: Couldn't retrieve Items", URL);
-//			}
-//		});
-//
-//	}
-//})
-//app.service('LibraryService', function ($http) {    
-////libraries array to hold list of all libraries
-//var libraries = [];
-//this.load = function(){
-//	$http({
-//		method : "GET",
-//		url: "http://localhost:8080/manage/library?userId=1"
-//	}).then(function successCallback(response) {
-//        response.data.forEach(function(element){
-//        	var library = { id: element.libraryId, name: element.name, type:element.type};
-//        	libraries.push(library);
-//        });
-//	}, function errorCallback(response) {
-//
-//		status = response.statusText;
-//	});
-//}
-//
-//this.allLibs = function(){
-//	return libraries;
-//}
-//
-//this.getAllNames = function(){
-//	var allNames = []
-//	for (i in libraries){
-//		alert(i.name);
-//		allNames.push(i.name);
-//	}
-//	return allNames;
-//}
-//
-//});
