@@ -17,10 +17,7 @@ app.controller('navigationController', function($scope,$http) {
             	library.libraryId = element.libraryId;
             	library.name = element.name;
             	library.type = element.type;
-//            	var library = { libraryId: element.libraryId, name: element.name, type:element.type};
-            	//libs.push(library);
             	var libItems = initItems(element.libraryId, element.type);
-//            	items.push(item);
             	library.items = libItems;
             	libs.push(library);
             });
@@ -116,7 +113,7 @@ app.controller('navigationController', function($scope,$http) {
     	
     	
     	$scope.items = libs[0].items;
-        $scope.status = libs;
+        $scope.status = libs[0].name;
         selectedLibraryName = libs[0].name;
 		$scope.libraries = {
 			options: libsNames,
@@ -153,15 +150,15 @@ app.controller('navigationController', function($scope,$http) {
     	}
      }
      
-     $scope.view = function (id) {
+     $scope.viewItem = function (id) {
 
      }
      
-     $scope.edit = function (id) {
+     $scope.editItem = function (id) {
 
      }
      
-     $scope.edit = function (id) {
+     $scope.deleteItem = function (id) {
 
      }
     
