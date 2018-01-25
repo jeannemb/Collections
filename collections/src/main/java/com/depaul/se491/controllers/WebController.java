@@ -41,4 +41,9 @@ public class WebController {
 	public String itemCreation(){
 	   return "itemCreation";
 	}
+	
+	@RequestMapping(value="/libraryHome2",method = RequestMethod.GET)
+	public String libraryHome2(){
+	   return "libraryHome2";
+	}
 }

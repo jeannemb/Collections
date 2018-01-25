@@ -1,0 +1,216 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<title>Collectr</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.css"></link>
+	<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	  
+	<script src="/js/index.js"></script>
+	<script src="/js/libraryHome.js"></script>
+	    <style>
+.wrapper {
+  display: grid;
+  grid-template-rows: 100px 100px;
+  grid-template-columns: 100px 100px 100px;
+  grid-gap: 10px;
+  background-color: #444;
+  color: #444;
+}
+.box {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+/*   padding: 20px; */
+  font-size: 150%;
+  cursor: pointer;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 800px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Collectr</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li><a href="libraryHome2">Collections</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid" ng-app="collection" ng-controller="navigationController" data-ng-init="init()">
+  <div class="row content">
+    <div class="col-sm-2" style = "height: 80%;">
+    <div class="jumbotron" style = "height: 20%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 10px; padding-top:5px; padding-right: 5px; padding-left: 5px; padding-bottom:10px">
+    <h4 style= "text-align: center">meharbi88</h4>
+    </div>
+    
+    <div class="jumbotron" style = "height: 80%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; padding-top:5px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
+    <div class="list-group" style = "width: 100%;">
+    <h4 style= "text-align: center">   Menu   </h4>
+    <ul class="nav nav-pills nav-stacked">
+  	<li class="active" style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+  	<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
+  	<li><a href="itemCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
+  	<li><a href="#" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
+  	<li><a href="#" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> log out</a></li>
+  	</ul>
+  	</div>
+  	</div>
+  	
+    </div>
+
+    <div class="col-sm-10" style = "height: 80%;">
+         <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search on Collectr .."/>
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+       <div class="form-group">
+      <label for="exampleSelect1">Library select</label>
+      <select class="form-control" ng-model="libraries.selected" ng-options="l as l for l in libraries.options" ng-change="selectedItemChanged()" ></select>
+      
+<!--       <select class="form-control" id="exampleSelect1">
+        <option>Library 1</option>
+        <option>Library 2</option>
+        <option>Library 3</option>
+        <option>Library 4</option>
+        <option>Library 5</option>
+      </select> -->
+    </div>
+    
+<!--   <div class="jumbotron" style = "height: 100%; width: 100%;">
+ -->  <h1 class="display-3" ng-show="welcomeMessage">Welcome to Collectr </h1>
+  <div ng-show="libraryMessage" class="hideByDefault">Please create your first library</div>
+ 
+    <div ng-show = "typeIsBook" class="panel panel-info" ng-repeat="item in items">
+      <div class="panel-heading"><a data-toggle="collapse" href="#{{$index}}">{{ item.title }}</a></div>
+       <div id="{{$index}}" class="panel-collapse collapse">
+      <div class="panel-body">
+      	<div>Book Title: {{ item.title }}</div>
+		<div>Book ISBN13: {{ item.ISBN13 }}</div>
+		<div>Book ISBN10: {{ item.ISBN10 }}</div>
+		<div>Book Authors: {{ item.authors }}</div>
+      </div>
+        <div class="panel-footer">
+      	    <a href="#" ng-click="view(item.itemId)">view</a> | 
+        	<a href="#" ng-click="edit(item.itemId)">edit</a> |
+        	<a href="#" ng-click="delete(item.itemId)">delete</a>
+		</div>
+		</div>
+    </div>
+    
+    <div ng-show = "typeIsMovie" class="panel panel-info" ng-repeat="item in items">
+      <div class="panel-heading"><a data-toggle="collapse" href="#{{$index+1000}}">{{ item.title }}</a></div>
+      <div id="{{$index+1000}}" class="panel-collapse collapse">
+      <div class="panel-body">  
+      <div>Movie Title: {{ item.title }}</div>
+      <div>Movie UPC: {{ item.UPC }}</div>
+      <div>Movie Actors: {{ item.actors }}</div>
+      </div> 
+      	<div class="panel-footer">
+     	    <a href="#" ng-click="view(item.itemId)">view</a> | 
+        	<a href="#" ng-click="edit(item.itemId)">edit</a> |
+        	<a href="#" ng-click="delete(item.itemId)">delete</a>
+		</div>
+		</div>
+    </div>
+
+    <div ng-show = "typeIsGeneric" class="panel panel-info" ng-repeat="item in items">
+      <div class="panel-heading"><a data-toggle="collapse" href="#{{$index+2000}}">{{ item.title }}</a></div>
+      <div id="{{$index+2000}}" class="panel-collapse collapse">
+      <div class="panel-body">
+      <div>Item Title: {{ item.title }}</div>
+      <div>Item Description: {{ item.description }}</div>
+      </div>
+      	<div class="panel-footer">
+      	    <a href="#" ng-click="view(item.itemId)">view</a> | 
+        	<a href="#" ng-click="edit(item.itemId)">edit</a> |
+        	<a href="#" ng-click="delete(item.itemId)">delete</a>
+		</div>
+		</div>
+    </div>
+
+  <!-- <table class="table table-hover">
+  	<thead> 
+  		<tr class="table-info">
+    		<th scope="col">Title</th>
+    		<th scope="col">Actions</th>
+    	</tr>
+	</thead>
+	<tbody>
+		<tr class="table-info" ng-repeat="item in items">
+    	<th scope="row">{{ item.title }}
+    	</th>
+    	<td>
+       	 	<a href="#" ng-click="view(item.itemId)">view</a> | 
+        	<a href="#" ng-click="edit(item.itemId)">edit</a> |
+        	<a href="#" ng-click="delete(item.itemId)">delete</a>
+    	</td>
+ 		</tr>
+	</tbody>
+</table>
+ -->
+<div ng-show="clicked2" class="hideByDefault">{{status}}</div>
+  
+</div>
+    </div>
+  </div>
+<!-- </div> -->
+
+<footer class="container-fluid">
+  <p>Footer Text</p>
+</footer>
+
+</body>
+</html>
