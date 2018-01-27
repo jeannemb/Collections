@@ -15,53 +15,60 @@
 	<script src="/js/index.js"></script>
 	<script src="/js/libraryHome.js"></script>
 	    <style>
-.wrapper {
-  display: grid;
-  grid-template-rows: 100px 100px;
-  grid-template-columns: 100px 100px 100px;
-  grid-gap: 10px;
-  background-color: #444;
-  color: #444;
-}
-.box {
-  background-color: #444;
-  color: #fff;
-  border-radius: 5px;
-/*   padding: 20px; */
-  font-size: 150%;
-  cursor: pointer;
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+			.wrapper {
+  				display: grid;
+  				grid-template-rows: 100px 100px;
+  				grid-template-columns: 100px 100px 100px;
+  				grid-gap: 10px;
+  				background-color: #444;
+  				color: #444;
+			}
+		
+			.box {
+  				background-color: #444;
+  				color: #fff;
+  				border-radius: 5px;
+				/*   padding: 20px; */
+  				font-size: 150%;
+  				cursor: pointer; 
+  				display: flex;
+  				justify-content: center;
+  				align-items: center;
+			}
+    
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {height: 800px}
+    		.row.content {
+    			height: 1500px
+    		}
 
     /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100%;
-    }
+    		.sidenav {
+      			background-color: #f1f1f1;
+      			height: 100%;
+    		}
 
     /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
+    		footer {
+     			background-color: #555;
+     			color: white;
+      			padding: 15px;
+    		}
 
     /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height: auto;}
-    }
-  </style>
+    		@media screen and (max-width: 767px) {
+     		 .sidenav {
+      		  height: auto;
+      		  padding: 15px;
+     		 }
+     		 .row.content {height: auto;}
+    		}
+  
+  		</style>
+  
 </head>
+
 <body>
+<!-- Navigation Bar Starts Here -->
   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -84,129 +91,160 @@
     </div>
   </div>
 </nav>
+<!-- Navigation Bar Ends Here -->
 
 <div class="container-fluid" ng-app="collection" ng-controller="navigationController" data-ng-init="init()">
   <div class="row content">
-    <div class="col-sm-2" style = "height: 80%;">
-    <div class="jumbotron" style = "height: 20%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 10px; padding-top:5px; padding-right: 5px; padding-left: 5px; padding-bottom:10px">
-    <h4 style= "text-align: center">meharbi88</h4>
-    </div>
-    
-    <div class="jumbotron" style = "height: 80%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; padding-top:5px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
-    <div class="list-group" style = "width: 100%;">
-    <h4 style= "text-align: center">   Menu   </h4>
-    <ul class="nav nav-pills nav-stacked">
-  	<li class="active" style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-  	<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
-  	<li><a href="itemCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
-  	<li><a href="#" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
-  	<li><a href="#" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> log out</a></li>
-  	</ul>
-  	</div>
-  	</div>
-  	
-    </div>
-
-    <div class="col-sm-10" style = "height: 80%;">
-         <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search on Collectr .."/>
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        </span>
-      </div>
-       <div class="form-group">
-      <label for="exampleSelect1">Library select</label>
-      <select class="form-control" ng-model="libraries.selected" ng-options="l as l for l in libraries.options" ng-change="selectedItemChanged()" ></select>
-      
-<!--       <select class="form-control" id="exampleSelect1">
-        <option>Library 1</option>
-        <option>Library 2</option>
-        <option>Library 3</option>
-        <option>Library 4</option>
-        <option>Library 5</option>
-      </select> -->
-    </div>
-    
-<!--   <div class="jumbotron" style = "height: 100%; width: 100%;">
- -->  <h1 class="display-3" ng-show="welcomeMessage">Welcome to Collectr </h1>
-  <div ng-show="libraryMessage" class="hideByDefault">Please create your first library</div>
- 
-    <div ng-show = "typeIsBook" class="panel panel-info" ng-repeat="item in items">
-      <div class="panel-heading"><a data-toggle="collapse" href="#{{$index}}">{{ item.title }}</a></div>
-       <div id="{{$index}}" class="panel-collapse collapse">
-      <div class="panel-body">
-      	<div>Book Title: {{ item.title }}</div>
-		<div>Book ISBN13: {{ item.ISBN13 }}</div>
-		<div>Book ISBN10: {{ item.ISBN10 }}</div>
-		<div>Book Authors: {{ item.authors }}</div>
-      </div>
-        <div class="panel-footer">
-      	    <a href="#" ng-click="viewItem(item.itemId)">view</a> | 
-        	<a href="#" ng-click="editItem(item.itemId)">edit</a> |
-        	<a href="#" ng-click="deleteItem(item.itemId)">delete</a>
-		</div>
-		</div>
-    </div>
-    
-    <div ng-show = "typeIsMovie" class="panel panel-info" ng-repeat="item in items">
-      <div class="panel-heading"><a data-toggle="collapse" href="#{{$index+1000}}">{{ item.title }}</a></div>
-      <div id="{{$index+1000}}" class="panel-collapse collapse">
-      <div class="panel-body">  
-      <div>Movie Title: {{ item.title }}</div>
-      <div>Movie UPC: {{ item.UPC }}</div>
-      <div>Movie Actors: {{ item.actors }}</div>
-      </div> 
-      	<div class="panel-footer">
-     	    <a href="#" ng-click="view(item.itemId)">view</a> | 
-        	<a href="#" ng-click="edit(item.itemId)">edit</a> |
-        	<a href="#" ng-click="delete(item.itemId)">delete</a>
-		</div>
-		</div>
-    </div>
-
-    <div ng-show = "typeIsGeneric" class="panel panel-info" ng-repeat="item in items">
-      <div class="panel-heading"><a data-toggle="collapse" href="#{{$index+2000}}">{{ item.title }}</a></div>
-      <div id="{{$index+2000}}" class="panel-collapse collapse">
-      <div class="panel-body">
-      <div>Item Title: {{ item.title }}</div>
-      <div>Item Description: {{ item.description }}</div>
-      </div>
-      	<div class="panel-footer">
-      	    <a href="#" ng-click="view(item.itemId)">view</a> | 
-        	<a href="#" ng-click="edit(item.itemId)">edit</a> |
-        	<a href="#" ng-click="delete(item.itemId)">delete</a>
-		</div>
-		</div>
-    </div>
-
-  <!-- <table class="table table-hover">
-  	<thead> 
-  		<tr class="table-info">
-    		<th scope="col">Title</th>
-    		<th scope="col">Actions</th>
-    	</tr>
-	</thead>
-	<tbody>
-		<tr class="table-info" ng-repeat="item in items">
-    	<th scope="row">{{ item.title }}
-    	</th>
-    	<td>
-       	 	<a href="#" ng-click="view(item.itemId)">view</a> | 
-        	<a href="#" ng-click="edit(item.itemId)">edit</a> |
-        	<a href="#" ng-click="delete(item.itemId)">delete</a>
-    	</td>
- 		</tr>
-	</tbody>
-</table>
- -->
-<div ng-show="clicked2" class="hideByDefault">{{status}}</div>
   
-</div>
+  	<!-- Left Navigation Bar Starts Here (First Column) -->
+    <div class="col-sm-2" style = "height: 80%;">
+    	<!-- FIRST BLOCK TO DISPALY USERNAME -->
+    	<div class="jumbotron" style = "height: 10%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 10px; padding-top:5px; padding-right: 5px; padding-left: 5px; padding-bottom:10px">
+    		<h4 style= "text-align: center">USERNAME</h4>
+    	</div>
+       	<!-- SECOND BLOCK TO DISPALY NAVIGTION OPTIONS -->
+    	<div class="jumbotron" style = "height: 90%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; padding-top:5px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
+    		<div class="list-group" style = "width: 100%;">
+    			<h4 style= "text-align: center">   Menu   </h4>
+    			<ul class="nav nav-pills nav-stacked">
+  					<li class="active" style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+  					<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
+  					<li><a href="itemCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
+  					<li><a href="#" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
+  					<li><a href="#" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> log out</a></li>
+  				</ul>
+  			</div>
+  		</div>
     </div>
-  </div>
-<!-- </div> -->
+   <!-- Left Navigation Bar Ends Here (First Column) -->
+    
+   <!-- Article View To Display Data Start Here -->
+   <div class="col-sm-10" style = "height: 80%;">
+	   	<!-- Search Bar -->
+   		<div class="input-group">
+   			<input type="text" class="form-control" placeholder="Search on Collectr .."/>
+        	<span class="input-group-btn">
+          	<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+        	</span>
+     	</div>
+     	<!-- Library Select  -->	 
+     	<div class="form-group">
+      		<label for="exampleSelect1">Library select</label>
+      		<select class="form-control" ng-model="libraries.selected" ng-options="l as l for l in libraries.options" ng-change="selectedItemChanged()" >
+      		</select>   
+    	</div>
+        
+        <!-- Welcome Messages In case No library  -->	     
+		<h1 class="display-3" ng-show="welcomeMessage">Welcome to Collectr </h1>
+  		<div ng-show="libraryMessage" class="hideByDefault">Please create your first library</div>
+ 
+         <!-- Type Book Item Panel  -->	     
+    	<div ng-show = "typeIsBook" class="panel panel-info" ng-repeat="item in items">
+      	    
+      	    <!-- Book Panel Heading  -->	     
+      		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index}}">{{ item.title }}</a></div>
+       		<div id="{{$index}}" class="panel-collapse collapse">		
+      			<!-- Book Panel Body  -->	     
+      			<div class="panel-body">
+      				<div class="row">
+  						<div class="col-xs-2">
+  						<img src="/images/placeholderImageItem.png" alt="1" class="img-rounded" width="100" height="100"></img>
+  						</div>			
+ 						<div class="column">
+ 			      			<div>Book Title: {{ item.title }}</div>
+							<div>Book ISBN13: {{ item.ISBN13 }}</div>
+							<div>Book ISBN10: {{ item.ISBN10 }}</div>
+							<div>Book Authors: {{ item.authors }}</div>
+							<li>
+								<span class="label label-info"  ng-if="item.owns">Own</span>
+								<span class="label label-info"  ng-if="item.wantsToOwn">Wants To Own</span>
+								<span class="label label-info"  ng-if="item.complete">Complete</span>
+								<span class="label label-info"  ng-if="item.wantsToComplete">Wants To Complete</span>
+    						</li>
+ 						</div>
+					</div>
+      			</div>
+      			<!-- Book Panel Footer  -->	     
+        		<div class="panel-footer">
+      	    		<a href="#" ng-click="viewItem(item.itemId)">view</a> | 
+        			<a href="#" ng-click="editItem(item.itemId)">edit</a> |
+        			<a href="#" ng-click="deleteItem(item.itemId)">delete</a>
+				</div>
+			</div>
+    	</div>
+    
+        <!-- Type Movie Item Panel  -->	     
+    	<div ng-show = "typeIsMovie" class="panel panel-info" ng-repeat="item in items">
+      		<!-- Movie Panel Heading  -->	     
+      		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index+1000}}">{{ item.title }}</a></div>
+      		<div id="{{$index+1000}}" class="panel-collapse collapse">
+      			<!-- Movie Panel Body  -->	     
+      			<div class="panel-body">
+            		<div class="row">
+  						<div class="col-xs-2">
+  							<img src="/images/placeholderImageItem.png" alt="1" class="img-rounded" width="100" height="100"></img>
+  						</div>
+ 						<div class="column">  
+      						<div>Movie Title: {{ item.title }}</div>
+      						<div>Movie UPC: {{ item.UPC }}</div>
+      						<div>Movie Actors: {{ item.actors }}</div>
+							<li>
+								<span class="label label-info"  ng-if="item.owns">Own</span>
+								<span class="label label-info"  ng-if="item.wantsToOwn">Wants To Own</span>
+								<span class="label label-info"  ng-if="item.complete">Complete</span>
+								<span class="label label-info"  ng-if="item.wantsToComplete">Wants To Complete</span>		
+    						</li>
+    					</div>
+					</div>
+      			</div> 
+      			<!-- Movie Panel Footer  -->	        			
+      			<div class="panel-footer">
+     	    		<a href="#" ng-click="view(item.itemId)">view</a> | 
+        			<a href="#" ng-click="edit(item.itemId)">edit</a> |
+        			<a href="#" ng-click="delete(item.itemId)">delete</a>
+				</div>
+			</div>
+    	</div>
+        
+        <!-- Type Generic Item Panel  -->	     
+    	<div ng-show = "typeIsGeneric" class="panel panel-info" ng-repeat="item in items">
+      		<!-- Generic Panel Heading  -->	     
+      		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index+2000}}">{{ item.title }}</a></div>
+      		<div id="{{$index+2000}}" class="panel-collapse collapse">
+      			<!-- Generic Panel Body  -->	     
+      			<div class="panel-body">
+                  	<div class="row">
+  						<div class="col-xs-2">
+  							<img src="/images/placeholderImageItem.png" alt="1" class="img-rounded" width="100" height="100"></img>
+  						</div>
+ 						<div class="column"> 
+      						<div>Item Title: {{ item.title }}</div>
+     						<div>Item Description: {{ item.description }}</div>
+							<li>	
+								<span class="label label-info"  ng-if="item.owns">Own</span>
+								<span class="label label-info"  ng-if="item.wantsToOwn">Wants To Own</span>
+								<span class="label label-info"  ng-if="item.complete">Complete</span>
+								<span class="label label-info"  ng-if="item.wantsToComplete">Wants To Complete</span>
+    						</li>
+    					</div>
+					</div>
+      			</div>
+      			<!-- Generic Panel Footer  -->	     
+      			<div class="panel-footer">
+      	   			<a href="#" ng-click="view(item.itemId)">view</a> | 
+        			<a href="#" ng-click="edit(item.itemId)">edit</a> |
+        			<a href="#" ng-click="delete(item.itemId)">delete</a>
+				</div>
+			</div>
+    	</div>
+
+		<div ng-show="clicked2" class="hideByDefault">{{status}}</div>
+  
+	</div>
+   
+   </div>
+ 
+ </div>
 
 <footer class="container-fluid">
   <p>Footer Text</p>
