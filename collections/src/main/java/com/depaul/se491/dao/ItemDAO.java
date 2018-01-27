@@ -17,5 +17,11 @@ public interface ItemDAO {
 	String addBooksInLibrary(Book book) throws SQLException;
 	String addMoviesInLibrary(Movie movie) throws SQLException;
 	String addGenericItemInLibrary(Item item) throws SQLException;
-
+	
+	// new Mohammed
+	String deleteItemByItemId (String libraryType, Long itemId) throws SQLException;
+	String deleteAllBooksByLibraryId(Long libraryId) throws SQLException;
+	String deleteAllMoviesByLibraryId(Long libraryId) throws SQLException;
+	String deleteAllGenericByLibraryId(Long libraryId) throws SQLException;
+	
 }

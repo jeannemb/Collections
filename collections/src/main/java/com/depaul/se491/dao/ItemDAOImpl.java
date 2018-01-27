@@ -40,7 +40,6 @@ public class ItemDAOImpl implements ItemDAO{
 			book.setTitle(rs.getString("title"));
 			book.setISBN13(rs.getString("ISBN13"));
 			book.setISBN10(rs.getString("ISBN10"));
-			book.setISBN13(rs.getString("ISBN13"));
 			book.setAuthors(rs.getString("authors"));
 			book.setOwns(rs.getBoolean("owns"));
 			book.setWantsToOwn(rs.getBoolean("wants_to_own"));
@@ -158,6 +157,67 @@ public class ItemDAOImpl implements ItemDAO{
 		return "SUCCESS";
 		}catch(Exception e){
 			return "FAILIED";
+		}		
+	}
+	
+	// new Mohammed
+	
+	public String deleteItemByItemId (String libraryType, Long itemId) throws SQLException{
+		String sql = "";
+		try{
+			System.out.println(libraryType);
+			if(libraryType.equals("books")){
+				sql = "DELETE FROM books WHERE item_id = ?";
+			}else if (libraryType.equals("movies")){
+				sql = "DELETE FROM movies WHERE item_id = ?";
+			}else if (libraryType.equals("generic_items")){
+				sql = "DELETE FROM generic_items WHERE item_id = ?";
+			}
+			int result = template.update(sql, new Object[] { itemId });
+			System.out.println(result);
+			if (result==1){
+				return "Items have been deleted";
+			}else {
+				return "Deletion FAILIED";
+			}
+		}catch(Exception e){
+			return "Deletion FAILIED"+e;
+		}		
+	}
+		
+	public String deleteAllBooksByLibraryId(Long libraryId) throws SQLException{
+		String sql;
+		try{
+			sql = "DELETE FROM books WHERE books_library_id=?";
+			int result = template.update(sql, new Object[] {libraryId });
+			System.out.println(result);
+		return "Books have been deleted";
+		}catch(Exception e){
+			return "Deletion FAILIED OR Empty Library";
+		}		
+	}
+	
+	public String deleteAllMoviesByLibraryId(Long libraryId) throws SQLException{
+		String sql;
+		try{
+			sql = "DELETE FROM movies WHERE movies_library_id=?";
+			int result = template.update(sql, new Object[] {libraryId });
+			System.out.println(result);
+		return "Movies have been deleted";
+		}catch(Exception e){
+			return "Deletion FAILIED OR Empty Library";
+		}		
+	}
+	
+	public String deleteAllGenericByLibraryId(Long libraryId) throws SQLException{
+		String sql;
+		try{
+			sql = "DELETE FROM generic_items WHERE generic_library_id=?";
+			int result = template.update(sql, new Object[] {libraryId });
+			System.out.println(result);
+		return "Generic Items have been deleted";
+		}catch(Exception e){
+			return "Deletion FAILIED OR Empty Library";
 		}		
 	}
 

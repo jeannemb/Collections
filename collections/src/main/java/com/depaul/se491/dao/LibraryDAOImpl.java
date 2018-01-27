@@ -4,15 +4,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.sql.DataSource;
+//import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+//import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.stereotype.Repository;
 
-import com.depaul.se491.connection.DatabaseConnection;
+//import com.depaul.se491.connection.DatabaseConnection;
 import com.depaul.se491.domain.Library;
 
 @Repository
@@ -63,9 +63,36 @@ public class LibraryDAOImpl implements LibraryDAO{
 		try{
 		sql = "INSERT INTO libraries (user_id, name, type) VALUES (?, ? ,?)";
 		int result = template.update(sql, new Object[]{lib.getUserId(), lib.getName(),lib.getType()});
+		System.out.println(result);
 		return "SUCCESS";
 		}catch(Exception e){
 			return "FAILIED"+e;
+		}		
+	}
+	
+	
+	// new Mohammed
+	public String getLibraryTypeByLibraryId(Long libraryId) throws SQLException{
+		String sql;
+		try{
+			sql = "SELECT type FROM libraries WHERE library_id = ?";
+		    String libraryType = template.queryForObject(sql, new Object[] { libraryId }, String.class);
+		    return libraryType;
+		}catch(Exception e){
+			return "Error occured or Library not Existed";
+		}		
+		
+	}
+	
+	public String deleteLibrary(Long libraryId) throws SQLException{
+		String sql;
+		try{			
+			sql = "DELETE FROM libraries WHERE library_id = ?";
+			int result = template.update(sql, new Object[] { libraryId });
+			System.out.println(result);
+		return "Library has been deleted";
+		}catch(Exception e){
+			return "Deletion FAILIED"+e;
 		}		
 	}
 
