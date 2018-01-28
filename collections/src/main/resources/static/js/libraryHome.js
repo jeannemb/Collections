@@ -39,7 +39,7 @@ app.controller('navigationController', function($scope,$http) {
             	if (type == "books"){
                 	var itemBook = new Object();
                 	itemBook.itemId = element.itemId;
-                	itemBook.booksLibraryId = element.booksLibraryId;
+                	itemBook.LibraryId = element.booksLibraryId;
                 	itemBook.title = element.title;
                 	itemBook.ISBN13 = element.ISBN13;
                 	itemBook.ISBN10 = element.ISBN10;
@@ -48,12 +48,13 @@ app.controller('navigationController', function($scope,$http) {
                 	itemBook.wantsToOwn = element.wantsToOwn;
                 	itemBook.complete = element.complete;
                 	itemBook.wantsToComplete = element.wantsToComplete;
+                	itemBook.type = type;
                 	items.push(itemBook);
                 	//libItems.push(itemBook);
             	}else if(type == "movies"){
                 	var itemMovie = new Object();
                 	itemMovie.itemId = element.itemId;
-                	itemMovie.moviesLibraryId = element.moviesLibraryId;
+                	itemMovie.LibraryId = element.moviesLibraryId;
                 	itemMovie.title = element.title;
                 	itemMovie.UPC = element.UPC;
                 	itemMovie.actors = element.actors;
@@ -61,19 +62,20 @@ app.controller('navigationController', function($scope,$http) {
                 	itemMovie.wantsToOwn = element.wantsToOwn;
                 	itemMovie.complete = element.complete;
                 	itemMovie.wantsToComplete = element.wantsToComplete;
+                	itemMovie.type = type;
                 	items.push(itemMovie);
                 	//libItems.push(itemMovie);
                 }else{
                 	var itemGeneric = new Object();
                 	itemGeneric.itemId = element.itemId;
-                	itemGeneric.genericLibraryId = element.genericLibraryId;
+                	itemGeneric.LibraryId = element.genericLibraryId;
                 	itemGeneric.title = element.title;
                 	itemGeneric.description = element.description;
                 	itemGeneric.owns = element.owns;
                 	itemGeneric.wantsToOwn = element.wantsToOwn;
                 	itemGeneric.complete = element.complete;
                 	itemGeneric.wantsToComplete = element.wantsToComplete;
-                	itemGeneric.push(itemGeneric); 
+                	itemGeneric.type = type;
                 	items.push(itemGeneric);
                 	//libItems.push(itemGeneric);
             	}
@@ -158,8 +160,20 @@ app.controller('navigationController', function($scope,$http) {
 
      }
      
-     $scope.deleteItem = function (id) {
-
+     $scope.deleteItem = function (id, libId) {
+         $.ajax({
+     		type : "DELETE",
+    		contentType : "application/json",
+    	    url : "http://localhost:8080/manage/deleteItem?libraryId=" + libId + "&itemId=" + id,
+    	    dataType : 'json',
+    	    success : function(result) {
+    	    	console.log("Success: " + result);
+    	    },
+    	    error : function(e) {
+    	    	console.log("FAILURE: " + id + libId);
+    	    	$("#postResultDiv").html("<strong>Error</strong>");
+    	    }
+         });
      }
     
 });
