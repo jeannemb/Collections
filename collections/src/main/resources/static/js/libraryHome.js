@@ -41,8 +41,8 @@ app.controller('navigationController', function($scope,$http) {
                 	itemBook.itemId = element.itemId;
                 	itemBook.LibraryId = element.booksLibraryId;
                 	itemBook.title = element.title;
-                	itemBook.ISBN13 = element.ISBN13;
-                	itemBook.ISBN10 = element.ISBN10;
+                	itemBook.isbn13 = element.isbn13;
+                	itemBook.isbn10 = element.isbn10;
                 	itemBook.authors = element.authors;
                 	itemBook.owns = element.owns;
                 	itemBook.wantsToOwn = element.wantsToOwn;
@@ -56,7 +56,7 @@ app.controller('navigationController', function($scope,$http) {
                 	itemMovie.itemId = element.itemId;
                 	itemMovie.LibraryId = element.moviesLibraryId;
                 	itemMovie.title = element.title;
-                	itemMovie.UPC = element.UPC;
+                	itemMovie.upc = element.upc;
                 	itemMovie.actors = element.actors;
                 	itemMovie.owns = element.owns;
                 	itemMovie.wantsToOwn = element.wantsToOwn;
@@ -91,10 +91,6 @@ app.controller('navigationController', function($scope,$http) {
     	if(libs.length > 0){
     		 $scope.welcomeMessage = false;
     		 $scope.libraryMessage = false;
-    	 }
-    	var libsNames = [];
-    	for (var i in libs){
-    		libsNames.push(libs[i].name); 
     	}
     	
     	if(libs[0].type == "books"){
@@ -113,38 +109,57 @@ app.controller('navigationController', function($scope,$http) {
     		$scope.typeIsGeneric = true;
     	}
     	
-    	
+    	$scope.libs = libs
     	$scope.items = libs[0].items;
         $scope.status = libs[0].name;
         selectedLibraryName = libs[0].name;
 		$scope.libraries = {
-			options: libsNames,
-		    selected: selectedLibraryName
+			options: libs,
+		    selected: libs[0]
 		};
+		localStorage.setItem("libraryId",libs[0].libraryId)
+		localStorage.setItem("name", libs[0].name);
+		localStorage.setItem("type", libs[0].type);
+		if(libs[0].type == "books"){
+			$scope.addLibrary = "addBook";
+		}else if(libs[0].type == "movies"){
+			$scope.addLibrary = "addMovie";
+		}else{
+			$scope.addLibrary = "addGeneric";
+		}
     }
      
      $scope.selectedItemChanged =  function(){
-    	$scope.status = $scope.libraries.selected;
+ 		localStorage.setItem("libraryId", $scope.libraries.selected.libraryId)
+		localStorage.setItem("name", $scope.libraries.selected.name);
+		localStorage.setItem("type", $scope.libraries.selected.type);
+
+    	$scope.status = $scope.libraries.selected.libraryId + " "+ $scope.libraries.selected.name;
      	for (var i in libs){
-     		if(libs[i].name == $scope.libraries.selected){
+     		if(libs[i].libraryId == $scope.libraries.selected.libraryId){
      	    	if(libs[i].type == "books"){
          			$scope.items  = libs[i].items;
          			selectedLibraryItems = libs[i].items;
      	    		$scope.typeIsBook = true;
      	    		$scope.typeIsMovie = false;
-     	    		$scope.typeIsGeneric = false;    		
-     	    	}else if (libs[0].type == "movies"){
+     	    		$scope.typeIsGeneric = false;
+     	    		$scope.addLibrary = "addBook";
+     	    	}else if (libs[i].type == "movies"){
      	    		$scope.typeIsBook = false;
          			$scope.items  = libs[i].items;
          			selectedLibraryItems = libs[i].items;
      	    		$scope.typeIsMovie = true;
      	    		$scope.typeIsGeneric = false;
+     				$scope.addLibrary = "addMovie";
+
      	    	}else{
      	    		$scope.typeIsBook = false;
      	    		$scope.typeIsMovie = false;
          			$scope.items  = libs[i].items;
          			selectedLibraryItems = libs[i].items;
      	    		$scope.typeIsGeneric = true;
+     				$scope.addLibrary = "addGeneric";
+
      	    	}
 
 

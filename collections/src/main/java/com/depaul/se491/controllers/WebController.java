@@ -46,4 +46,19 @@ public class WebController {
 	public String libraryHome2(){
 	   return "libraryHome2";
 	}
+	
+	@RequestMapping(value="/addBook",method = RequestMethod.GET)
+	public String addBook(){
+	   return "addBook";
+	}
+	
+	@RequestMapping(value="/addMovie",method = RequestMethod.GET)
+	public String addMovie(){
+	   return "addMovie";
+	}
+	
+	@RequestMapping(value="/addGeneric",method = RequestMethod.GET)
+	public String addGeneric(){
+	   return "addGeneric";
+	}
 }

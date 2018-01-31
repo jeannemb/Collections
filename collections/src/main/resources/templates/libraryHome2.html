@@ -63,8 +63,7 @@
      		 .row.content {height: auto;}
     		}
   
-  		</style>
-  
+  		</style>  
 </head>
 
 <body>
@@ -109,7 +108,7 @@
     			<ul class="nav nav-pills nav-stacked">
   					<li class="active" style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-home"></span> Home</a></li>
   					<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
-  					<li><a href="itemCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
+  					<li><a href="/{{addLibrary}}" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
   					<li><a href="#" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
   					<li><a href="#" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> log out</a></li>
   				</ul>
@@ -130,7 +129,7 @@
      	<!-- Library Select  -->	 
      	<div class="form-group">
       		<label for="exampleSelect1">Library select</label>
-      		<select class="form-control" ng-model="libraries.selected" ng-options="l as l for l in libraries.options" ng-change="selectedItemChanged()" >
+      		<select class="form-control" ng-model="libraries.selected" ng-options="library.name for library in libraries.options track by library.libraryId" ng-change="selectedItemChanged()">
       		</select>   
     	</div>
         
@@ -150,10 +149,10 @@
   						<div class="col-xs-2">
   						<img src="/images/placeholderImageItem.png" alt="1" class="img-rounded" width="100" height="100"></img>
   						</div>			
- 						<div class="column">
+ 						<div class="col-xs-10">
  			      			<div>Book Title: {{ item.title }}</div>
-							<div>Book ISBN13: {{ item.ISBN13 }}</div>
-							<div>Book ISBN10: {{ item.ISBN10 }}</div>
+							<div>Book ISBN13: {{ item.isbn13 }}</div>
+							<div>Book ISBN10: {{ item.isbn10 }}</div>
 							<div>Book Authors: {{ item.authors }}</div>
 							<li>
 								<span class="label label-info"  ng-if="item.owns">Own</span>
@@ -184,9 +183,9 @@
   						<div class="col-xs-2">
   							<img src="/images/placeholderImageItem.png" alt="1" class="img-rounded" width="100" height="100"></img>
   						</div>
- 						<div class="column">  
+ 						<div class="col-xs-10">  
       						<div>Movie Title: {{ item.title }}</div>
-      						<div>Movie UPC: {{ item.UPC }}</div>
+      						<div>Movie UPC: {{ item.upc }}</div>
       						<div>Movie Actors: {{ item.actors }}</div>
 							<li>
 								<span class="label label-info"  ng-if="item.owns">Own</span>
@@ -217,7 +216,7 @@
   						<div class="col-xs-2">
   							<img src="/images/placeholderImageItem.png" alt="1" class="img-rounded" width="100" height="100"></img>
   						</div>
- 						<div class="column"> 
+ 						<div class="col-xs-10"> 
       						<div>Item Title: {{ item.title }}</div>
      						<div>Item Description: {{ item.description }}</div>
 							<li>	

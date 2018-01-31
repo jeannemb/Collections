@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<title>Collectr</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.css"></link>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+	<script src="/js/index.js"></script>
+	<script src="/js/addMovie.js"></script>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="/">Collectr</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="/">Home</a></li>
+	        <li><a href="about">About</a></li>
+	        <li><a href="libraryHome">Collections</a></li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8" style="align:middle">
+
+<form name="MovieCreationForm" ng-hide="Manual Entry" class="form-horizontal" style="margin: auto; border: 3px solid; padding: 20px;" ng-app="collection" ng-controller="addMovie">
+	<h2>Add Movie to {{LibraryName}} </h2>
+	<p> -----------------------------------------------------------------------------------------------------------------------------------------------</p>
+  	<button class="btn btn-info btn-md" ng-model="lookUp"  ng-click="lookUpClicked()" style="width: 49%" >Look up</button>
+	<button class="btn btn-info btn-md" ng-model="manual" ng-click="manualClicked()" style="width: 49%">Manual Entry</button> 
+	<p> -----------------------------------------------------------------------------------------------------------------------------------------------</p>
+
+	<div ng-show = "showSearchBar">
+		<!-- Search Bar -->
+		<div class="input-group">
+		   <input type="text" class="form-control" placeholder="Look Up a Book .."/>
+		   	<span class="input-group-btn">
+		   		<button class="btn btn-default" type="button" ng-Click="searchMovie()"><span class="glyphicon glyphicon-search"></span></button>
+	    	</span>
+		</div>
+	</div>
+
+	<div ng-show = "showManualEntry" class="hideByDefault">
+		<h2>Manual Entry</h2>
+		<label for="Movie Title">Movie Title:</label>
+		<input type="text" class="form-control" placeholder="Movie Title" ng-required = "true" ng-model="title"/>
+		<label for="UPC">UPC:</label>
+		<input type="text" class="form-control" placeholder="UPC" ng-model="UPC"/>
+		<label for="Actors">Actors:</label>
+		<input type="text" class="form-control" placeholder="Actors" ng-model="actors"/>
+		<div class="checkbox">
+      	<label>
+    	<input type="checkbox" ng-model="owns"/> Own
+      	</label>
+    	</div>
+    	<div class="checkbox">
+      	<label>
+        <input type="checkbox" ng-model="wantsToOwn"/> Wants To Own
+      	</label>
+    	</div>
+    	<div class="checkbox">
+		<label>
+		<input type="checkbox" ng-model="complete"/> Complete
+		</label>
+		</div>
+		<div class="checkbox">
+		<label>
+		<input type="checkbox" ng-model="wantsToComplete"/> Wants To Complete
+		</label>
+		</div>
+		<button type="submit" style = "margin: 10px" class="btn btn-default" ng-click="create()" >Create</button>
+				<div class="alert alert-dismissible alert-success" ng-if="alertSuccess" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
+  			<button type="button" class="close" data-dismiss="alert">&times;</button>
+  				<strong>Well done!</strong> You successfully added this movie.
+		</div>
+		
+		<div class="alert alert-dismissible alert-danger" ng-if="alertDanger" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
+  			<button type="button" class="close" data-dismiss="alert">&times;</button>
+  				<strong>Oh snap!</strong> Change a few things up and try submitting again.
+		</div>	
+</div>
+<div ng-show="clicked" class="hideByDefault">{{response}}</div>
+</form>
+</div>
+<div class="col-sm-2"></div>
+</body>
+</html>

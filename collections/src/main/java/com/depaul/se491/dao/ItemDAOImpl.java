@@ -38,8 +38,8 @@ public class ItemDAOImpl implements ItemDAO{
 			book.setItemId(rs.getLong("item_id"));
 			book.setBooksLibraryId(rs.getLong("books_library_id"));
 			book.setTitle(rs.getString("title"));
-			book.setISBN13(rs.getString("ISBN13"));
-			book.setISBN10(rs.getString("ISBN10"));
+			book.setIsbn13(rs.getString("isbn13"));
+			book.setIsbn10(rs.getString("isbn10"));
 			book.setAuthors(rs.getString("authors"));
 			book.setOwns(rs.getBoolean("owns"));
 			book.setWantsToOwn(rs.getBoolean("wants_to_own"));
@@ -59,7 +59,7 @@ public class ItemDAOImpl implements ItemDAO{
 			movie.setItemId(rs.getLong("item_id"));
 			movie.setMoviesLibraryId(rs.getLong("movies_library_id"));
 			movie.setTitle(rs.getString("title"));
-			movie.setUPC(rs.getString("UPC"));
+			movie.setUpc(rs.getString("upc"));
 			movie.setActors(rs.getString("actors"));
 			movie.setOwns(rs.getBoolean("owns"));
 			movie.setWantsToOwn(rs.getBoolean("wants_to_own"));
@@ -118,10 +118,10 @@ public class ItemDAOImpl implements ItemDAO{
 	public String addBooksInLibrary(Book book) throws SQLException{
 		String sql;
 		try{
-		sql = "INSERT INTO books (books_library_id, title, ISBN13, ISBN10, authors, owns, wants_to_own, complete, wants_to_complete) "
+		sql = "INSERT INTO books (books_library_id, title, isbn13, isbn10, authors, owns, wants_to_own, complete, wants_to_complete) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = template.update(sql, new Object[]{book.getBooksLibraryId(),book.getTitle(),
-				book.getISBN13(),book.getISBN10(),book.getAuthors(),
+				book.getIsbn13(),book.getIsbn10(),book.getAuthors(),
 				book.getOwns(),book.getWantsToOwn(),book.getComplete(),book.getWantsToComplete()});
 		System.out.println(result);
 		return "SUCCESS";
@@ -133,10 +133,10 @@ public class ItemDAOImpl implements ItemDAO{
 	public String addMoviesInLibrary(Movie movie) throws SQLException{
 		String sql;
 		try{
-		sql = "INSERT INTO movies (movies_library_id, title, UPC, actors, owns, wants_to_own, complete, wants_to_complete) "
+		sql = "INSERT INTO movies (movies_library_id, title, upc, actors, owns, wants_to_own, complete, wants_to_complete) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = template.update(sql, new Object[]{movie.getMoviesLibraryId(),movie.getTitle(),
-				movie.getUPC(),movie.getActors(),
+				movie.getUpc(),movie.getActors(),
 				movie.getOwns(),movie.getWantsToOwn(),movie.getComplete(),movie.getWantsToComplete()});
 		System.out.println(result);
 		return "SUCCESS";

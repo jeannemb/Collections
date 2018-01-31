@@ -8,8 +8,8 @@ public class Book implements Serializable{
 	private Long itemId;
 	private Long booksLibraryId;
 	private String title;
-	private String ISBN13;
-	private String ISBN10;
+	private String isbn13;
+	private String isbn10;
 	private String authors;
 	private boolean owns;
 	private boolean wantsToOwn;
@@ -34,17 +34,17 @@ public class Book implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getISBN13() {
-		return ISBN13;
+	public String getIsbn13() {
+		return isbn13;
 	}
-	public void setISBN13(String iSBN13) {
-		ISBN13 = iSBN13;
+	public void setIsbn13(String iSBN13) {
+		isbn13 = iSBN13;
 	}
-	public String getISBN10() {
-		return ISBN10;
+	public String getIsbn10() {
+		return isbn10;
 	}
-	public void setISBN10(String iSBN10) {
-		ISBN10 = iSBN10;
+	public void setIsbn10(String iSBN10) {
+		isbn10 = iSBN10;
 	}
 	public String getAuthors() {
 		return authors;
@@ -79,7 +79,7 @@ public class Book implements Serializable{
 	@Override
 	public String toString() {
 		return "Book [itemId=" + itemId + ", booksLibraryId=" + booksLibraryId + ", title=" + title + ", ISBN13="
-				+ ISBN13 + ", ISBN10=" + ISBN10 + ", authors=" + authors + ", owns=" + owns + ", wantsToOwn="
+				+ isbn13 + ", ISBN10=" + isbn10 + ", authors=" + authors + ", owns=" + owns + ", wantsToOwn="
 				+ wantsToOwn + ", complete=" + complete + ", wantsToComplete=" + wantsToComplete + "]";
 	}
 

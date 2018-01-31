@@ -8,7 +8,7 @@ public class Movie implements Serializable{
 	private Long itemId;
 	private Long moviesLibraryId;
 	private String title;
-	private String UPC;
+	private String upc;
 	private String actors;
 	private boolean owns;
 	private boolean wantsToOwn;
@@ -33,11 +33,11 @@ public class Movie implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getUPC() {
-		return UPC;
+	public String getUpc() {
+		return upc;
 	}
-	public void setUPC(String uPC) {
-		UPC = uPC;
+	public void setUpc(String uPC) {
+		upc = uPC;
 	}
 	public String getActors() {
 		return actors;
@@ -71,7 +71,7 @@ public class Movie implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Movie [itemId=" + itemId + ", moviesLibraryId=" + moviesLibraryId + ", title=" + title + ", UPC=" + UPC
+		return "Movie [itemId=" + itemId + ", moviesLibraryId=" + moviesLibraryId + ", title=" + title + ", UPC=" + upc
 				+ ", actors=" + actors + ", owns=" + owns + ", wantsToOwn=" + wantsToOwn + ", complete=" + complete
 				+ ", wantsToComplete=" + wantsToComplete + "]";
 	}
