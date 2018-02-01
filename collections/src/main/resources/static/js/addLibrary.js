@@ -4,7 +4,13 @@ $( document ).ready(function() {
     $("#libraryForm").submit(function(event) {
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
-		ajaxPost();
+		var libName = document.getElementById("libName");
+		var libType = document.getElementById("libType");
+		if (libName.value == null || libName.value == "" || libType.value == null || libType.value == ""){
+			alert("Please Fill All Required Fields");
+		} else {
+			ajaxPost();
+		}
 	});
     
     function ajaxPost(){
@@ -25,9 +31,13 @@ $( document ).ready(function() {
 					"Post Successfully! <br>" +
 					"---> Customer's Info: userId = " + 
 					result.data.userId + " ,name = " + result.data.name + " ,type = " + result.data.type + "</p>");
+				resetData();
+				redirect();
     	    },
     	    error : function(e) {
-    	    	console.log("FAILURE: ", result.data.name);
+    	    	console.log("FAILURE ");
+    	    	resetData();
+    	    	redirect();
     	    	$("#postResultDiv").html("<strong>Error</strong>");
     	    }
     	});
@@ -36,6 +46,10 @@ $( document ).ready(function() {
         	1;
         	$("#libName").val("");
         	$("#libType").val("");
+        }
+        
+        function redirect(){
+        	window.location="http://localhost:8080/libraryHome2";
         }
     }
 	
