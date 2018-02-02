@@ -176,49 +176,19 @@ app.controller('navigationController', function($scope,$http) {
      }
      
      $scope.deleteItem = function (id, libId) {
-    	 var txt;
-    	 var r = confirm("Do you want to delete this item?");
-    	 if (r == true) {
-    		 $.ajax({
-    			 type : "DELETE",
-    	    	 contentType : "application/json",
-    	    	 url : "http://localhost:8080/manage/deleteItem?libraryId=" + libId + "&itemId=" + id,
-    	    	 dataType : 'json',
-    	    	 success : function(result) {
-    	    	    console.log("Success: " + result);
-    	    	    reloadData();
-    	    	 },
-    	    	 error : function(e) {
-    	    	    console.log("FAILURE: " + id + libId);
-    	    	    $("#postResultDiv").html("<strong>Error</strong>");
-    	    	    reloadData();
-    	    	 }
-    	     })
-         } else {
-    	     
-    	 }
+         $.ajax({
+     		type : "DELETE",
+    		contentType : "application/json",
+    	    url : "http://localhost:8080/manage/deleteItem?libraryId=" + libId + "&itemId=" + id,
+    	    dataType : 'json',
+    	    success : function(result) {
+    	    	console.log("Success: " + result);
+    	    },
+    	    error : function(e) {
+    	    	console.log("FAILURE: " + id + libId);
+    	    	$("#postResultDiv").html("<strong>Error</strong>");
+    	    }
+         });
      }
-     
-     function reloadData(){
- 		$http({
-			method : "GET",
-			url: "http://localhost:8080/manage/library?userId=1"
-		}).then(function successCallback(response) {
-            response.data.forEach(function(element){
-            	var library = new Object();
-            	library.libraryId = element.libraryId;
-            	library.name = element.name;
-            	library.type = element.type;
-            	var libItems = initItems(element.libraryId, element.type);
-            	library.items = libItems;
-            	libs.push(library);
-            });
-            loadInHtml();
-            //$scope.status = items;
-		}, function errorCallback(response) {
-
-			$scope.status = response.statusText;
-		});
-     }
-     
+    
 });
