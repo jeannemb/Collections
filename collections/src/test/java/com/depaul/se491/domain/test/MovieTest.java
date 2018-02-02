@@ -97,8 +97,8 @@ public class MovieTest {
 		try{
 			movieTest = new Movie();
 			String uPC = "978-3-16-148410-0";
-			movieTest.setUPC(uPC);
-			assertEquals(uPC, movieTest.getUPC());
+			movieTest.setUpc(uPC);
+			assertEquals(uPC, movieTest.getUpc());
 		}catch(Exception e){
 			fail("ISBN13 has not been set correctly");
 		}
@@ -111,8 +111,8 @@ public class MovieTest {
 		try{
 			movieTest = new Movie();
 			String uPC = "978-3-16-148410-0";
-			movieTest.setUPC(uPC);
-			assertEquals(uPC, movieTest.getUPC());
+			movieTest.setUpc(uPC);
+			assertEquals(uPC, movieTest.getUpc());
 		}catch(Exception e){
 			fail("ISBN13 has not been set correctly");
 		}

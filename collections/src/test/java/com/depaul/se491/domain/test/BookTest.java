@@ -100,8 +100,8 @@ public class BookTest {
 		try{
 			bookTest = new Book();
 			String iSBN13 = "978-3-16-148410-0";
-			bookTest.setISBN13(iSBN13);
-			assertEquals(iSBN13, bookTest.getISBN13());
+			bookTest.setIsbn13(iSBN13);
+			assertEquals(iSBN13, bookTest.getIsbn13());
 		}catch(Exception e){
 			fail("ISBN13 has not been set correctly");
 		}
@@ -114,8 +114,8 @@ public class BookTest {
 		try{
 			bookTest = new Book();
 			String iSBN13 = "978-3-16-148410-0";
-			bookTest.setISBN13(iSBN13);
-			assertEquals(iSBN13, bookTest.getISBN13());
+			bookTest.setIsbn13(iSBN13);
+			assertEquals(iSBN13, bookTest.getIsbn13());
 		}catch(Exception e){
 			fail("ISBN13 has not been set correctly");
 		}
@@ -128,8 +128,8 @@ public class BookTest {
 		try{
 			bookTest = new Book();
 			String iSBN10 = "978-3-16-148410-0";
-			bookTest.setISBN10(iSBN10);
-			assertEquals(iSBN10, bookTest.getISBN10());
+			bookTest.setIsbn10(iSBN10);
+			assertEquals(iSBN10, bookTest.getIsbn10());
 		}catch(Exception e){
 			fail("ISBN10 has not been set correctly");
 		}
@@ -142,8 +142,8 @@ public class BookTest {
 		try{
 			bookTest = new Book();
 			String iSBN10 = "032157351X";
-			bookTest.setISBN10(iSBN10);
-			assertEquals(iSBN10, bookTest.getISBN10());
+			bookTest.setIsbn10(iSBN10);
+			assertEquals(iSBN10, bookTest.getIsbn10());
 		}catch(Exception e){
 			fail("ISBN10 has not been set correctly");
 		}
