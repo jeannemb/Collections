@@ -21,8 +21,8 @@ public class SSHConnection {
 		
 		//jsch.addIdentity("/Users/mohammadalharbi/Downloads/SSHAccess.pem.txt");
 		//jsch.addIdentity("/Users/Jeanne/Documents/SE491/SSHAccess.pem.txt");
-		//jsch.addIdentity("/Users/Mark/Documents/SSHAccess.pem.txt");
-		jsch.addIdentity("files/SSHAccess.pem.txt");
+		jsch.addIdentity("/Users/Mark/Documents/SSHAccess.pem.txt");
+		//jsch.addIdentity("files/SSHAccess.pem.txt");
 		
 		String rhost = "se491-mysql-collections.cwxyxwc6zgxm.us-east-1.rds.amazonaws.com";
 		int rport = 3306;
