@@ -200,6 +200,7 @@ app.controller('navigationController', function($scope,$http) {
      }
      
      function reloadData(){
+    	libs = [];
  		$http({
 			method : "GET",
 			url: "http://localhost:8080/manage/library?userId=1"
