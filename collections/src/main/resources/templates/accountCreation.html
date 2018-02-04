@@ -14,47 +14,28 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>                        
-	      </button>
-	      <a class="navbar-brand" href="#">Collectr</a>
-	    </div>
-	    <div class="collapse navbar-collapse" id="myNavbar">
-	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">Home</a></li>
-	        <li><a href="about.html">About</a></li>
-	        <li><a href="Index.html">Collections</a></li>
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-	      </ul>
-	    </div>
-	  </div>
-	</nav>
-<h1> </h1>
+	<div th:include = "/Index :: header"></div>
 
 <div class="container" ng-app="collection" ng-controller="accountCreation">
 <div class="col-sm-2"></div>
 <div class="col-sm-8" style="align:middle">
 <form name="accountCreationForm" ng-hide="success" class="form-horizontal" style="margin: auto; border: 3px solid; padding: 20px;">
 
-	  <h2>Create your Collectr Account</h2>
-	  	  <label for="First Name">First Name:</label>
-	      <input type="text" class="form-control" id="fName" placeholder="First Name" name="fName" ng-required = "true" ng-model="firstName"/>
-	      <label for="Last Name">Last Name:</label>
-	      <input type="text" class="form-control" id="lName" placeholder="Last Name" name="lName" ng-required = "true" ng-model="lastName"/>
-	      <label for="email">Email:</label>
-	      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" ng-required = "true" ng-model="email"/>
-	      <label for="pwd">Password:</label>
-	      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" ng-required = "true" ng-model="password"/>
-	      <label for="pwd">Confirm Password:</label>
-	      <input type="password" class="form-control" id="cfmpwd" placeholder="Confirm your password" name="cfmpwd" ng-required = "true" ng-model="confirmPassword"/>
-	    <button type="submit" style = "margin: 10px" class="btn btn-default" ng-click="create()" >Create</button>
+	<div class="text-center">    
+		<h2>Create your Collectr Account</h2>		
+		<a href="login">Already a user?  Login.</a>
+	</div>	
+	<label for="First Name">First Name:</label>
+	<input type="text" class="form-control" id="fName" placeholder="First Name" name="fName" ng-required = "true" ng-model="firstName"/>
+	<label for="Last Name">Last Name:</label>
+	<input type="text" class="form-control" id="lName" placeholder="Last Name" name="lName" ng-required = "true" ng-model="lastName"/>
+	<label for="email">Email:</label>
+	<input type="email" class="form-control" id="email" placeholder="Enter email" name="email" ng-required = "true" ng-model="email"/>
+	<label for="pwd">Password:</label>
+	<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" ng-required = "true" ng-model="password"/>
+	<label for="pwd">Confirm Password:</label>
+	<input type="password" class="form-control" id="cfmpwd" placeholder="Confirm your password" name="cfmpwd" ng-required = "true" ng-model="confirmPassword"/>
+	<button type="submit" style = "margin: 10px" class="btn btn-default" ng-click="create()" >Create</button>
 
 </form>
 	  <div ng-show="clicked" class="hideByDefault">{{response}}</div>

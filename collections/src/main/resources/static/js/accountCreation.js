@@ -17,7 +17,7 @@ app.controller('accountCreation', function($scope, $http) {
 
 			$http({
 				method: "POST",
-				url: "http://localhost:8080//user/createUser",
+				url: "http://localhost:8080/user/createUser",
 				data : angular.toJson(user),
 				headers : {
 					'Content-Type': 'application/json'

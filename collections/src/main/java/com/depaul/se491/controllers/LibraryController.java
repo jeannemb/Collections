@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +33,10 @@ public class LibraryController {
     private ItemDAO itemDAO;
 	
 	@RequestMapping(value = "/library", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<List<Library>> getLibraries( @RequestParam(required=true, value="userId") Long userId) throws SQLException {
-		List<Library> libs = libraryDAO.getLibrariesByUser(userId);
+	public ResponseEntity<List<Library>> getLibraries() throws SQLException {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName();
+		List<Library> libs = libraryDAO.getLibrariesByUser(username);
 		return new ResponseEntity<>(libs, HttpStatus.OK);
 	}
 	

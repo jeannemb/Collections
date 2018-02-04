@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -22,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
         	.csrf().disable()
             .authorizeRequests()
-                .antMatchers("/", "/images/**", "/js/**").permitAll()
+                .antMatchers("/", "/user/createUser", "/accountCreation", "/about", "/images/**", "/js/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -38,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         
         auth.jdbcAuthentication().dataSource(datasource)
         	.usersByUsernameQuery("select username, password, 1 from users where username=?")
-        	.authoritiesByUsernameQuery("select u.username, ur.role from users u join user_roles ur on u.user_id = ur.user_id where username=?")
+        	.authoritiesByUsernameQuery("select username, 'ROLE_USER' as role from users where username=?")
         	.passwordEncoder(new BCryptPasswordEncoder());
     }
 }

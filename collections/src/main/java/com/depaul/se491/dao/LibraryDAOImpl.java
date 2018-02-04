@@ -45,10 +45,10 @@ public class LibraryDAOImpl implements LibraryDAO{
 	
 	
 	@Override
-	public List<Library> getLibrariesByUser(Long userId) throws SQLException {
+	public List<Library> getLibrariesByUser(String username) throws SQLException {
 		try{
-		String sql = "SELECT * FROM libraries WHERE USER_ID = ?";
-		List<Library> libraries = template.query(sql, new Object[]{userId}, new LibraryRowMapper());
+		String sql = "SELECT l.library_id, l.user_id, l.name, l.type FROM libraries l left join users u on l.user_id = u.user_id WHERE u.EMAIL = ?";
+		List<Library> libraries = template.query(sql, new Object[]{username}, new LibraryRowMapper());
 		return libraries;
 		}catch(Exception e){
 			System.out.println(e);
@@ -56,6 +56,18 @@ public class LibraryDAOImpl implements LibraryDAO{
 		}
 		
 	}
+	
+ 	@Override
+	public List<Library> getLibrariesByUser(Long userId) throws SQLException {
+ 		try{
+		String sql = "SELECT * FROM libraries WHERE USER_ID = ?";
+		List<Library> libraries = template.query(sql, new Object[]{userId}, new LibraryRowMapper());
+ 		return libraries;
+ 		}catch(Exception e){
+ 			System.out.println(e);
+ 			return null;
+ 		}		
+ 	}
 
 	
 	public String createLibraryForUser(Library lib) throws SQLException{
@@ -79,7 +91,7 @@ public class LibraryDAOImpl implements LibraryDAO{
 		    String libraryType = template.queryForObject(sql, new Object[] { libraryId }, String.class);
 		    return libraryType;
 		}catch(Exception e){
-			return "Error occured or Library not Existed";
+			return "Error occured or library does not exist";
 		}		
 		
 	}
@@ -92,7 +104,7 @@ public class LibraryDAOImpl implements LibraryDAO{
 			System.out.println(result);
 		return "Library has been deleted";
 		}catch(Exception e){
-			return "Deletion FAILIED"+e;
+			return "Deletion failed"+e;
 		}		
 	}
 

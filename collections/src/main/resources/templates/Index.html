@@ -14,10 +14,10 @@
 	  
 </head>
 <body>
-
+    <div th:fragment="header">
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
-	    <div class="navbar-header">
+	    <div class="navbar-header" >
 	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
@@ -27,30 +27,30 @@
 	    </div>
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="/">Home</a></li>
+	        <li><a href="/">Home</a></li>
 	        <li><a href="about">About</a></li>
 	        <li><a href="libraryHome2">Collections</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	      	<li>
 	      		<div class="navbar-text">
-	      			<p class="text-warning" th:fragment="logout" sec:authorize="isAuthenticated()">Welcome,  <span sec:authentication="name"></span>  </p>
+	      			<p class="text-warning" th:fragment="logout" sec:authorize="isAuthenticated()"><span sec:authentication="name"></span></p>
 	      		</div>
 	      	</li>
 	      	<li>
-	      		<div th:fragment="logout" sec:authorize="isAuthenticated()">		
-                	<form th:action="@{/logout}" method="post">					
-                    	<button type="submit" class="btn btn-link"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
-                	</form>
+	      		<div class="navbar-text" sec:authorize="isAuthenticated()">	
+	      		    <a href="/logout" th:href="@{#}" onclick="$('#form').submit();"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a>
+                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
         		</div>
         	</li>
 	        <li>
-	        	<a href="login" sec:authorize="!isAuthenticated()"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+	        	<a href="login" sec:authorize="!isAuthenticated()"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a>
 	        </li>
 	      </ul>
 	    </div>
 	  </div>
 	</nav>
+	</div>
 	  
 	<div class="container-fluid text-center">    
 	    <div class="page-header" id="banner">
@@ -114,7 +114,8 @@
 				    </a>
 				</div>
 				<div>
-					<a href="libraryHome" class="btn btn-primary btn-lg">Start Collecting!</a>
+					<a href="accountCreation" sec:authorize="!isAuthenticated()" class="btn btn-primary btn-lg">Start Collecting!</a>
+					<a href="libraryHome2" sec:authorize="isAuthenticated()" class="btn btn-primary btn-lg">Start Collecting!</a>
 				</div>
 	          </div>
 	    </div>
