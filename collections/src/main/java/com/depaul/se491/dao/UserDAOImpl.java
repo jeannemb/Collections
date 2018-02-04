@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public User getUserDetails(String username) throws SQLException {
 		try{
-		String sql = "SELECT user_id, first_name, last_name, email FROM user WHERE username = ?";
+		String sql = "SELECT user_id, first_name, last_name, email FROM users WHERE username = ?";
 		User user = template.queryForObject(sql, new Object[]{username}, new UserRowMapper());
 		return user;
 		}catch(Exception e){

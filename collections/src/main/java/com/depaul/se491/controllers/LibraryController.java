@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.depaul.se491.dao.ItemDAO;
 import com.depaul.se491.dao.LibraryDAO;
+import com.depaul.se491.dao.UserDAO;
 import com.depaul.se491.domain.Book;
 import com.depaul.se491.domain.Item;
 import com.depaul.se491.domain.Library;
 import com.depaul.se491.domain.Movie;
+import com.depaul.se491.domain.User;
 
 @RestController
 @RequestMapping(value = "/manage")
@@ -28,6 +30,9 @@ public class LibraryController {
 	
     @Autowired
 	private LibraryDAO libraryDAO;
+    
+    @Autowired
+    private UserDAO userDAO;
     
     @Autowired
     private ItemDAO itemDAO;
@@ -47,6 +52,9 @@ public class LibraryController {
 	
 	@RequestMapping(value = "/createlibrary", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public ResponseEntity<String> createLibrary(@RequestBody Library jsonLibrary) throws SQLException {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userDAO.getUserDetails(auth.getName());
+		jsonLibrary.setUserId(user.getUserId());
 		String result = libraryDAO.createLibraryForUser(jsonLibrary);
 		if (result == "SUCCESS"){
 			return new ResponseEntity<String>(HttpStatus.OK);
