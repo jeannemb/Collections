@@ -128,7 +128,7 @@ a.adisabled:active { text-decoration: none; }
         <!-- Welcome Messages In case No library  -->	     
 		<div ng-show="welcomeMessage" class="ng-cloak"><h1>Welcome to Collectr </h1></div>
   		<div ng-show="libraryMessage" class="ng-cloak"><h2>Please create your first library</h2></div>
-  		<div ng-show="itemMessage" class="ng-cloak"><h2> {{libraryName}} is empty, please add item</h2></div>
+  		<div ng-show="itemMessage" class="ng-cloak"><h3> {{libraryName}} is empty, please <a href="{{addLibrary}}" ng-class = "{'adisabled': !usable}" ng-click="doOperation()">Add Item</a></h3></div>
 
          <!-- Type Book Item Panel  -->	     
     	<div ng-show = "typeIsBook" class="panel panel-info ng-cloak" ng-repeat="item in items">

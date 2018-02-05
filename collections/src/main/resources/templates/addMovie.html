@@ -35,13 +35,13 @@
 	</div>
 	</div>
 	
-	<h2>Add Movie to {{LibraryName}} </h2>
+	<h2>Add Movie to <i ng-bind="libraryName"><strong></strong></i></h2>
 	<p> -----------------------------------------------------------------------------------------------------------------------------------------------</p>
   	<button class="btn btn-info btn-md" ng-model="lookUp"  ng-click="lookUpClicked()" style="width: 49%" >Look up</button>
 	<button class="btn btn-info btn-md" ng-model="manual" ng-click="manualClicked()" style="width: 49%">Manual Entry</button> 
 	<p> -----------------------------------------------------------------------------------------------------------------------------------------------</p>
 
-	<div ng-show = "showSearchBar">
+	<div ng-show = "showSearchBar" class= "ng-cloak">
 		<!-- Search Bar -->
 		<div class="input-group">
 		   <input type="text" class="form-control" placeholder="Look Up a Book .."/>
@@ -49,9 +49,11 @@
 		   		<button class="btn btn-default" type="button" ng-Click="searchMovie()"><span class="glyphicon glyphicon-search"></span></button>
 	    	</span>
 		</div>
+		<div ng-show = "nothingFound" class= "ng-cloak"> Nothing Found </div>
+		<div ng-show = "searchResult" class= "ng-cloak"> Results: </div>
 	</div>
 
-	<div ng-show = "showManualEntry" class="hideByDefault">
+	<div ng-show = "showManualEntry">
 		<h2>Manual Entry</h2>
 		<label for="Movie Title">Movie Title:</label>
 		<input type="text" class="form-control" placeholder="Movie Title" ng-required = "true" ng-model="title"/>
@@ -68,7 +70,7 @@
 		<button type="submit" style = "margin: 10px" class="btn btn-default" ng-click="create()" >Create</button>
 	
 </div>
-<div ng-show="responseResult" class="hideByDefault">{{response}}</div>
+<div ng-show="responseResult" class= "ng-cloak">{{response}}</div>
 </form>
 </div>
 <div class="col-sm-2"></div>

@@ -1,6 +1,7 @@
 var app = angular.module('collection', []);
 
 app.controller('addMovie', function($scope,$http) {
+	$scope.libraryName = localStorage.getItem("name");
 	$scope.showAlertDiv = false;
 	$scope.alertSuccess = false;
 	$scope.alertDanger = false;
@@ -8,7 +9,6 @@ app.controller('addMovie', function($scope,$http) {
 	$scope.showSearchBar = false;
 	$scope.showManualEntry = true;
 	//$scope.LibraryName = localStorage.getItem("libraryId");
-	$scope.LibraryName = localStorage.getItem("name");
 	//$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("type");
 	
 	$scope.lookUpClicked =  function(){

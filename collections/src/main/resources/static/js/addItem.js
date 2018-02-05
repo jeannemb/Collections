@@ -1,13 +1,13 @@
 var app = angular.module('collection', []);
 
 app.controller('addItem', function($scope,$http) {
+	$scope.libraryName = localStorage.getItem("name");
 	$scope.showAlertDiv = false;
 	$scope.alertSuccess = false;
 	$scope.alertDanger = false;
 	$scope.showManualEntry = true;
 	$scope.responseResult = false;
 	//$scope.LibraryName = localStorage.getItem("libraryId");
-	$scope.LibraryName = localStorage.getItem("name");
 	//$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("type");	
 
 	$scope.create = function(){
