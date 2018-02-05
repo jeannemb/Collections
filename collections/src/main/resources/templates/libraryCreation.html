@@ -16,28 +16,8 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>                        
-	      </button>
-	      <a class="navbar-brand" href="/">Collectr</a>
-	    </div>
-	    <div class="collapse navbar-collapse" id="myNavbar">
-	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="/">Home</a></li>
-	        <li><a href="about">About</a></li>
-	        <li><a href="libraryHome">Collections</a></li>
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-	      </ul>
-	    </div>
-	  </div>
-	</nav>
+<div th:include = "/Index :: header"></div>
+
 	  
 <div class="panel panel-default" style="margin: auto; width: 40%; border: 3px solid; padding: 10px;">
   <div class="panel-body">
@@ -49,9 +29,9 @@
 	      <input id="libName" type="text" class="form-control" placeholder="Library Name"/>
 	      <label for="Library Type">Type of Library:</label>
 	      <select id="libType" class="form-control">
-		      <option selected="">Other</option>
-		      <option value="1">Books</option>
-		      <option value="2">Movies</option>
+		      <option selected="" value="other">Other</option>
+		      <option value="books">Books</option>
+		      <option value="movies">Movies</option>
           </select>
 	      <button type="submit" class="btn btn-default">Create</button>
 	    

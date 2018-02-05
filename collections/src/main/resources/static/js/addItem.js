@@ -1,14 +1,17 @@
 var app = angular.module('collection', []);
 
 app.controller('addItem', function($scope,$http) {
+	$scope.showAlertDiv = false;
+	$scope.alertSuccess = false;
+	$scope.alertDanger = false;
 	$scope.showManualEntry = true;
-	$scope.clicked = true;
-	$scope.LibraryName = localStorage.getItem("libraryId");
-	$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("name");
-	$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("type");	
+	$scope.responseResult = false;
+	//$scope.LibraryName = localStorage.getItem("libraryId");
+	$scope.LibraryName = localStorage.getItem("name");
+	//$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("type");	
 
 	$scope.create = function(){
-		$scope.clicked = true;
+		//$scope.clicked = true;
 		var id = localStorage.getItem("libraryId");
 		if($scope.title != null){
 			var item = {
@@ -29,18 +32,21 @@ app.controller('addItem', function($scope,$http) {
 					'Content-Type': 'application/json'
 				}
 			}).then(function successCallback(check) {
-				$scope.response = check
+				//$scope.response = check
+				$scope.showAlertDiv = true;
 				$scope.alertSuccess = true
 				$scope.alertDanger = false
 				clearFields();
 			}, function errorCallback(check) {
-				$scope.response = check
+				//$scope.response = check
+				$scope.showAlertDiv = true;
 				$scope.alertDanger = true
 				$scope.alertSuccess = false
 			});
 
 		}else{
-			$scope.response = "Title must not be empty";
+			//$scope.response = "Title must not be empty";
+			$scope.showAlertDiv = true;
 			$scope.alertDanger = true;
 			$scope.alertSuccess = false;
 		}
@@ -54,8 +60,8 @@ app.controller('addItem', function($scope,$http) {
 	}
 	
 	clearFields = function(){
-		$scope.title = "";
-		$scope.description = "";
+		$scope.title = null;
+		$scope.description = null;
 		$scope.owns = false;
 		$scope.wantsToOwn = false;
 		$scope.complete = false;

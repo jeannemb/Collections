@@ -1,18 +1,18 @@
 var app = angular.module('collection', []);
 app.controller('addBook', function($scope,$http) {
-	$scope.clicked = true;
+	$scope.showAlertDiv = false;
+	$scope.responseResult = false;
 	$scope.showSearchBar = false;
 	$scope.showManualEntry = true;
-	$scope.LibraryName = localStorage.getItem("libraryId");
-	$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("name");
-	$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("type");
-	$scope.alertSuccess = false;
-	$scope.alertDanger = false;
+	//$scope.LibraryName = localStorage.getItem("libraryId");
+	$scope.LibraryName = localStorage.getItem("name");
+	//$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("type");
+
 	
 	$scope.lookUpClicked = function(){
 		$scope.showSearchBar = true;
 		$scope.showManualEntry = false;
-		$scope.response = "LookUp Clicked";
+		//$scope.responseResult = "LookUp Clicked";
 		$scope.alertSuccess = false;
 		$scope.alertDanger = false;
 	}
@@ -20,19 +20,20 @@ app.controller('addBook', function($scope,$http) {
 	$scope.manualClicked = function(){
 		$scope.showSearchBar = false;
 		$scope.showManualEntry = true;
-		$scope.response = "Manual Clicked";
+		//$scope.responseResult = "Manual Clicked";
 		$scope.alertSuccess = false;
 		$scope.alertDanger = false;
 	}
 	
 	
 	$scope.searchBook = function(){
-		$scope.response = "Search Clicked"
+	
 	}
 	
 	$scope.create = function(){
 		$scope.clicked = true;
 		var id = localStorage.getItem("libraryId");
+		console.log($scope.title);
 		if($scope.title != null){
 			var book = {
 					booksLibraryId : id,
@@ -54,18 +55,23 @@ app.controller('addBook', function($scope,$http) {
 					'Content-Type': 'application/json'
 				}
 			}).then(function successCallback(check) {
-				$scope.response = check
-				$scope.alertSuccess = true
-				$scope.alertDanger = false
+				//$scope.responseResult = check
+				$scope.showAlertDiv = true;
+				$scope.alertSuccess = true;
+				$scope.alertDanger = false;
 				clearFields();
 			}, function errorCallback(check) {
-				$scope.response = check
-				$scope.alertDanger = true
-				$scope.alertSuccess = false
+				$scope.showAlertDiv = true;
+				$scope.responseResult = true;
+				$scope.responseResult = check
+				$scope.alertDanger = true;
+				$scope.alertSuccess = false;
 			});
 
 		}else{
-			$scope.response = "Title must not be empty";
+			//$scope.responseResult = true;
+			//$scope.responseResult = "Title must not be empty";
+			$scope.showAlertDiv = true;
 			$scope.alertDanger = true;
 			$scope.alertSuccess = false;
 		}
@@ -79,10 +85,10 @@ app.controller('addBook', function($scope,$http) {
 	}
 	
 	clearFields = function(){
-		$scope.title = "";
-		$scope.ISBN13 = "";
-		$scope.ISBN10 = "";
-		$scope.authors = "";
+		$scope.title = null;
+		$scope.ISBN13 = null;
+		$scope.ISBN10 = null;
+		$scope.authors = null;
 		$scope.owns = false;
 		$scope.wantsToOwn = false;
 		$scope.complete = false;

@@ -62,34 +62,26 @@
      		 }
      		 .row.content {height: auto;}
     		}
+    		
+    		a.adisabled {
+  cursor: not-allowed;
+  opacity: .65;
+}
+
+a.adisabled:hover { text-decoration: none; }
+a.adisabled:focus { text-decoration: none; }
+a.adisabled:active { text-decoration: none; }
+
+.aPanel {
+  margin: 1em;
+}
   
   		</style>  
 </head>
 
 <body>
 <!-- Navigation Bar Starts Here -->
-  <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Collectr</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="about">About</a></li>
-        <li><a href="libraryHome2">Collections</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<div th:include = "/Index :: header"></div>
 <!-- Navigation Bar Ends Here -->
 
 <div class="container-fluid" ng-app="collection" ng-controller="navigationController" data-ng-init="init()">
@@ -108,7 +100,7 @@
     			<ul class="nav nav-pills nav-stacked">
   					<li class="active" style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-home"></span> Home</a></li>
   					<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
-  					<li><a href="/{{addLibrary}}" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
+  					<li><a href="{{addLibrary}}" class="list-group-item list-group-item-action" ng-class = "{'adisabled': !usable}" ng-click="doOperation()"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
   					<li><a href="#" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
   					<li><a href="#" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> log out</a></li>
   				</ul>
@@ -134,11 +126,12 @@
     	</div>
         
         <!-- Welcome Messages In case No library  -->	     
-		<h1 class="display-3" ng-show="welcomeMessage">Welcome to Collectr </h1>
-  		<div ng-show="libraryMessage" class="hideByDefault">Please create your first library</div>
- 
+		<div ng-show="welcomeMessage" class="ng-cloak"><h1>Welcome to Collectr </h1></div>
+  		<div ng-show="libraryMessage" class="ng-cloak"><h2>Please create your first library</h2></div>
+  		<div ng-show="itemMessage" class="ng-cloak"><h2> {{libraryName}} is empty, please add item</h2></div>
+
          <!-- Type Book Item Panel  -->	     
-    	<div ng-show = "typeIsBook" class="panel panel-info" ng-repeat="item in items">
+    	<div ng-show = "typeIsBook" class="panel panel-info ng-cloak" ng-repeat="item in items">
       	    
       	    <!-- Book Panel Heading  -->	     
       		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index}}">{{ item.title }}</a></div>
@@ -173,7 +166,7 @@
     	</div>
     
         <!-- Type Movie Item Panel  -->	     
-    	<div ng-show = "typeIsMovie" class="panel panel-info" ng-repeat="item in items">
+    	<div ng-show = "typeIsMovie" class="panel panel-info ng-cloak" ng-repeat="item in items">
       		<!-- Movie Panel Heading  -->	     
       		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index+1000}}">{{ item.title }}</a></div>
       		<div id="{{$index+1000}}" class="panel-collapse collapse">
@@ -206,7 +199,7 @@
     	</div>
         
         <!-- Type Generic Item Panel  -->	     
-    	<div ng-show = "typeIsGeneric" class="panel panel-info" ng-repeat="item in items">
+    	<div ng-show = "typeIsGeneric" class="panel panel-info ng-cloak" ng-repeat="item in items">
       		<!-- Generic Panel Heading  -->	     
       		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index+2000}}">{{ item.title }}</a></div>
       		<div id="{{$index+2000}}" class="panel-collapse collapse">
@@ -237,12 +230,9 @@
 			</div>
     	</div>
 
-		<div ng-show="clicked2" class="hideByDefault">{{status}}</div>
-  
-	</div>
-   
+		<div ng-show="statusResult" class="ng-cloak">{{status}}</div>
+     </div>
    </div>
- 
  </div>
 
 <footer class="container-fluid">

@@ -16,33 +16,25 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand" href="/">Collectr</a>
-	    </div>
-	    <div class="collapse navbar-collapse" id="myNavbar">
-	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="/">Home</a></li>
-	        <li><a href="about">About</a></li>
-	        <li><a href="libraryHome">Collections</a></li>
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-	      </ul>
-	    </div>
-	  </div>
-	</nav>
+<div th:include = "/Index :: header"></div>
+
 
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8" style="align:middle">
 
 <form name="BookCreationForm" class="form-horizontal" style="margin: auto; border: 3px solid; padding: 20px;" ng-app="collection" ng-controller="addItem">
+	<div ng-show = "showAlertDiv" class= "ng-cloak">
+	<div class="alert alert-dismissible alert-success" ng-show="alertSuccess" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
+  		<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Well done!</strong> You successfully added this movie.
+	</div>
+		
+	<div class="alert alert-dismissible alert-danger" ng-show="alertDanger" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
+  		<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Oh snap!</strong> Change a few things up and try submitting again.
+	</div>
+	</div>
+	
 	<h2>Add Item to {{LibraryName}} </h2>
 	<p> ------------------------------------------------------------------------------------------------------------------------------------------------ </p>
 
@@ -52,38 +44,16 @@
 		<input type="text" class="form-control" placeholder="Item Title" ng-required = "true" ng-model="title"/>
 		<label for="Description">Description:</label>
       	<textarea class="form-control" id="exampleTextarea" rows="4" ng-model="description"></textarea>
-		<div class="checkbox">
-      	<label>
-    	<input type="checkbox" ng-model="owns"/> Own
-      	</label>
-    	</div>
-    	<div class="checkbox">
-      	<label>
-        <input type="checkbox" ng-model="wantsToOwn"/> Wants To Own
-      	</label>
-    	</div>
-    	<div class="checkbox">
-		<label>
-		<input type="checkbox" ng-model="complete"/> Complete
-		</label>
-		</div>
-		<div class="checkbox">
-		<label>
-		<input type="checkbox" ng-model="wantsToComplete"/> Wants To Complete
-		</label>
-		</div>
-		<button type="submit" style = "margin: 10px" class="btn btn-default" ng-click="create()" >Create</button>
-		<div class="alert alert-dismissible alert-success" ng-if="alertSuccess" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
-  			<button type="button" class="close" data-dismiss="alert">&times;</button>
-  				<strong>Well done!</strong> You successfully added this item.
-		</div>
 		
-		<div class="alert alert-dismissible alert-danger" ng-if="alertDanger" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
-  			<button type="button" class="close" data-dismiss="alert">&times;</button>
-  				<strong>Oh snap!</strong> Change a few things up and try submitting again.
-		</div>	
+		<div class="checkbox"><label><input type="checkbox" ng-model="owns"/> Own</label></div>
+    	<div class="checkbox"><label><input type="checkbox" ng-model="wantsToOwn"/> Wants To Own</label></div>
+    	<div class="checkbox"><label><input type="checkbox" ng-model="complete"/> Complete</label></div>
+		<div class="checkbox"><label><input type="checkbox" ng-model="wantsToComplete"/> Wants To Complete</label></div>
+		
+		<button type="submit" style = "margin: 10px" class="btn btn-default" ng-click="create()" >Create</button>
+
 </div>
-<div ng-show="clicked" class="hideByDefault">{{response}}</div>
+<div ng-show="responseResult" class="hideByDefault">{{response}}</div>
 </form>
 </div>
 <div class="col-sm-2"></div>

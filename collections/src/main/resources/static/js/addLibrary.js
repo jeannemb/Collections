@@ -15,7 +15,6 @@ $( document ).ready(function() {
     
     function ajaxPost(){
     	var formData = {
-        	userId : 1,
         	name :  $("#libName").val(),
         	type :  $("#libType").val().toLowerCase()
         }

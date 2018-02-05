@@ -4,13 +4,14 @@ app.controller('navigationController', function($scope,$http) {
 	var libs = [];
     var selectedLibraryItems = [];
     var selectedLibraryName = "";
+	$scope.statusResult = false;
 	$scope.init = function () {
-		$scope.clicked1 = true;
-		$scope.clicked2 = true;
+		//$scope.clicked1 = true;
+		//$scope.clicked2 = true;
 		//LibraryService.load();
 		$http({
 			method : "GET",
-			url: "http://localhost:8080/manage/library?userId=1"
+			url: "http://localhost:8080/manage/library"
 		}).then(function successCallback(response) {
             response.data.forEach(function(element){
             	var library = new Object();
@@ -24,7 +25,7 @@ app.controller('navigationController', function($scope,$http) {
             loadInHtml();
             //$scope.status = items;
 		}, function errorCallback(response) {
-
+			$scope.statusResult = true;
 			$scope.status = response.statusText;
 		});
 	}
@@ -81,6 +82,7 @@ app.controller('navigationController', function($scope,$http) {
             	}
             });
 		}, function errorCallback(response) {
+			$scope.statusResult = true;
 			$scope.status = response.statusText;
 		});
     	
@@ -89,15 +91,20 @@ app.controller('navigationController', function($scope,$http) {
     
      function loadInHtml(){
     	if(libs.length > 0){
-    		 $scope.welcomeMessage = false;
-    		 $scope.libraryMessage = false;
+    		$scope.welcomeMessage = false;
+    		$scope.libraryMessage = false;
+    		$scope.usable = true;
+    	}else{
+    		$scope.welcomeMessage = true;
+    		$scope.libraryMessage = true;
+    		$scope.condition = true;
+    		$scope.usable = false;
+    		$scope.addLibrary = "#";
     	}
-    	
     	if(libs[0].type == "books"){
     		$scope.typeIsBook = true;
     		$scope.typeIsMovie = false;
     		$scope.typeIsGeneric = false;
-
     		
     	}else if (libs[0].type == "movies"){
     		$scope.typeIsBook = false;
@@ -108,16 +115,15 @@ app.controller('navigationController', function($scope,$http) {
     		$scope.typeIsMovie = false;
     		$scope.typeIsGeneric = true;
     	}
-    	
-    	$scope.libs = libs
+    	$scope.libraryName = libs[0].name;
+    	$scope.libs = libs;
     	$scope.items = libs[0].items;
-        $scope.status = libs[0].name;
         selectedLibraryName = libs[0].name;
 		$scope.libraries = {
 			options: libs,
 		    selected: libs[0]
 		};
-		localStorage.setItem("libraryId",libs[0].libraryId)
+		localStorage.setItem("libraryId",libs[0].libraryId);
 		localStorage.setItem("name", libs[0].name);
 		localStorage.setItem("type", libs[0].type);
 		if(libs[0].type == "books"){
@@ -130,15 +136,21 @@ app.controller('navigationController', function($scope,$http) {
     }
      
      $scope.selectedItemChanged =  function(){
+        $scope.status  = false;
  		localStorage.setItem("libraryId", $scope.libraries.selected.libraryId)
 		localStorage.setItem("name", $scope.libraries.selected.name);
 		localStorage.setItem("type", $scope.libraries.selected.type);
-
+    	$scope.libraryName = $scope.libraries.selected.name;
     	$scope.status = $scope.libraries.selected.libraryId + " "+ $scope.libraries.selected.name;
      	for (var i in libs){
      		if(libs[i].libraryId == $scope.libraries.selected.libraryId){
      	    	if(libs[i].type == "books"){
          			$scope.items  = libs[i].items;
+         	    	if(libs[i].items.length == 0){
+             	    	$scope.itemMessage = true;
+         	    	}else{
+             	    	$scope.itemMessage = false;
+         	    	}
          			selectedLibraryItems = libs[i].items;
      	    		$scope.typeIsBook = true;
      	    		$scope.typeIsMovie = false;
@@ -147,6 +159,11 @@ app.controller('navigationController', function($scope,$http) {
      	    	}else if (libs[i].type == "movies"){
      	    		$scope.typeIsBook = false;
          			$scope.items  = libs[i].items;
+         	    	if(libs[i].items.length == 0){
+             	    	$scope.itemMessage = true;
+             		 }else{
+             	    	$scope.itemMessage = false;
+         	    	}
          			selectedLibraryItems = libs[i].items;
      	    		$scope.typeIsMovie = true;
      	    		$scope.typeIsGeneric = false;
@@ -156,6 +173,11 @@ app.controller('navigationController', function($scope,$http) {
      	    		$scope.typeIsBook = false;
      	    		$scope.typeIsMovie = false;
          			$scope.items  = libs[i].items;
+         	    	if(libs[i].items.length == 0){
+         	    		$scope.itemMessage = true;
+         	    	}else{
+         	    		$scope.itemMessage = false;
+         	    	}
          			selectedLibraryItems = libs[i].items;
      	    		$scope.typeIsGeneric = true;
      				$scope.addLibrary = "addGeneric";
@@ -165,6 +187,15 @@ app.controller('navigationController', function($scope,$http) {
 
      		}
     	}
+     }
+     
+     $scope.doOperation = function(e){
+    	 
+    	 if ($scope.usable != true) {
+    	    	e.preventDefault();
+    	    } else {
+    	      //alert('Anchor element is enabled.');
+    	    }
      }
      
      $scope.viewItem = function (id) {
@@ -198,6 +229,7 @@ app.controller('navigationController', function($scope,$http) {
     	     
     	 }
      }
+    
      
      function reloadData(){
     	libs = [];
@@ -217,7 +249,7 @@ app.controller('navigationController', function($scope,$http) {
             loadInHtml();
             //$scope.status = items;
 		}, function errorCallback(response) {
-
+			$scope.statusResult = true;
 			$scope.status = response.statusText;
 		});
      }
