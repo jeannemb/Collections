@@ -21,8 +21,7 @@
 
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8" style="align:middle">
-
-<form name="BookCreationForm" class="form-horizontal" style="margin: auto; border: 3px solid; padding: 20px;" ng-app="collection" ng-controller="addItem">
+<form ng-app="collection" ng-controller="addItem">
 	<div ng-show = "showAlertDiv" class= "ng-cloak">
 	<div class="alert alert-dismissible alert-success" ng-show="alertSuccess" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
   		<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -36,10 +35,12 @@
 	</div>
 	
 	<h2>Add Generic to <i ng-bind="libraryName"><strong></strong></i></h2>
-	<p> ------------------------------------------------------------------------------------------------------------------------------------------------ </p>
-
-	<div ng-show = "showManualEntry">
-		<h2>Manual Entry</h2>
+		<ul class="nav nav-tabs">
+  			<li class="nav-item active show"><a class="nav-link active show" data-toggle="tab">Manual Entry</a></li>
+ 		</ul>
+ 		
+	<div ng-show = "showManualEntry" class="form-group">
+		<h2 style = "text-align: center">Look Up</h2>
 		<label for="Item Title">Item Title:</label>
 		<input type="text" class="form-control" placeholder="Item Title" ng-required = "true" ng-model="title"/>
 		<label for="Description">Description:</label>

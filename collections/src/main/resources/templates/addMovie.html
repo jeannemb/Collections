@@ -22,13 +22,12 @@
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8" style="align:middle">
 
-<form name="MovieCreationForm" ng-hide="Manual Entry" class="form-horizontal" style="margin: auto; border: 3px solid; padding: 20px;" ng-app="collection" ng-controller="addMovie">
+<form ng-app="collection" ng-controller="addMovie">
 	<div ng-show = "showAlertDiv" class= "ng-cloak">
 	<div class="alert alert-dismissible alert-success" ng-show="alertSuccess" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
   		<button type="button" class="close" data-dismiss="alert">&times;</button>
   			<strong>Well done!</strong> You successfully added this movie.
-	</div>
-		
+	</div>		
 	<div class="alert alert-dismissible alert-danger" ng-show="alertDanger" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
   		<button type="button" class="close" data-dismiss="alert">&times;</button>
   			<strong>Oh snap!</strong> Change a few things up and try submitting again.
@@ -36,25 +35,55 @@
 	</div>
 	
 	<h2>Add Movie to <i ng-bind="libraryName"><strong></strong></i></h2>
-	<p> -----------------------------------------------------------------------------------------------------------------------------------------------</p>
-  	<button class="btn btn-info btn-md" ng-model="lookUp"  ng-click="lookUpClicked()" style="width: 49%" >Look up</button>
-	<button class="btn btn-info btn-md" ng-model="manual" ng-click="manualClicked()" style="width: 49%">Manual Entry</button> 
-	<p> -----------------------------------------------------------------------------------------------------------------------------------------------</p>
+	
+		<ul class="nav nav-tabs">
+  			<li class="nav-item active show"><a class="nav-link active show" data-toggle="tab" ng-model="lookUp" ng-click="lookUpClicked()">Look up</a></li>
+  			<li class="nav-item"><a class="nav-link" data-toggle="tab" ng-model="manual" ng-click="manualClicked()">Manual Entry</a></li>
+ 		</ul>
 
-	<div ng-show = "showSearchBar" class= "ng-cloak">
-		<!-- Search Bar -->
-		<div class="input-group">
-		   <input type="text" class="form-control" placeholder="Look Up a Book .."/>
-		   	<span class="input-group-btn">
-		   		<button class="btn btn-default" type="button" ng-Click="searchMovie()"><span class="glyphicon glyphicon-search"></span></button>
-	    	</span>
-		</div>
+		<div ng-show = "showSearchBar">
+	<!-- Search Bar -->
+	<h2 style = "text-align: center">Look Up</h2>
+	<div>Search Options:</div>
+	<div class="form-group">
+    <div class="custom-control custom-radio">
+      <input type="radio" id="searchMovie" value = "movies" ng-model="search" class="custom-control-input" checked=""/>
+      <label class="custom-control-label" for="searchMovie">Search Movies</label>
+    </div>
+    <div class="custom-control custom-radio">
+      <input type="radio" id="searchTvShow" value = "tvShows" ng-model="search" class="custom-control-input"/>
+      <label class="custom-control-label" for="searchTvShow">Search TV Shows</label>
+    </div>
+    </div>
+	
+	<div class="input-group">
+  		<input type="text" class="form-control" placeholder="Look Up a Movie .." ng-model="searchText"/>
+	  		<span class="input-group-btn">
+				<button class="btn btn-default" type="button" ng-click="searchMovie()"><span class="glyphicon glyphicon-search"></span></button>
+			</span>
+	</div>
 		<div ng-show = "nothingFound" class= "ng-cloak"> Nothing Found </div>
-		<div ng-show = "searchResult" class= "ng-cloak"> Results: </div>
+		<div ng-show = "searchResult" class= "ng-cloak"> Results:	
+		<div ng-repeat= "movie in movies">
+			<div class="col-xs-2">
+				<img src="{{movie.image}}" alt="/images/placeholderImageItem.png" class="img-rounded" width="100" height="100"></img>
+			</div>
+ 			<div class="col-xs-10">
+ 				<div>Movie Title: {{ movie.title }}</div>
+				<div>Movie UPC: {{ movie.upc }}</div>
+				<div>Movie Actors: {{ movie.actors }}</div>
+				<div class="checkbox"><label><input type="checkbox" ng-model="movie.owns"/> Own</label></div>
+				<div class="checkbox"><label><input type="checkbox" ng-model="movie.wantsToOwn"/> Wants To Own</label></div>
+				<div class="checkbox"><label><input type="checkbox" ng-model="movie.complete"/> Complete</label></div>
+				<div class="checkbox"><label><input type="checkbox" ng-model="movie.wantsToComplete"/> Wants To Complete</label></div>
+				<button type="submit" style = "margin: 10px" class="btn btn-default" ng-click="addMovie(movie)" >Add Book</button>
+			</div>
+		</div>	
+	</div>
 	</div>
 
-	<div ng-show = "showManualEntry">
-		<h2>Manual Entry</h2>
+	<div ng-show = "showManualEntry" class="form-group ng-cloak">
+		<h2 style = "text-align: center">Manual Entry</h2>
 		<label for="Movie Title">Movie Title:</label>
 		<input type="text" class="form-control" placeholder="Movie Title" ng-required = "true" ng-model="title"/>
 		<label for="UPC">UPC:</label>

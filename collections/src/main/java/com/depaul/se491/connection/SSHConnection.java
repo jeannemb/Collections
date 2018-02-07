@@ -17,12 +17,12 @@ public class SSHConnection {
 	{
 
 	    JSch jsch = new JSch();
-		session = jsch.getSession("ec2-user", "ec2-54-205-47-135.compute-1.amazonaws.com", 22);
+		session = jsch.getSession("ec2-user", "ec2-52-55-17-59.compute-1.amazonaws.com", 22);
 		
-		//jsch.addIdentity("/Users/mohammadalharbi/Downloads/SSHAccess.pem.txt");
+		jsch.addIdentity("/Users/mohammadalharbi/Downloads/SSHAccess.pem.txt");
 		//jsch.addIdentity("/Users/Jeanne/Documents/SE491/SSHAccess.pem.txt");
 		//jsch.addIdentity("/Users/Mark/Documents/SSHAccess.pem.txt");
-		jsch.addIdentity("files/SSHAccess.pem.txt");
+		//jsch.addIdentity("files/SSHAccess.pem.txt");
 		
 		String rhost = "se491-mysql-collections.cwxyxwc6zgxm.us-east-1.rds.amazonaws.com";
 		int rport = 3306;
