@@ -102,7 +102,7 @@ a.adisabled:active { text-decoration: none; }
   					<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
   					<li><a href="{{addLibrary}}" class="list-group-item list-group-item-action" ng-class = "{'adisabled': !usable}" ng-click="doOperation()"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
   					<li><a href="#" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
-  					<li><a href="#" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> log out</a></li>
+  					<li><a href="/logout" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> log out</a></li>
   				</ul>
   			</div>
   		</div>
@@ -111,18 +111,12 @@ a.adisabled:active { text-decoration: none; }
     
    <!-- Article View To Display Data Start Here -->
    <div class="col-sm-10" style = "height: 80%;">
-	   	<!-- Search Bar -->
-   		<div class="input-group">
-   			<input type="text" class="form-control" placeholder="Search on Collectr .."/>
-        	<span class="input-group-btn">
-          	<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-        	</span>
-     	</div>
      	<!-- Library Select  -->	 
      	<div class="form-group">
       		<label for="exampleSelect1">Library select</label>
       		<select class="form-control" ng-model="libraries.selected" ng-options="library.name for library in libraries.options track by library.libraryId" ng-change="selectedItemChanged()">
-      		</select>   
+      		</select> 
+      		<button type="addItem" style = "margin: 10px" ng-click="doOperation()" class="btn btn-default" href="{{addLibrary}}">Create Item</button>  
     	</div>
         
         <!-- Welcome Messages In case No library  -->	     
@@ -158,8 +152,6 @@ a.adisabled:active { text-decoration: none; }
       			</div>
       			<!-- Book Panel Footer  -->	     
         		<div class="panel-footer">
-      	    		<a href="#" ng-click="viewItem(item.itemId)">view</a> | 
-        			<a href="#" ng-click="editItem(item.itemId)">edit</a> |
         			<a href="#" ng-click="deleteItem(item.itemId, item.LibraryId)">delete</a>
 				</div>
 			</div>
@@ -191,8 +183,6 @@ a.adisabled:active { text-decoration: none; }
       			</div> 
       			<!-- Movie Panel Footer  -->	        			
       			<div class="panel-footer">
-     	    		<a href="#" ng-click="view(item.itemId)">view</a> | 
-        			<a href="#" ng-click="edit(item.itemId)">edit</a> |
         			<a href="#" ng-click="deleteItem(item.itemId, item.LibraryId)">delete</a>
 				</div>
 			</div>
@@ -223,8 +213,6 @@ a.adisabled:active { text-decoration: none; }
       			</div>
       			<!-- Generic Panel Footer  -->	     
       			<div class="panel-footer">
-      	   			<a href="#" ng-click="view(item.itemId)">view</a> | 
-        			<a href="#" ng-click="edit(item.itemId)">edit</a> |
         			<a href="#" ng-click="deleteItem(item.itemId, item.LibraryId)">delete</a>
 				</div>
 			</div>
