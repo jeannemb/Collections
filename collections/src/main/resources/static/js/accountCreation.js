@@ -1,6 +1,6 @@
 var app = angular.module('collection', []);
 app.controller('accountCreation', function($scope, $http) {
-		
+	$scope.showAlertDiv = false;	
 	$scope.create = function(){
 		$scope.clicked = true
 		if($scope.password == $scope.confirmPassword && $scope.firstName != null 
@@ -28,11 +28,17 @@ app.controller('accountCreation', function($scope, $http) {
 			function _success(response){
 				$scope.response = response.data
 				$scope.success = true
+				window.location="http://localhost:8080/libraryHome2";
+				$scope.showAlertDiv = true;
+				$scope.alertSuccess = true
+				$scope.alertDanger = false
 			}
 			
 			function _error(response){
+				$scope.showAlertDiv = true;
+				$scope.alertDanger = true
+				$scope.alertSuccess = false
 				$scope.response = response.statusText
-
 			}
 
 		}else{

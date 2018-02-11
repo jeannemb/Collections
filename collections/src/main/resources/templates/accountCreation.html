@@ -21,7 +21,18 @@
 <div class="col-sm-8" style="align:middle">
 <form name="accountCreationForm" ng-hide="success" class="form-horizontal" style="margin: auto; border: 3px solid; padding: 20px;">
 
-	<div class="text-center">    
+	<div class="text-center">
+		<div ng-show = "showAlertDiv" class= "ng-cloak">
+	<div class="alert alert-dismissible alert-success" ng-show="alertSuccess" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
+  		<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Well done!</strong> You successfully registered in Collectr.
+	</div>
+		
+	<div class="alert alert-dismissible alert-danger" ng-show="alertDanger" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
+  		<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>You are already registered!</strong>.
+	</div>
+	</div>    
 		<h2>Create your Collectr Account</h2>		
 		<a href="login">Already a user?  Login.</a>
 	</div>	

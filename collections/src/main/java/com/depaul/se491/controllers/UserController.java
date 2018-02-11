@@ -35,8 +35,14 @@ public class UserController {
 	@RequestMapping(value = "/createUser", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public ResponseEntity<String> createUser(@RequestBody User user) throws SQLException {
 		String result = userDAO.createUser(user);
-		String login = security.autoLogin(user.getEmail(), user.getPassword());
-		return new ResponseEntity<>(result+", "+login, HttpStatus.OK);
+		if (result.equals("New user created")){
+			String login = security.autoLogin(user.getEmail(), user.getPassword());
+			return new ResponseEntity<>(HttpStatus.OK);	
+		}else{
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);	
+		}
+		
+		
 		
 		//TODO: lets re-route to library page and throw a popup at the bottom of the page saying, user successfully logged in
 	}
