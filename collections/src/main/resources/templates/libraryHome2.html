@@ -116,7 +116,7 @@ a.adisabled:active { text-decoration: none; }
       		<label for="exampleSelect1">Library select</label>
       		<select class="form-control" ng-model="libraries.selected" ng-options="library.name for library in libraries.options track by library.libraryId" ng-change="selectedItemChanged()">
       		</select> 
-      		<button type="addItem" style = "margin: 10px" ng-click="doOperation()" class="btn btn-default" href="{{addLibrary}}">Create Item</button>  
+      		<a href="{{addLibrary}}" class="button btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add Item</a>  
     	</div>
         
         <!-- Welcome Messages In case No library  -->	     
