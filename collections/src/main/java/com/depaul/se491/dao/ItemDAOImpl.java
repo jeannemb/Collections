@@ -97,15 +97,15 @@ public class ItemDAOImpl implements ItemDAO{
 		try{
 		switch (libraryType){
 			case "books": 
-				sql = "SELECT * FROM books WHERE books_library_id = ?";
+				sql = "SELECT * FROM books WHERE books_library_id = ? order by title asc";
 				List books = template.query(sql, new Object[]{libraryId}, new BooksRowMapper());
 				return books;
 			case "movies": 
-				sql = "SELECT * FROM movies WHERE movies_library_id = ?";
+				sql = "SELECT * FROM movies WHERE movies_library_id = ? order by title asc";
 				List movies = template.query(sql, new Object[]{libraryId}, new MoviesRowMapper());
 				return movies;
 			default: 
-				sql = "SELECT * FROM generic_items WHERE generic_library_id = ?";
+				sql = "SELECT * FROM generic_items WHERE generic_library_id = ? order by title asc";
 				List genericItems = template.query(sql, new Object[]{libraryId}, new GenericItemsRowMapper());
 				return genericItems;
 		}

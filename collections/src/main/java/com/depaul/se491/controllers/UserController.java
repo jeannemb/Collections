@@ -32,7 +32,7 @@ public class UserController {
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/createUser", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	@RequestMapping(value = "/createUser", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<String> createUser(@RequestBody User user) throws SQLException {
 		String result = userDAO.createUser(user);
 		if (result.equals("New user created")){

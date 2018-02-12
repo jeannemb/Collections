@@ -34,11 +34,11 @@
 	      <ul class="nav navbar-nav navbar-right">
 	      	<li>
 	      		<div class="navbar-text">
-	      			<p class="text-warning" th:fragment="logout" sec:authorize="isAuthenticated()"><span sec:authentication="name"></span></p>
+	      			<p class="text-warning" sec:authorize="isAuthenticated()"><span sec:authentication="name"></span></p>
 	      		</div>
 	      	</li>
 	      	<li>
-	      		<div class="navbar-text" sec:authorize="isAuthenticated()">	
+	      		<div th:fragment="logout" class="navbar-text" sec:authorize="isAuthenticated()">	
 	      		    <a href="/logout" th:href="@{#}" onclick="$('#form').submit();"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a>
                     <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
         		</div>

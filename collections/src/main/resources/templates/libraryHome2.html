@@ -91,7 +91,7 @@ a.adisabled:active { text-decoration: none; }
     <div class="col-sm-2" style = "height: 80%;">
     	<!-- FIRST BLOCK TO DISPALY USERNAME -->
     	<div class="jumbotron" style = "height: 10%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 10px; padding-top:5px; padding-right: 5px; padding-left: 5px; padding-bottom:10px">
-    		<h4 style= "text-align: center">USERNAME</h4>
+    		<h4 style= "text-align: center"><span sec:authentication="name"></span></h4>
     	</div>
        	<!-- SECOND BLOCK TO DISPALY NAVIGTION OPTIONS -->
     	<div class="jumbotron" style = "height: 90%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; padding-top:5px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
@@ -128,7 +128,7 @@ a.adisabled:active { text-decoration: none; }
     	<div ng-show = "typeIsBook" class="panel panel-info ng-cloak" ng-repeat="item in items">
       	    
       	    <!-- Book Panel Heading  -->	     
-      		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index}}">{{ item.title }}</a></div>
+      		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index}}" style="color:#ffffff">{{ item.title }}</a></div>
        		<div id="{{$index}}" class="panel-collapse collapse">		
       			<!-- Book Panel Body  -->	     
       			<div class="panel-body">
@@ -160,7 +160,7 @@ a.adisabled:active { text-decoration: none; }
         <!-- Type Movie Item Panel  -->	     
     	<div ng-show = "typeIsMovie" class="panel panel-info ng-cloak" ng-repeat="item in items">
       		<!-- Movie Panel Heading  -->	     
-      		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index+1000}}">{{ item.title }}</a></div>
+      		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index+1000}}" style="color:#ffffff">{{ item.title }}</a></div>
       		<div id="{{$index+1000}}" class="panel-collapse collapse">
       			<!-- Movie Panel Body  -->	     
       			<div class="panel-body">
@@ -191,7 +191,7 @@ a.adisabled:active { text-decoration: none; }
         <!-- Type Generic Item Panel  -->	     
     	<div ng-show = "typeIsGeneric" class="panel panel-info ng-cloak" ng-repeat="item in items">
       		<!-- Generic Panel Heading  -->	     
-      		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index+2000}}">{{ item.title }}</a></div>
+      		<div class="panel-heading"><a data-toggle="collapse" href="#{{$index+2000}}" style="color:#ffffff">{{ item.title }}</a></div>
       		<div id="{{$index+2000}}" class="panel-collapse collapse">
       			<!-- Generic Panel Body  -->	     
       			<div class="panel-body">

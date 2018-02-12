@@ -17,7 +17,7 @@ app.controller('accountCreation', function($scope, $http) {
 
 			$http({
 				method: "POST",
-				url: "http://localhost:8080/user/createUser",
+				url: "/user/createUser",
 				data : angular.toJson(user),
 				headers : {
 					'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ app.controller('accountCreation', function($scope, $http) {
 			function _success(response){
 				$scope.response = response.data
 				$scope.success = true
-				window.location="http://localhost:8080/libraryHome2";
+				window.location="/libraryHome2";
 				$scope.showAlertDiv = true;
 				$scope.alertSuccess = true
 				$scope.alertDanger = false
