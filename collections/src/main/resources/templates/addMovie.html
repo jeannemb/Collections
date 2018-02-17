@@ -79,7 +79,7 @@
 	<div class="input-group">
   		<input type="text" class="form-control" placeholder="Look Up a Movie .." ng-model="searchText"/>
 	  		<span class="input-group-btn">
-				<button class="btn btn-default" type="button" ng-click="searchMovie()"><span class="glyphicon glyphicon-search"></span></button>
+				<button class="btn btn-default" type="submit" ng-click="searchMovie()"><span class="glyphicon glyphicon-search"></span></button>
 			</span>
 	</div>
 		<div ng-show = "nothingFound" class= "ng-cloak"> Nothing Found </div>
@@ -88,7 +88,7 @@
 			<div class="col-xs-2">
 				<img src="{{movie.image}}" alt="/images/placeholderImageItem.png" class="img-rounded" width="100" height="100"></img>
 			</div>
- 			<div class="col-xs-10">
+ 			<div class="col-md-10 col-xs-12">
  				<div>Movie Title: {{ movie.title }}</div>
 				<div>Movie UPC: {{ movie.upc }}</div>
 				<div>Movie Actors: {{ movie.actors }}</div>
@@ -96,7 +96,7 @@
 				<div class="checkbox"><label><input type="checkbox" ng-model="movie.wantsToOwn"/> Wants To Own</label></div>
 				<div class="checkbox"><label><input type="checkbox" ng-model="movie.complete"/> Complete</label></div>
 				<div class="checkbox"><label><input type="checkbox" ng-model="movie.wantsToComplete"/> Wants To Complete</label></div>
-				<button type="submit" style = "margin: 10px" class="btn btn-default" ng-click="addMovie(movie)" >Add Book</button>
+				<button type="button" style = "margin: 10px" class="btn btn-default" ng-click="addMovie(movie)" >Add Movie</button>
 			</div>
 		</div>	
 	</div>
@@ -116,7 +116,7 @@
     	<div class="checkbox"><label><input type="checkbox" ng-model="complete"/> Complete</label></div>
 		<div class="checkbox"><label><input type="checkbox" ng-model="wantsToComplete"/> Wants To Complete</label></div>
 		
-		<button type="submit" style = "margin: 10px" class="btn btn-default" ng-click="create()" >Create</button>
+		<button type="button" style = "margin: 10px" class="btn btn-default" ng-click="create()" >Create</button>
 	
 </div>
 <div ng-show="responseResult" class= "ng-cloak">{{response}}</div>
