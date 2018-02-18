@@ -15,6 +15,7 @@
 	<script src="/js/index.js"></script>
 	<script src="/js/libraryHome.js"></script>
 	    <style>
+	    
 			.wrapper {
   				display: grid;
   				grid-template-rows: 100px 100px;
@@ -38,7 +39,7 @@
     
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     		.row.content {
-    			height: 1500px
+    			height: 1000px
     		}
 
     /* Set gray background color and 100% height */
@@ -49,10 +50,12 @@
 
     /* Set black background color, white text and some padding */
     		footer {
+    			height: 50px;
      			background-color: #555;
      			color: white;
       			padding: 15px;
     		}
+    		
 
     /* On small screens, set height to 'auto' for sidenav and grid */
     		@media screen and (max-width: 767px) {
@@ -83,22 +86,23 @@ a.adisabled:active { text-decoration: none; }
 <!-- Navigation Bar Starts Here -->
 <div th:include = "index :: header"></div>
 <!-- Navigation Bar Ends Here -->
-
 <div class="container-fluid" ng-app="collection" ng-controller="navigationController" data-ng-init="init()">
   <div class="row content">
   
   	<!-- Left Navigation Bar Starts Here (First Column) -->
-    <div class="col-sm-2" style = "height: 80%;">
+    <div class="col-sm-3 col-md-3" style = "height: 80%;">
     	<!-- FIRST BLOCK TO DISPALY USERNAME -->
-    	<div class="jumbotron" style = "height: 10%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 10px; padding-top:5px; padding-right: 5px; padding-left: 5px; padding-bottom:10px">
-    		<h4 style= "text-align: center"><span sec:authentication="name"></span></h4>
-    	</div>
+    		<div class="jumbotron jumbotron-fluid" style = "height: 10%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 5px; padding-top:1px; padding-right: 1px; padding-left: 1px; padding-bottom:1px ">
+    			<div class="container text-center">
+    				<p><h6 class="text-warning display-6" style= "text-align: center"><span sec:authentication="name"></span></h6></p>
+    			</div>
+    		</div>
        	<!-- SECOND BLOCK TO DISPALY NAVIGTION OPTIONS -->
     	<div class="jumbotron" style = "height: 90%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; padding-top:5px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
     		<div class="list-group" style = "width: 100%;">
     			<h4 style= "text-align: center">   Menu   </h4>
     			<ul class="nav nav-pills nav-stacked">
-  					<li class="active" style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+  					<li class="active" style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-home"></span> Collections</a></li>
   					<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
   					<li><a href="{{addLibrary}}" class="list-group-item list-group-item-action" ng-class = "{'adisabled': !usable}" ng-click="doOperation()"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
   					<li><a href="#" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
@@ -110,13 +114,16 @@ a.adisabled:active { text-decoration: none; }
    <!-- Left Navigation Bar Ends Here (First Column) -->
     
    <!-- Article View To Display Data Start Here -->
-   <div class="col-sm-10" style = "height: 80%;">
+   <div class="col-sm-9 col-md-9" style = "height: 80%;">
      	<!-- Library Select  -->	 
      	<div class="form-group">
       		<label for="exampleSelect1">Library select</label>
-      		<select class="form-control" ng-model="libraries.selected" ng-options="library.name for library in libraries.options track by library.libraryId" ng-change="selectedItemChanged()">
+      		<select class="form-control" style = "padding-bottom:5px; margin-bottom: 10px;" ng-model="libraries.selected" ng-options="library.name for library in libraries.options track by library.libraryId" ng-change="selectedItemChanged()">
       		</select> 
-      		<a href="{{addLibrary}}" class="button btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add Item</a>  
+      		<div class = "form-inline">
+      				<a href="{{addLibrary}}" class="button btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add Item</a>
+      		<button type="button" ng-show = "DeleteLibrary" class="btn btn-danger ng-cloak" style="position: absolute; right: 0; margin-right: 12px" ng-click="deleteLibrary(libraries.selected)">Delete Library</button>  
+      		</div>
     	</div>
         
         <!-- Welcome Messages In case No library  -->	     
@@ -136,7 +143,7 @@ a.adisabled:active { text-decoration: none; }
   						<div class="col-xs-2">
   						<img src="/images/placeholderImageItem.png" alt="1" class="img-rounded" width="100" height="100"></img>
   						</div>			
- 						<div class="col-xs-10">
+ 						<div class="col-md-10 col-xs-12">
  			      			<div>Book Title: {{ item.title }}</div>
 							<div>Book ISBN13: {{ item.isbn13 }}</div>
 							<div>Book ISBN10: {{ item.isbn10 }}</div>
@@ -168,7 +175,7 @@ a.adisabled:active { text-decoration: none; }
   						<div class="col-xs-2">
   							<img src="/images/placeholderImageItem.png" alt="1" class="img-rounded" width="100" height="100"></img>
   						</div>
- 						<div class="col-xs-10">  
+ 						<div class="col-md-10 col-xs-12">  
       						<div>Movie Title: {{ item.title }}</div>
       						<div>Movie UPC: {{ item.upc }}</div>
       						<div>Movie Actors: {{ item.actors }}</div>
@@ -199,7 +206,7 @@ a.adisabled:active { text-decoration: none; }
   						<div class="col-xs-2">
   							<img src="/images/placeholderImageItem.png" alt="1" class="img-rounded" width="100" height="100"></img>
   						</div>
- 						<div class="col-xs-10"> 
+ 						<div class="col-md-10 col-xs-12"> 
       						<div>Item Title: {{ item.title }}</div>
      						<div>Item Description: {{ item.description }}</div>
 							<li>	
@@ -223,9 +230,9 @@ a.adisabled:active { text-decoration: none; }
    </div>
  </div>
 
-<footer class="container-fluid">
+<!-- <footer class="footer">
   <p>Footer Text</p>
-</footer>
+</footer> -->
 
 </body>
 </html>

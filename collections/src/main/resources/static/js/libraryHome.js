@@ -6,6 +6,7 @@ app.controller('navigationController', function($scope,$http) {
     var selectedLibraryName = "";
 	$scope.statusResult = false;
 	$scope.init = function () {
+		$scope.DeleteLibrary = false;
 		//$scope.clicked1 = true;
 		//$scope.clicked2 = true;
 		//LibraryService.load();
@@ -93,46 +94,52 @@ app.controller('navigationController', function($scope,$http) {
     	if(libs.length > 0){
     		$scope.welcomeMessage = false;
     		$scope.libraryMessage = false;
+    		$scope.DeleteLibrary = true;
     		$scope.usable = true;
+    		if(libs[0].type == "books"){
+        		$scope.typeIsBook = true;
+        		$scope.typeIsMovie = false;
+        		$scope.typeIsGeneric = false;
+        		
+        	}else if (libs[0].type == "movies"){
+        		$scope.typeIsBook = false;
+        		$scope.typeIsMovie = true;
+        		$scope.typeIsGeneric = false;
+        	}else{
+        		$scope.typeIsBook = false;
+        		$scope.typeIsMovie = false;
+        		$scope.typeIsGeneric = true;
+        	}
+        	$scope.libraryName = libs[0].name;
+        	$scope.libs = libs;
+        	$scope.items = libs[0].items;
+            selectedLibraryName = libs[0].name;
+    		$scope.libraries = {
+    			options: libs,
+    		    selected: libs[0]
+    		};
+    		localStorage.setItem("libraryId",libs[0].libraryId);
+    		localStorage.setItem("name", libs[0].name);
+    		localStorage.setItem("type", libs[0].type);
+    		if(libs[0].type == "books"){
+    			$scope.addLibrary = "addBook";
+    		}else if(libs[0].type == "movies"){
+    			$scope.addLibrary = "addMovie";
+    		}else{
+    			$scope.addLibrary = "addGeneric";
+    		}
     	}else{
+    		$scope.DeleteLibrary = false;
     		$scope.welcomeMessage = true;
     		$scope.libraryMessage = true;
     		$scope.condition = true;
     		$scope.usable = false;
     		$scope.addLibrary = "#";
-    	}
-    	if(libs[0].type == "books"){
-    		$scope.typeIsBook = true;
-    		$scope.typeIsMovie = false;
-    		$scope.typeIsGeneric = false;
-    		
-    	}else if (libs[0].type == "movies"){
-    		$scope.typeIsBook = false;
-    		$scope.typeIsMovie = true;
-    		$scope.typeIsGeneric = false;
-    	}else{
     		$scope.typeIsBook = false;
     		$scope.typeIsMovie = false;
-    		$scope.typeIsGeneric = true;
+    		$scope.typeIsGeneric = false;
     	}
-    	$scope.libraryName = libs[0].name;
-    	$scope.libs = libs;
-    	$scope.items = libs[0].items;
-        selectedLibraryName = libs[0].name;
-		$scope.libraries = {
-			options: libs,
-		    selected: libs[0]
-		};
-		localStorage.setItem("libraryId",libs[0].libraryId);
-		localStorage.setItem("name", libs[0].name);
-		localStorage.setItem("type", libs[0].type);
-		if(libs[0].type == "books"){
-			$scope.addLibrary = "addBook";
-		}else if(libs[0].type == "movies"){
-			$scope.addLibrary = "addMovie";
-		}else{
-			$scope.addLibrary = "addGeneric";
-		}
+    	
     }
      
      $scope.selectedItemChanged =  function(){
@@ -183,8 +190,6 @@ app.controller('navigationController', function($scope,$http) {
      				$scope.addLibrary = "addGeneric";
 
      	    	}
-
-
      		}
     	}
      }
@@ -212,9 +217,7 @@ app.controller('navigationController', function($scope,$http) {
     	 if (r == true) {
     		 $.ajax({
     			 type : "DELETE",
-    	    	 contentType : "application/json",
     	    	 url : "http://localhost:8080/manage/deleteItem?libraryId=" + libId + "&itemId=" + id,
-    	    	 dataType : 'json',
     	    	 success : function(result) {
     	    	    console.log("Success: " + result);
     	    	    reloadData();
@@ -235,7 +238,7 @@ app.controller('navigationController', function($scope,$http) {
     	libs = [];
  		$http({
 			method : "GET",
-			url: "http://localhost:8080/manage/library?userId=1"
+			url: "http://localhost:8080/manage/library"
 		}).then(function successCallback(response) {
             response.data.forEach(function(element){
             	var library = new Object();
@@ -252,6 +255,33 @@ app.controller('navigationController', function($scope,$http) {
 			$scope.statusResult = true;
 			$scope.status = response.statusText;
 		});
+     }
+     
+     
+     $scope.deleteLibrary = function(library){
+    	 console.log(library);
+    	 var r = confirm("All Items within the library will be deleted. Are you sure you wnat to continue?");
+    	 if (r == true) {
+    		 
+    		 $.ajax({
+    			 type : "DELETE",
+    	    	 url : "http://localhost:8080/manage/deleteLibrary?libraryId=" + library.libraryId,
+    	    	 success : function(result) {
+    	    	    console.log("Success");
+    	    	    reloadData();
+    	    	    libs = [];
+    	    	    $scope.libs = libs;
+    	    	    $scope.libraries.options = libs;
+    	    	    $scope.libraries.selected = "";
+    	    	    $scope.$apply();
+    	    	 },
+    	    	 error : function(e) {
+    	    	    console.log("FAILURE");
+    	    	 }
+    	     })
+         } else {
+    	     
+    	 } 
      }
      
 });

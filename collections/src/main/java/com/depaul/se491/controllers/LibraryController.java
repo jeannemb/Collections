@@ -104,7 +104,7 @@ public class LibraryController {
 				case "books": 
 					itemDAO.deleteAllBooksByLibraryId(libraryId);
 					result =  libraryDAO.deleteLibrary(libraryId);
-				case "moveis":
+				case "movies":
 					itemDAO.deleteAllMoviesByLibraryId(libraryId);
 					result = libraryDAO.deleteLibrary(libraryId);
 				default:
@@ -115,8 +115,14 @@ public class LibraryController {
 		}else{
 			result = "Error occured or Library not Existed";
 		}
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
+		
+		if (result == "SUCCESS"){
+			return new ResponseEntity<>(HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);	
+		} 
+		
+	}
 	
 	@RequestMapping(value = "/deleteItem", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<String> deleteItem(@RequestParam (required=true, value="libraryId") Long libraryId, @RequestParam (required=true, value="itemId") Long itemId) throws SQLException {
@@ -125,17 +131,19 @@ public class LibraryController {
 		if (!libraryType.equals("Error occured or Library not Existed")){
 			if(libraryType.equals("books") || libraryType.equals("movies")){
 				result = itemDAO.deleteItemByItemId(libraryType, itemId);
-				result = result + " " + libraryType;
 			}else{
 				libraryType = "generic_items";
 				result = itemDAO.deleteItemByItemId(libraryType, itemId);
-				result = result + " " + libraryType;
 			}
 		
 		}else{
 			result = "Error occured or Library not Existed";
 		}
-        return new ResponseEntity<>(result, HttpStatus.OK);
+		if (result == "SUCCESS"){
+			return new ResponseEntity<>(HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);	
+		}
     }
 	
 }

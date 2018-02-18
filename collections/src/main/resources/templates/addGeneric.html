@@ -18,19 +18,21 @@
 
 <div th:include = "index :: header"></div>
 
-  	<!-- Left Navigation Bar Starts Here (First Column) -->
-    <div class="col-sm-2" style = "height: 80%;">
+    <div class="col-sm-3 col-md-3" style = "height: 80%;">
     	<!-- FIRST BLOCK TO DISPALY USERNAME -->
-    	<div class="jumbotron" style = "height: 10%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 10px; padding-top:5px; padding-right: 5px; padding-left: 5px; padding-bottom:10px">
-    		<h4 style= "text-align: center">USERNAME</h4>
-    	</div>
+    		<div class="jumbotron jumbotron-fluid" style = "height: 10%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 5px; padding-top:1px; padding-right: 1px; padding-left: 1px; padding-bottom:1px ">
+    			<div class="container text-center">
+    				<p><h6 class="text-warning display-6" style= "text-align: center"><span sec:authentication="name"></span></h6></p>
+    			</div>
+    		</div>
        	<!-- SECOND BLOCK TO DISPALY NAVIGTION OPTIONS -->
     	<div class="jumbotron" style = "height: 90%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; padding-top:5px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
     		<div class="list-group" style = "width: 100%;">
     			<h4 style= "text-align: center">   Menu   </h4>
     			<ul class="nav nav-pills nav-stacked">
-  					<li class="active" style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+  					<li style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-home"></span> Collections</a></li>
   					<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
+  					<li><a href="" class="list-group-item list-group-item-action active" ng-class = "{'adisabled': !usable}" ng-click="doOperation()"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
   					<li><a href="#" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
   					<li><a href="/logout" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> log out</a></li>
   				</ul>
@@ -39,7 +41,7 @@
     </div>
    <!-- Left Navigation Bar Ends Here (First Column) -->
 
-	<div class="col-sm-8" style="align:middle">
+	<div class="col-sm-9 col-md-9" style="align:middle">
 <form ng-app="collection" ng-controller="addItem">
 	<div ng-show = "showAlertDiv" class= "ng-cloak">
 	<div class="alert alert-dismissible alert-success" ng-show="alertSuccess" dismiss-on-timeout="2000" data-auto-dismiss="2000" close="closeAlert()">
@@ -70,12 +72,11 @@
     	<div class="checkbox"><label><input type="checkbox" ng-model="complete"/> Complete</label></div>
 		<div class="checkbox"><label><input type="checkbox" ng-model="wantsToComplete"/> Wants To Complete</label></div>
 		
-		<button type="submit" style = "margin: 10px" class="btn btn-default" ng-click="create()" >Create</button>
+		<button type="button" style = "margin: 10px" class="btn btn-default" ng-click="create()" >Create</button>
 
 </div>
 <div ng-show="responseResult" class= "ng-cloak">{{response}}</div>
 </form>
 </div>
-<div class="col-sm-2"></div>
 </body>
 </html>
