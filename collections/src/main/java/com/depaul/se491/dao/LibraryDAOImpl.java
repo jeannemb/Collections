@@ -102,7 +102,7 @@ public class LibraryDAOImpl implements LibraryDAO{
 			sql = "DELETE FROM libraries WHERE library_id = ?";
 			int result = template.update(sql, new Object[] { libraryId });
 			System.out.println(result);
-		return "Library has been deleted";
+		return "SUCCESS";
 		}catch(Exception e){
 			return "Deletion failed"+e;
 		}		

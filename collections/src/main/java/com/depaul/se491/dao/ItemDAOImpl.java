@@ -176,7 +176,7 @@ public class ItemDAOImpl implements ItemDAO{
 			int result = template.update(sql, new Object[] { itemId });
 			System.out.println(result);
 			if (result==1){
-				return "Items have been deleted";
+				return "SUCCESS";
 			}else {
 				return "Deletion FAILIED";
 			}
@@ -191,7 +191,7 @@ public class ItemDAOImpl implements ItemDAO{
 			sql = "DELETE FROM books WHERE books_library_id=?";
 			int result = template.update(sql, new Object[] {libraryId });
 			System.out.println(result);
-		return "Books have been deleted";
+		return "SUCCESS";
 		}catch(Exception e){
 			return "Deletion FAILIED OR Empty Library";
 		}		
@@ -203,7 +203,7 @@ public class ItemDAOImpl implements ItemDAO{
 			sql = "DELETE FROM movies WHERE movies_library_id=?";
 			int result = template.update(sql, new Object[] {libraryId });
 			System.out.println(result);
-		return "Movies have been deleted";
+		return "SUCCESS";
 		}catch(Exception e){
 			return "Deletion FAILIED OR Empty Library";
 		}		
@@ -215,7 +215,7 @@ public class ItemDAOImpl implements ItemDAO{
 			sql = "DELETE FROM generic_items WHERE generic_library_id=?";
 			int result = template.update(sql, new Object[] {libraryId });
 			System.out.println(result);
-		return "Generic Items have been deleted";
+		return "SUCCESS";
 		}catch(Exception e){
 			return "Deletion FAILIED OR Empty Library";
 		}		
