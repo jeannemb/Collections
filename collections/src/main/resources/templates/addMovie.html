@@ -19,11 +19,13 @@
 <div th:include = "/Index :: header"></div>
 
   	<!-- Left Navigation Bar Starts Here (First Column) -->
-    <div class="col-sm-2" style = "height: 80%;">
+    <div class="col-sm-3 col-md-3" style = "height: 80%;">
     	<!-- FIRST BLOCK TO DISPALY USERNAME -->
-    	<div class="jumbotron" style = "height: 10%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 10px; padding-top:5px; padding-right: 5px; padding-left: 5px; padding-bottom:10px">
-    		<h4 style= "text-align: center">USERNAME</h4>
-    	</div>
+    		<div class="jumbotron jumbotron-fluid" style = "height: 10%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 5px; padding-top:1px; padding-right: 1px; padding-left: 1px; padding-bottom:1px ">
+    			<div class="container text-center">
+    				<p><h6 class="text-warning display-6" style= "text-align: center"><span sec:authentication="name"></span></h6></p>
+    			</div>
+    		</div>
        	<!-- SECOND BLOCK TO DISPALY NAVIGTION OPTIONS -->
     	<div class="jumbotron" style = "height: 90%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; padding-top:5px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
     		<div class="list-group" style = "width: 100%;">
@@ -40,7 +42,7 @@
     </div>
    <!-- Left Navigation Bar Ends Here (First Column) -->
 
-	<div class="col-sm-8" style="align:middle">
+	<div class="col-sm-9 col-md-9" style="align:middle">
 
 <form ng-app="collection" ng-controller="addMovie">
 	<div ng-show = "showAlertDiv" class= "ng-cloak">
@@ -122,6 +124,6 @@
 <div ng-show="responseResult" class= "ng-cloak">{{response}}</div>
 </form>
 </div>
-<div class="col-sm-2"></div>
+
 </body>
 </html>
