@@ -26,7 +26,7 @@ app.controller('addItem', function($scope,$http) {
 			
 			$http({
 				method: "POST",
-				url: "http://localhost:8080/manage/addgeneric",
+				url: "/manage/addgeneric",
 				data : angular.toJson(item),
 				headers : {
 					'Content-Type': 'application/json'

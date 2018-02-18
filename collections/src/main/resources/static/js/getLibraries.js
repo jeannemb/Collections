@@ -6,7 +6,7 @@ $( document ).ready(function() {
 	function ajaxGet(){
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8080/manage/library?userId=1",
+			url : "/manage/library?userId=1",
 			success: function(result){
 					$('#getResultDiv ul').empty();
 					result.forEach(function(element){
@@ -38,7 +38,7 @@ $( document ).ready(function() {
 		if (oldBtn != null){
 			oldBtn.parentNode.removeChild(oldBtn);
 		}
-		var URL = "http://localhost:8080/manage/items?libraryId=" + libId + "&libraryType=" + libType;
+		var URL = "/manage/items?libraryId=" + libId + "&libraryType=" + libType;
 		$.ajax({
 			type : "GET",
 			url : URL,

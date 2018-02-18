@@ -21,7 +21,7 @@ $( document ).ready(function() {
     	$.ajax({
     		type : "POST",
     		contentType : "application/json",
-    	    url : "http://localhost:8080/manage/createlibrary",
+    	    url : "/manage/createlibrary",
     	    data : JSON.stringify(formData),
     	    dataType : 'json',
     	    success : function(result) {
@@ -48,7 +48,7 @@ $( document ).ready(function() {
         }
         
         function redirect(){
-        	window.location="http://localhost:8080/libraryHome2";
+        	window.location="/libraryHome2";
         }
     }
 	

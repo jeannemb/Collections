@@ -12,7 +12,7 @@ app.controller('navigationController', function($scope,$http) {
 		//LibraryService.load();
 		$http({
 			method : "GET",
-			url: "http://localhost:8080/manage/library"
+			url: "/manage/library"
 		}).then(function successCallback(response) {
             response.data.forEach(function(element){
             	var library = new Object();
@@ -35,7 +35,7 @@ app.controller('navigationController', function($scope,$http) {
     	var items = [];
     	$http({
 			method : "GET",
-			url: "http://localhost:8080/manage/items?libraryId=" + libraryId + "&libraryType=" + type
+			url: "/manage/items?libraryId=" + libraryId + "&libraryType=" + type
 		}).then(function successCallback(response) {
             response.data.forEach(function(element){
             	if (type == "books"){
@@ -238,7 +238,7 @@ app.controller('navigationController', function($scope,$http) {
     	libs = [];
  		$http({
 			method : "GET",
-			url: "http://localhost:8080/manage/library"
+			url: "/manage/library"
 		}).then(function successCallback(response) {
             response.data.forEach(function(element){
             	var library = new Object();
@@ -265,7 +265,7 @@ app.controller('navigationController', function($scope,$http) {
     		 
     		 $.ajax({
     			 type : "DELETE",
-    	    	 url : "http://localhost:8080/manage/deleteLibrary?libraryId=" + library.libraryId,
+    	    	 url : "/manage/deleteLibrary?libraryId=" + library.libraryId,
     	    	 success : function(result) {
     	    	    console.log("Success");
     	    	    reloadData();

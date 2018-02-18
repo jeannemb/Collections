@@ -112,7 +112,7 @@ app.controller('addBook', function($scope,$http) {
 
 			$http({
 				method: "POST",
-				url: "http://localhost:8080/manage/addbook",
+				url: "/manage/addbook",
 				data : angular.toJson(book),
 				headers : {
 					'Content-Type': 'application/json'
@@ -156,7 +156,7 @@ app.controller('addBook', function($scope,$http) {
 			
 			$http({
 				method: "POST",
-				url: "http://localhost:8080/manage/addbook",
+				url: "/manage/addbook",
 				data : angular.toJson(book),
 				headers : {
 					'Content-Type': 'application/json'

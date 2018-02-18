@@ -168,7 +168,7 @@ app.controller('addMovie', function($scope,$http) {
 
 			$http({
 				method: "POST",
-				url: "http://localhost:8080/manage/addmovie",
+				url: "/manage/addmovie",
 				data : angular.toJson(movie),
 				headers : {
 					'Content-Type': 'application/json'
@@ -211,7 +211,7 @@ app.controller('addMovie', function($scope,$http) {
 			
 			$http({
 				method: "POST",
-				url: "http://localhost:8080/manage/addmovie",
+				url: "/manage/addmovie",
 				data : angular.toJson(movie),
 				headers : {
 					'Content-Type': 'application/json'
