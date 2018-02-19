@@ -217,7 +217,7 @@ app.controller('navigationController', function($scope,$http) {
     	 if (r == true) {
     		 $.ajax({
     			 type : "DELETE",
-    	    	 url : "http://localhost:8080/manage/deleteItem?libraryId=" + libId + "&itemId=" + id,
+    	    	 url : "/manage/deleteItem?libraryId=" + libId + "&itemId=" + id,
     	    	 success : function(result) {
     	    	    console.log("Success: " + result);
     	    	    reloadData();
