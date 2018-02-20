@@ -12,37 +12,122 @@
 
 	<script src="/js/index.js"></script>
 	<script src="/js/addMovie.js"></script>
+	<style>
+    		/*
+ 			* Style tweaks
+ 			* --------------------------------------------------
+ 			*/
+			footer {
+ 				padding-left: 15px;
+  				padding-right: 15px;
+			}
 
+			/*
+			 * Off Canvas
+			 * --------------------------------------------------
+			 */
+			@media screen and (max-width: 768px) {
+			  .row-offcanvas {
+			    position: relative;
+			    -webkit-transition: all 0.25s ease-out;
+			    -moz-transition: all 0.25s ease-out;
+			    transition: all 0.25s ease-out;
+			  }
+			
+			  .row-offcanvas-left
+			  .sidebar-offcanvas {
+			    left: -33%;
+			  }
+			
+			  .row-offcanvas-left.active {
+			    left: 33%;
+			  }
+			
+			  .sidebar-offcanvas {
+			    position: absolute;
+			    top: 0;
+			    width: 33%;
+			    margin-left: 10px;
+			  }
+			}
+			
+			
+			/* Sidebar navigation */
+			.nav-sidebar {
+			  margin-right: -15px;
+			  margin-bottom: 20px;
+			  margin-left: -15px;
+			}
+			.nav-sidebar > li > a {
+			  padding-right: 20px;
+			  padding-left: 20px;
+			}
+			.nav-sidebar > .active > a {
+			  color: #fff;
+			  background-color: #428bca;
+			}
+			
+			/*
+			 * Main content
+			 */
+			
+			.main {
+			  padding: 20px;
+			}
+			@media (min-width: 768px) {
+			  .main {
+			    padding-right: 40px;
+			    padding-left: 40px;
+			  }
+			}
+			.main .page-header {
+			  margin-top: 0;
+			}
+    		a.adisabled {
+  				cursor: not-allowed;
+  				opacity: .65;
+			}
+
+			a.adisabled:hover { text-decoration: none; }
+			a.adisabled:focus { text-decoration: none; }
+			a.adisabled:active { text-decoration: none; }
+
+			.aPanel {
+  				margin: 1em;
+				}
+  
+  		</style>  
 </head>
 <body>
 
 <div th:include = "index :: header"></div>
 
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
   	<!-- Left Navigation Bar Starts Here (First Column) -->
-    <div class="col-sm-3 col-md-3" style = "height: 80%;">
-    	<!-- FIRST BLOCK TO DISPALY USERNAME -->
-    		<div class="jumbotron jumbotron-fluid" style = "height: 10%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 5px; padding-top:1px; padding-right: 1px; padding-left: 1px; padding-bottom:1px ">
-    			<div class="container text-center">
-    				<p><h6 class="text-warning display-6" style= "text-align: center"><span sec:authentication="name"></span></h6></p>
-    			</div>
-    		</div>
-       	<!-- SECOND BLOCK TO DISPALY NAVIGTION OPTIONS -->
-    	<div class="jumbotron" style = "height: 90%; width: 100%; margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; padding-top:5px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
-    		<div class="list-group" style = "width: 100%;">
-    			<h4 style= "text-align: center">   Menu   </h4>
-    			<ul class="nav nav-pills nav-stacked">
-  					<li style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-home"></span> Collections</a></li>
-  					<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
-  					<li><a href="" class="list-group-item list-group-item-action active" ng-class = "{'adisabled': !usable}" ng-click="doOperation()"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
-  					<li><a href="#" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
-  					<li><a href="/logout" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> log out</a></li>
-  				</ul>
+    <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" style = "height: 100%; background-color:#303030">
+        <ul class="nav nav-sidebar">
+       		<!-- SECOND BLOCK TO DISPALY NAVIGTION OPTIONS -->
+    		<div class = "jumbotron" style = "margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; padding-top:5px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
+    			<div class="list-group" style = "width: 100%;">
+    				<h4 style= "text-align: center">   Menu   </h4>
+    				<ul class="nav nav-pills nav-stacked">
+  						<li style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-home"></span> Collections</a></li>
+  						<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
+  						<li class="active" style = "width: 100%;"><a href="" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
+  						<li><a href="setting" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
+  						<li><a href="/logout" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  					</ul>
+  				</div>
   			</div>
-  		</div>
+  		</ul>
     </div>
    <!-- Left Navigation Bar Ends Here (First Column) -->
-
-	<div class="col-sm-9 col-md-9" style="align:middle">
+   <!-- Article View To Display Data Start Here -->
+   <div class="col-sm-9 col-md-10 main">
+          <p class="visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
+          </p>
 
 <form ng-app="collection" ng-controller="addMovie">
 	<div ng-show = "showAlertDiv" class= "ng-cloak">
@@ -124,6 +209,18 @@
 <div ng-show="responseResult" class= "ng-cloak">{{response}}</div>
 </form>
 </div>
+</div>
+</div>
+
+<footer class="footer" style = "background-color:#303030">
+  	<div> <p> © 2018 - Collectr </p></div>
+  	<div><p> Developers: 
+  	<a href="">Jeanne Boggs</a>, 
+  	<a href="">Mark Wlodarski</a>, 
+  	<a href="https://www.linkedin.com/in/meharbi88/">Mohammed Alharbi</a>
+  	</p>
+  	</div>
+</footer>
 
 </body>
 </html>

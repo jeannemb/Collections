@@ -51,5 +51,9 @@ $( document ).ready(function() {
         	window.location="/libraryHome2";
         }
     }
+    
+    $('[data-toggle=offcanvas]').click(function() {
+	    $('.row-offcanvas').toggleClass('active');
+    });
 	
 })

@@ -254,4 +254,7 @@ app.controller('addMovie', function($scope,$http) {
 		$scope.wantsToComplete = false;
 	}
 	
+    $('[data-toggle=offcanvas]').click(function() {
+	    $('.row-offcanvas').toggleClass('active');
+    });
 });

@@ -201,4 +201,8 @@ app.controller('addBook', function($scope,$http) {
 		$scope.complete = false;
 		$scope.wantsToComplete = false;
 	}
+	
+    $('[data-toggle=offcanvas]').click(function() {
+	    $('.row-offcanvas').toggleClass('active');
+    });
 });

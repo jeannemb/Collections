@@ -61,4 +61,9 @@ public class WebController {
 	public String addGeneric(){
 	   return "addGeneric";
 	}
+	
+	@RequestMapping(value="/setting",method = RequestMethod.GET)
+	public String setting(){
+	   return "setting";
+	}
 }

@@ -3,17 +3,17 @@
 	<title>Collectr</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.css"></link>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-	  
-	<script src="/js/index.js"></script>
-	<script src="/js/addLibrary.js"></script>
 
-<style>
+	<script src="/js/index.js"></script>
+	<script src="/js/setting.js"></script>
+
+	<style>
     		/*
  			* Style tweaks
  			* --------------------------------------------------
@@ -98,13 +98,11 @@
 				}
   
   		</style>  
-	
+
 </head>
-
 <body>
-
 <div th:include = "index :: header"></div>
-<div class="container-fluid">
+<div class="container-fluid" ng-app="collection" ng-controller="setting">
     <div class="row row-offcanvas row-offcanvas-left">
   	<!-- Left Navigation Bar Starts Here (First Column) -->
     <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" style = "height: 100%; background-color:#303030">
@@ -115,9 +113,9 @@
     				<h4 style= "text-align: center">   Menu   </h4>
     				<ul class="nav nav-pills nav-stacked">
   						<li style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-home"></span> Collections</a></li>
-  						<li class="active" style = "width: 100%;"><a href="libraryCreation" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
+  						<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
   						<li><a href="" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
-  						<li><a href="setting" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
+  						<li class="active" style = "width: 100%;"><a href="#" class="list-group-item list-group-item-action active"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
   						<li><a href="/logout" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
   					</ul>
   				</div>
@@ -126,29 +124,15 @@
     </div>
    <!-- Left Navigation Bar Ends Here (First Column) -->
    <!-- Article View To Display Data Start Here -->
-   <div class="col-sm-9 col-md-10 main" style="align:middle">
+   <div class="col-sm-9 col-md-10 main">
           <p class="visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
           </p>
-
-<form class="form-horizontal" style="margin: auto; border: 3px solid; padding: 20px;" id="libraryForm">
-
-	  <h2>Create a New Library</h2>
-	  	  <label for="Library Name">Library Name:</label>
-	      <input id="libName" type="text" class="form-control" placeholder="Library Name"/>
-	      <label for="Library Type">Type of Library:</label>
-	      <select id="libType" class="form-control">
-		      <option selected="" value="other">Other</option>
-		      <option value="books">Books</option>
-		      <option value="movies">Movies</option>
-          </select>
-	      <button type="submit" class="btn btn-default">Create</button>
-	    
-</form>
-  </div>
-  </div>
-  </div>
-
+          
+          <h1>This is a setting Page</h1>
+</div>
+</div>
+</div>
 <footer class="footer" style = "background-color:#303030">
   	<div> <p> © 2018 - Collectr </p></div>
   	<div><p> Developers: 
@@ -158,5 +142,7 @@
   	</p>
   	</div>
 </footer>
+
 </body>
+
 </html>

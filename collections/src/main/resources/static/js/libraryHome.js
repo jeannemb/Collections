@@ -284,4 +284,9 @@ app.controller('navigationController', function($scope,$http) {
     	 } 
      }
      
+     $('[data-toggle=offcanvas]').click(function() {
+ 	    $('.row-offcanvas').toggleClass('active');
+     });
+  
+     
 });
