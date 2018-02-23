@@ -61,9 +61,9 @@ app.controller('addMovie', function($scope,$http) {
 						  }
 						  
 						  if (typeof response.results[i].poster_path !== 'undefined'){
-								movie.image = "https://image.tmdb.org/t/p/w500"+response.results[i].poster_path;	
+								movie.posterUrl = "https://image.tmdb.org/t/p/w500"+response.results[i].poster_path;	
 							}else{
-								movie.image = "/images/placeholderImageItem.png";
+								movie.posterUrl = "/images/placeholderImageItem.png";
 							}
 						  
 						  movie.owns = false;
@@ -116,9 +116,9 @@ app.controller('addMovie', function($scope,$http) {
 						  }
 						  
 						  if (typeof response.results[i].poster_path !== 'undefined'){
-								movie.image = "https://image.tmdb.org/t/p/w500"+response.results[i].poster_path;	
+								movie.posterUrl = "https://image.tmdb.org/t/p/w500"+response.results[i].poster_path;	
 							}else{
-								movie.image = "/images/placeholderImageItem.png";
+								movie.posterUrl = "/images/placeholderImageItem.png";
 							}
 						  movie.owns = false;
 						  movie.wantsToOwn = false;
@@ -163,7 +163,8 @@ app.controller('addMovie', function($scope,$http) {
 				owns : movie.owns,
 				wantsToOwn : movie.wantsToOwn,
 				complete : movie.complete,
-				wantsToComplete: movie.wantsToComplete
+				wantsToComplete: movie.wantsToComplete,
+				posterUrl: movie.posterUrl
 			}
 
 			$http({

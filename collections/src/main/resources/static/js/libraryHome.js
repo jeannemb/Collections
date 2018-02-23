@@ -50,6 +50,11 @@ app.controller('navigationController', function($scope,$http) {
                 	itemBook.wantsToOwn = element.wantsToOwn;
                 	itemBook.complete = element.complete;
                 	itemBook.wantsToComplete = element.wantsToComplete;
+                	if (element.posterUrl == null){
+                		itemBook.posterUrl = "/images/placeholderImageItem.png";
+                	}else{
+                		itemBook.posterUrl = element.posterUrl;	
+                	}
                 	itemBook.type = type;
                 	items.push(itemBook);
                 	//libItems.push(itemBook);
@@ -64,6 +69,11 @@ app.controller('navigationController', function($scope,$http) {
                 	itemMovie.wantsToOwn = element.wantsToOwn;
                 	itemMovie.complete = element.complete;
                 	itemMovie.wantsToComplete = element.wantsToComplete;
+                	if (element.posterUrl == null){
+                		itemMovie.posterUrl = "/images/placeholderImageItem.png";
+                	}else{
+                		itemMovie.posterUrl = element.posterUrl;	
+                	}
                 	itemMovie.type = type;
                 	items.push(itemMovie);
                 	//libItems.push(itemMovie);

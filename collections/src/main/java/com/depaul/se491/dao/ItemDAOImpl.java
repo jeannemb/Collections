@@ -45,6 +45,7 @@ public class ItemDAOImpl implements ItemDAO{
 			book.setWantsToOwn(rs.getBoolean("wants_to_own"));
 			book.setComplete(rs.getBoolean("complete"));
 			book.setWantsToComplete(rs.getBoolean("wants_to_complete"));
+			book.setPosterUrl(rs.getString("poster_url"));
 
 			return book;
 		}
@@ -65,6 +66,7 @@ public class ItemDAOImpl implements ItemDAO{
 			movie.setWantsToOwn(rs.getBoolean("wants_to_own"));
 			movie.setComplete(rs.getBoolean("complete"));
 			movie.setWantsToComplete(rs.getBoolean("wants_to_complete"));
+			movie.setPosterUrl(rs.getString("poster_url"));
 
 			return movie;
 		}
@@ -118,11 +120,11 @@ public class ItemDAOImpl implements ItemDAO{
 	public String addBooksInLibrary(Book book) throws SQLException{
 		String sql;
 		try{
-		sql = "INSERT INTO books (books_library_id, title, isbn13, isbn10, authors, owns, wants_to_own, complete, wants_to_complete) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		sql = "INSERT INTO books (books_library_id, title, isbn13, isbn10, authors, owns, wants_to_own, complete, wants_to_complete, poster_url) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = template.update(sql, new Object[]{book.getBooksLibraryId(),book.getTitle(),
 				book.getIsbn13(),book.getIsbn10(),book.getAuthors(),
-				book.getOwns(),book.getWantsToOwn(),book.getComplete(),book.getWantsToComplete()});
+				book.getOwns(),book.getWantsToOwn(),book.getComplete(),book.getWantsToComplete(),book.getPosterUrl()});
 		System.out.println(result);
 		return "SUCCESS";
 		}catch(Exception e){
@@ -133,11 +135,11 @@ public class ItemDAOImpl implements ItemDAO{
 	public String addMoviesInLibrary(Movie movie) throws SQLException{
 		String sql;
 		try{
-		sql = "INSERT INTO movies (movies_library_id, title, upc, actors, owns, wants_to_own, complete, wants_to_complete) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		sql = "INSERT INTO movies (movies_library_id, title, upc, actors, owns, wants_to_own, complete, wants_to_complete, poster_url) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = template.update(sql, new Object[]{movie.getMoviesLibraryId(),movie.getTitle(),
 				movie.getUpc(),movie.getActors(),
-				movie.getOwns(),movie.getWantsToOwn(),movie.getComplete(),movie.getWantsToComplete()});
+				movie.getOwns(),movie.getWantsToOwn(),movie.getComplete(),movie.getWantsToComplete(),movie.getPosterUrl()});
 		System.out.println(result);
 		return "SUCCESS";
 		}catch(Exception e){

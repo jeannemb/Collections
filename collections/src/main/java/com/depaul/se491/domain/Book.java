@@ -15,6 +15,7 @@ public class Book implements Serializable{
 	private boolean wantsToOwn;
 	private boolean complete;
 	private boolean wantsToComplete;
+	private String posterUrl;
 	
 	public Long getItemId() {
 		return itemId;
@@ -81,6 +82,12 @@ public class Book implements Serializable{
 		return "Book [itemId=" + itemId + ", booksLibraryId=" + booksLibraryId + ", title=" + title + ", ISBN13="
 				+ isbn13 + ", ISBN10=" + isbn10 + ", authors=" + authors + ", owns=" + owns + ", wantsToOwn="
 				+ wantsToOwn + ", complete=" + complete + ", wantsToComplete=" + wantsToComplete + "]";
+	}
+	public String getPosterUrl() {
+		return posterUrl;
+	}
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
 	}
 
 	

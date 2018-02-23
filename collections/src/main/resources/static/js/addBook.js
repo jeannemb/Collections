@@ -69,9 +69,9 @@ app.controller('addBook', function($scope,$http) {
 		            book.complete = false;
 		            book.wantsToComplete = false;
 					if (typeof response.items[i].volumeInfo.imageLinks !== 'undefined'){
-						book.image = response.items[i].volumeInfo.imageLinks.thumbnail;	
+						book.posterUrl = response.items[i].volumeInfo.imageLinks.thumbnail;	
 					}else{
-						book.image = "/images/placeholderImageItem.png";
+						book.posterUrl = "/images/placeholderImageItem.png";
 					}
 						
 		            myBooks.push(book); 
@@ -107,7 +107,8 @@ app.controller('addBook', function($scope,$http) {
 				owns : book.owns,
 				wantsToOwn : book.wantsToOwn,
 				complete : book.complete,
-				wantsToComplete: book.wantsToComplete
+				wantsToComplete: book.wantsToComplete,
+				posterUrl : book.posterUrl
 			}
 
 			$http({
