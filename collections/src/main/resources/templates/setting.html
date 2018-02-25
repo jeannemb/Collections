@@ -132,8 +132,8 @@
          <h1><span class="glyphicon glyphicon-cog"></span> Setting</h1>
           
          <ul class="nav nav-tabs" style = "margin-bottom: 10px;">
-  			<li class="nav-item active show"><a class="nav-link active show" data-toggle="tab" ng-model="account" ng-click="accountClicked()">Account</a></li>
-  			<li class="nav-item"><a class="nav-link" data-toggle="tab" ng-model="library" ng-click="libraryClicked()">Library</a></li>
+  			<li class="nav-item active show" style = "width: 50%;"><a align="center" class="nav-link active show" data-toggle="tab" ng-model="account" ng-click="accountClicked()">Account Setting</a></li>
+  			<li class="nav-item" style = "width: 50%;"><a align="center" class="nav-link" data-toggle="tab" ng-model="library" ng-click="libraryClicked()">Library Setting</a></li>
  		</ul>
      
      	<div ng-show = "accountSetting">
@@ -149,7 +149,7 @@
       						<label for="lastName">Last Name</label>
       						<input type="text" class="form-control input-sm" id="lastName" ng-required = "true" ng-model="user.lastName" style = "width: 80%;" placeholder="Last Name" value="{{user.lastName}}"/>
     					</div>
-    					<button type="button" class="btn btn-primary" ng-click="UpdateName(user)">Submit</button>
+    					<button type="button" class="btn btn-primary" ng-click="updateName(user)">Save</button>
       				  </fieldset>
       				</form>
       			</div>
@@ -169,7 +169,7 @@
       						<label for="confirmEmail">Confirm Email address</label>
       						<input type="email" class="form-control input-sm" id="confirmEmail" ng-required = "true" ng-model="confirmEmail" style = "width: 80%;" placeholder="Confirm Email"/>
     					</div>
-    					<button type="button" class="btn btn-primary" ng-click="UpdateEmail(user, newEmail, confirmEmail)">Submit</button>
+    					<button type="button" class="btn btn-primary" ng-click="updateEmail(user, newEmail, confirmEmail)">Save</button>
       				  </fieldset>
       				</form>
       			</div>
@@ -190,7 +190,7 @@
       						<label for="confirmPassword">Confirm Email address</label>
       						<input type="password" class="form-control input-sm" id="confirmPassword" ng-required = "true" ng-model="confirmPassword" style = "width: 80%;" placeholder="Confirm Password"/>
     					</div>
-    					<button type="button" class="btn btn-primary" ng-click="UpdatePassword(user, newPassword, confirmPassword)">Submit</button>
+    					<button type="button" class="btn btn-primary" ng-click="updatePassword(user, newPassword, confirmPassword)">Save</button>
       				  </fieldset>
       				</form>
       			</div>
@@ -247,7 +247,7 @@
       		<div class="panel-heading"><a data-toggle="collapse" href="#5" style="color:#ffffff">Delete Library</a></div>
        		<div id="5" class="panel-collapse collapse">		
       			<div class="panel-body">
-					<table class="table danger table-striped table-hover ">
+					<table class="table danger table-striped table-hover">
 						<thead>
     						<tr>
       							<th>#</th>

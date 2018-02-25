@@ -108,17 +108,17 @@ app.controller('setting', function($scope,$http) {
     	 console.log(lib);
      }
 	 
-     $scope.UpdateName  = function(user){
+     $scope.updateName  = function(user){
     	 console.log(user);
      }
      
-     $scope.UpdateEmail  = function(user, newEmail, confirmEmail){
+     $scope.updateEmail  = function(user, newEmail, confirmEmail){
     	 console.log(user);
     	 console.log(newEmail);
     	 console.log(confirmEmail);
      }
      
-     $scope.UpdatePassword = function(user, newPassword, confirmPassword){
+     $scope.updatePassword = function(user, newPassword, confirmPassword){
     	 console.log(user);
     	 console.log(newPassword);
     	 console.log(confirmPassword);
