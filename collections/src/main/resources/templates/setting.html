@@ -102,7 +102,7 @@
 </head>
 <body>
 <div th:include = "index :: header"></div>
-<div class="container-fluid" ng-app="collection" ng-controller="setting">
+<div class="container-fluid" ng-app="collection" ng-controller="setting" data-ng-init="init()">
     <div class="row row-offcanvas row-offcanvas-left">
   	<!-- Left Navigation Bar Starts Here (First Column) -->
     <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" style = "height: 100%; background-color:#303030">
@@ -129,7 +129,149 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
           </p>
           
-          <h1>This is a setting Page</h1>
+         <h1><span class="glyphicon glyphicon-cog"></span> Setting</h1>
+          
+         <ul class="nav nav-tabs" style = "margin-bottom: 10px;">
+  			<li class="nav-item active show"><a class="nav-link active show" data-toggle="tab" ng-model="account" ng-click="accountClicked()">Account</a></li>
+  			<li class="nav-item"><a class="nav-link" data-toggle="tab" ng-model="library" ng-click="libraryClicked()">Library</a></li>
+ 		</ul>
+     
+     	<div ng-show = "accountSetting">
+    	<div class="panel panel-default">	     
+      		<div class="panel-heading"><a data-toggle="collapse" href="#0" style="color:#ffffff">Change Name</a></div>
+       		<div id="0" class="panel-collapse collapse">		
+      			<div class="panel-body">
+      				<form>
+      				  <fieldset>
+      				  	<div class="form-group">
+      						<label for="firstName">First Name</label>
+      						<input type="text" class="form-control input-sm" id="firstName" ng-required = "true" ng-model="user.firstName"  style = "width: 80%;" placeholder="First Name" value="{{user.firstName}}"/>
+      						<label for="lastName">Last Name</label>
+      						<input type="text" class="form-control input-sm" id="lastName" ng-required = "true" ng-model="user.lastName" style = "width: 80%;" placeholder="Last Name" value="{{user.lastName}}"/>
+    					</div>
+    					<button type="button" class="btn btn-primary" ng-click="UpdateName(user)">Submit</button>
+      				  </fieldset>
+      				</form>
+      			</div>
+			</div>
+      	</div>
+      	<div class="panel panel-default">    
+      		<div class="panel-heading"><a data-toggle="collapse" href="#1" style="color:#ffffff">Change Email</a></div>
+       		<div id="1" class="panel-collapse collapse">		
+      			<div class="panel-body">
+      				<form>
+      				  <fieldset>
+      				  	<div class="form-group">
+      				  	<label for="currentEmail">Current Email address</label>
+      						<input type="email" class="form-control input-sm" id="currentEmail" ng-required = "true" ng-model="user.email" style = "width: 80%;" placeholder="Current Password" value="{{user.email}}"/>
+     						<label for="newEmail">New Email address</label>
+      						<input type="email" class="form-control input-sm" id="newEmail" ng-required = "true" ng-model="newEmail" style = "width: 80%;" placeholder="Email"/>
+      						<label for="confirmEmail">Confirm Email address</label>
+      						<input type="email" class="form-control input-sm" id="confirmEmail" ng-required = "true" ng-model="confirmEmail" style = "width: 80%;" placeholder="Confirm Email"/>
+    					</div>
+    					<button type="button" class="btn btn-primary" ng-click="UpdateEmail(user, newEmail, confirmEmail)">Submit</button>
+      				  </fieldset>
+      				</form>
+      			</div>
+			</div>
+      	</div>
+      	
+      	<div class="panel panel-default">    
+      		<div class="panel-heading"><a data-toggle="collapse" href="#2" style="color:#ffffff">Change Password</a></div>
+       		<div id="2" class="panel-collapse collapse">		
+      			<div class="panel-body">
+					<form>
+      				  <fieldset>
+      				  	<div class="form-group">
+     						<label for="currentPassword">Current Password</label>
+      						<input type="password" class="form-control input-sm" id="currentPassword" ng-required = "true" ng-model="user.password" style = "width: 80%;" placeholder="Current Password" value="{{user.password}}"/>
+      						<label for="newPassword">Current Password</label>
+      						<input type="password" class="form-control input-sm" id="newPassword" ng-required = "true" ng-model="newPassword" style = "width: 80%;" placeholder="New Password"/>
+      						<label for="confirmPassword">Confirm Email address</label>
+      						<input type="password" class="form-control input-sm" id="confirmPassword" ng-required = "true" ng-model="confirmPassword" style = "width: 80%;" placeholder="Confirm Password"/>
+    					</div>
+    					<button type="button" class="btn btn-primary" ng-click="UpdatePassword(user, newPassword, confirmPassword)">Submit</button>
+      				  </fieldset>
+      				</form>
+      			</div>
+			</div>
+      	</div>
+      	
+      	 <div class="panel panel-default">    
+      		<div class="panel-heading"><a data-toggle="collapse" href="#3" style="color:#ffffff">Delete Account</a></div>
+       		<div id="3" class="panel-collapse collapse">		
+      			<div class="panel-body">
+      				<h3><strong>Delete Account will delete all your information...</strong></h3>
+					<button type="button" class="btn btn-danger" ng-click="deleteAccount(user)">Delete Account</button>
+      			</div>
+			</div>
+      	</div>
+      	
+ 		</div>
+ 		
+ 		
+ 		<div ng-show = "librarySetting">
+    	<div class="panel panel-default">	     
+      		<div class="panel-heading"><a data-toggle="collapse" href="#4" style="color:#ffffff">Edit Library</a></div>
+       		<div id="4" class="panel-collapse collapse">		
+      			<div class="panel-body">
+					<table class="table info table-striped table-hover">
+						<thead>
+    						<tr>
+      							<th>#</th>
+      							<th>Library Name</th>
+      							<th>Library Type</th>
+      							<th>Edit Library</th>
+    						</tr>
+    						
+  						</thead>
+  						<tbody ng-repeat="lib in libs">
+    						<tr>
+      							<td>{{lib.index}}</td>
+      							<td>
+      							<form>
+      								<input type="text" class="form-control input-sm" ng-required = "true" ng-model="lib.name"></input>
+      							</form>
+      							</td>
+      							<td>{{lib.type}}</td>
+     							<td>
+	     							<button type="button" class="btn btn-primary btn-sm" ng-click="editLibrary(lib)">Edit Library</button>
+     							</td>
+    						</tr>
+    					</tbody>
+					</table> 
+      			</div>
+			</div>
+      	</div>
+      	<div class="panel panel-default">    
+      		<div class="panel-heading"><a data-toggle="collapse" href="#5" style="color:#ffffff">Delete Library</a></div>
+       		<div id="5" class="panel-collapse collapse">		
+      			<div class="panel-body">
+					<table class="table danger table-striped table-hover ">
+						<thead>
+    						<tr>
+      							<th>#</th>
+      							<th>Library Name</th>
+      							<th>Library Type</th>
+      							<th>Delete Library</th>
+    						</tr>
+    						
+  						</thead>
+  						<tbody ng-repeat="lib in libs">
+    						<tr>
+      							<td>{{lib.index}}</td>
+      							<td>{{lib.name}}</td>
+      							<td>{{lib.type}}</td>
+     							<td><button type="button" class="btn btn-danger btn-sm" ng-click="deleteLibrary(lib)">Delete Library</button></td>
+    						</tr>
+    					</tbody>
+					</table> 
+      			</div>
+			</div>
+      	</div>
+      	
+ 		</div>
+ 		
 </div>
 </div>
 </div>
