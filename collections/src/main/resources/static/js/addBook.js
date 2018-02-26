@@ -5,6 +5,7 @@ app.controller('addBook', function($scope,$http) {
 	$scope.responseResult = false;
 	$scope.showSearchBar = true;
 	$scope.showManualEntry = false;
+	var myBooks = [];
 	//$scope.LibraryName = localStorage.getItem("libraryId");
 	//$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("type");
 
@@ -37,7 +38,8 @@ app.controller('addBook', function($scope,$http) {
 		}else if($scope.search == 'isbn'){
 			url = "https://www.googleapis.com/books/v1/volumes?q=isbn:"
 		}
-		var myBooks = [];
+		myBooks = [];
+		var index = 0;
 		var searchText = $scope.searchText;
 		//https://www.googleapis.com/books/v1/volumes?q=isbn:9780321573513
 		$.get(url + searchText, function(response){
@@ -77,7 +79,8 @@ app.controller('addBook', function($scope,$http) {
 					}else{
 						book.posterUrl = "/images/placeholderImageItem.png";
 					}
-						
+					book.index = index;
+					index++;
 		            myBooks.push(book); 
 				}
 				
@@ -97,21 +100,21 @@ app.controller('addBook', function($scope,$http) {
 		});
 	}
 	
-		$scope.addBook = function(book){
-		console.log(book);
+		$scope.addBook = function(bookToAdd){
+		console.log(bookToAdd);
 		var id = localStorage.getItem("libraryId");
-		if(book.title != null){
+		if(bookToAdd.title != null){
 			var book = {
 				booksLibraryId : id,
-				title : book.title,
-				isbn13 : book.isbn13,
-				isbn10 : book.isbn10,
-				authors : book.authors,
-				owns : book.owns,
-				wantsToOwn : book.wantsToOwn,
-				complete : book.complete,
-				wantsToComplete: book.wantsToComplete,
-				posterUrl : book.posterUrl
+				title : bookToAdd.title,
+				isbn13 : bookToAdd.isbn13,
+				isbn10 : bookToAdd.isbn10,
+				authors : bookToAdd.authors,
+				owns : bookToAdd.owns,
+				wantsToOwn : bookToAdd.wantsToOwn,
+				complete : bookToAdd.complete,
+				wantsToComplete: bookToAdd.wantsToComplete,
+				posterUrl : bookToAdd.posterUrl
 			}
 
 			$http({
@@ -123,6 +126,7 @@ app.controller('addBook', function($scope,$http) {
 				}
 			}).then(function successCallback(check) {
 				showSuccessSnakbar();
+				remove(bookToAdd);
 				clearFields();
 			}, function errorCallback(check) {
 				showFailSnakbar();
@@ -130,6 +134,16 @@ app.controller('addBook', function($scope,$http) {
 		}else{
 			showFailSnakbar();
 		}
+	}
+		
+	function remove(book){
+		for (i = 0; i< myBooks.length; i++){
+			if(myBooks[i].index == book.index){
+				myBooks.splice(i, 1);
+			}
+		}
+		$scope.books = myBooks;
+		$scope.$apply();
 	}
 	
 	$scope.create = function(){

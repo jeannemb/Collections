@@ -48,6 +48,7 @@ app.controller('addMovie', function($scope,$http) {
 	performMovieSerach = function(url){
 	
 		myMovies = [];
+		var index = 0;
 		var searchText = encodeURI($scope.searchText);
 		url = url + searchText;
 		var settings = {
@@ -109,6 +110,8 @@ app.controller('addMovie', function($scope,$http) {
 				movie.wantsToOwn = false;
 				movie.complete = false;
 				movie.wantsToComplete = false;
+				movie.index = index;
+				index++;
 				myMovies.push(movie);
 				
 			});
@@ -123,6 +126,7 @@ app.controller('addMovie', function($scope,$http) {
 	performTvShowSerach = function(url){
 		
 		myMovies = [];
+		var index = 0;
 		var searchText = encodeURI($scope.searchText);
 		url = url + searchText;
 		var settings = {
@@ -183,6 +187,8 @@ app.controller('addMovie', function($scope,$http) {
 				movie.wantsToOwn = false;
 				movie.complete = false;
 				movie.wantsToComplete = false;
+				movie.index = index;
+				index++;
 				myMovies.push(movie);
 				
 			});
@@ -211,20 +217,20 @@ app.controller('addMovie', function($scope,$http) {
 		$scope.$apply();
 	}
 	
-	$scope.addMovie = function(movie){
-		console.log(movie);
+	$scope.addMovie = function(movieToAdd){
+		console.log(movieToAdd);
 		var id = localStorage.getItem("libraryId");
-		if(movie.title != null){
+		if(movieToAdd.title != null){
 			var movie = {
 				moviesLibraryId : id,
-				title : movie.title,
-				upc : movie.upc,
-				actors : movie.actors,
-				owns : movie.owns,
-				wantsToOwn : movie.wantsToOwn,
-				complete : movie.complete,
-				wantsToComplete: movie.wantsToComplete,
-				posterUrl: movie.posterUrl
+				title : movieToAdd.title,
+				upc : movieToAdd.upc,
+				actors : movieToAdd.actors,
+				owns : movieToAdd.owns,
+				wantsToOwn : movieToAdd.wantsToOwn,
+				complete : movieToAdd.complete,
+				wantsToComplete: movieToAdd.wantsToComplete,
+				posterUrl: movieToAdd.posterUrl
 			}
 
 			$http({
@@ -236,6 +242,7 @@ app.controller('addMovie', function($scope,$http) {
 				}
 			}).then(function successCallback(check) {
 				showSuccessSnakbar();
+				remove(movieToAdd);
 				clearFields();
 			}, function errorCallback(check) {
 				showFailSnakbar();
@@ -245,7 +252,15 @@ app.controller('addMovie', function($scope,$http) {
 			showFailSnakbar();
 		}
 	}
-	
+	function remove(movie){
+		for (i = 0; i< myMovies.length; i++){
+			if(myMovies[i].index == movie.index){
+				myMovies.splice(i, 1);
+			}
+		}
+		$scope.movies = myMovies;
+		$scope.$apply();
+	}
 	
 	$scope.create = function(){
 		//$scope.clicked = true;
