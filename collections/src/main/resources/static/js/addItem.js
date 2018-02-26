@@ -2,14 +2,24 @@ var app = angular.module('collection', []);
 
 app.controller('addItem', function($scope,$http) {
 	$scope.libraryName = localStorage.getItem("name");
-	$scope.showAlertDiv = false;
-	$scope.alertSuccess = false;
-	$scope.alertDanger = false;
 	$scope.showManualEntry = true;
 	$scope.responseResult = false;
 	//$scope.LibraryName = localStorage.getItem("libraryId");
 	//$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("type");	
 
+	function showSuccessSnakbar() {
+	    var x = document.getElementById("snackbarGreen")
+	    x.className = "show";
+	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+	}
+	
+	function showFailSnakbar() {
+	    var x = document.getElementById("snackbarRed")
+	    x.className = "show";
+	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+	}
+	
+	
 	$scope.create = function(){
 		//$scope.clicked = true;
 		var id = localStorage.getItem("libraryId");
@@ -33,31 +43,20 @@ app.controller('addItem', function($scope,$http) {
 				}
 			}).then(function successCallback(check) {
 				//$scope.response = check
-				$scope.showAlertDiv = true;
-				$scope.alertSuccess = true
-				$scope.alertDanger = false
+				showSuccessSnakbar();
 				clearFields();
 			}, function errorCallback(check) {
 				//$scope.response = check
-				$scope.showAlertDiv = true;
-				$scope.alertDanger = true
-				$scope.alertSuccess = false
+				showFailSnakbar();
 			});
 
 		}else{
 			//$scope.response = "Title must not be empty";
-			$scope.showAlertDiv = true;
-			$scope.alertDanger = true;
-			$scope.alertSuccess = false;
+			showFailSnakbar();
 		}
 		
 	}
-	
-	$scope.closeAlert = function() {
-		$scope.alertSuccess = false;
-		$scope.alertDanger = false;
 
-	}
 	
 	clearFields = function(){
 		$scope.title = null;

@@ -2,28 +2,32 @@ var app = angular.module('collection', []);
 app.controller('addBook', function($scope,$http) {
 	$scope.search = 'keyword';
 	$scope.libraryName = localStorage.getItem("name");
-	$scope.showAlertDiv = false;
 	$scope.responseResult = false;
 	$scope.showSearchBar = true;
 	$scope.showManualEntry = false;
 	//$scope.LibraryName = localStorage.getItem("libraryId");
 	//$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("type");
 
+	function showSuccessSnakbar() {
+	    var x = document.getElementById("snackbarGreen")
+	    x.className = "show";
+	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+	}
+	
+	function showFailSnakbar() {
+	    var x = document.getElementById("snackbarRed")
+	    x.className = "show";
+	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+	}
 	
 	$scope.lookUpClicked = function(){
 		$scope.showSearchBar = true;
 		$scope.showManualEntry = false;
-		//$scope.responseResult = "LookUp Clicked";
-		$scope.alertSuccess = false;
-		$scope.alertDanger = false;
 	}
 	
 	$scope.manualClicked = function(){
 		$scope.showSearchBar = false;
 		$scope.showManualEntry = true;
-		//$scope.responseResult = "Manual Clicked";
-		$scope.alertSuccess = false;
-		$scope.alertDanger = false;
 	}
 	
 	$scope.searchBook = function(){
@@ -82,10 +86,9 @@ app.controller('addBook', function($scope,$http) {
 				$scope.showSearchBar = true;
 				$scope.showManualEntry = false;
 				$scope.response = "LookUp Clicked";
-				$scope.alertSuccess = false;
-				$scope.alertDanger = false;
 				$scope.$apply();
 			}else {
+				
 				$scope.books = myBooks;
 				$scope.nothingFound = true;
 				$scope.searchResult = false;
@@ -119,22 +122,13 @@ app.controller('addBook', function($scope,$http) {
 					'Content-Type': 'application/json'
 				}
 			}).then(function successCallback(check) {
-				$scope.showAlertDiv = true;
-				$scope.response = check
-				$scope.alertSuccess = true
-				$scope.alertDanger = false
+				showSuccessSnakbar();
 				clearFields();
 			}, function errorCallback(check) {
-				$scope.showAlertDiv = true;
-				$scope.response = check
-				$scope.alertDanger = true
-				$scope.alertSuccess = false
+				showFailSnakbar();
 			});
 		}else{
-			$scope.showAlertDiv = true;
-			$scope.response = "Title must not be empty";
-			$scope.alertDanger = true;
-			$scope.alertSuccess = false;
+			showFailSnakbar();
 		}
 	}
 	
@@ -163,34 +157,19 @@ app.controller('addBook', function($scope,$http) {
 					'Content-Type': 'application/json'
 				}
 			}).then(function successCallback(check) {
-				//$scope.responseResult = check
-				$scope.showAlertDiv = true;
-				$scope.alertSuccess = true;
-				$scope.alertDanger = false;
+
+				showSuccessSnakbar();
 				clearFields();
 			}, function errorCallback(check) {
-				$scope.showAlertDiv = true;
-				$scope.responseResult = true;
-				$scope.responseResult = check
-				$scope.alertDanger = true;
-				$scope.alertSuccess = false;
+				showFailSnakbar();
 			});
 
 		}else{
-			//$scope.responseResult = true;
-			//$scope.responseResult = "Title must not be empty";
-			$scope.showAlertDiv = true;
-			$scope.alertDanger = true;
-			$scope.alertSuccess = false;
+			showFailSnakbar();
 		}
 		
 	}
 	
-	$scope.closeAlert = function() {
-		$scope.alertSuccess = false;
-		$scope.alertDanger = false;
-
-	}
 	
 	clearFields = function(){
 		$scope.title = null;

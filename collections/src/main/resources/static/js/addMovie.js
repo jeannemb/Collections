@@ -3,15 +3,24 @@ var app = angular.module('collection', []);
 app.controller('addMovie', function($scope,$http) {
 	$scope.search = 'movies';
 	$scope.libraryName = localStorage.getItem("name");
-	$scope.showAlertDiv = false;
-	$scope.alertSuccess = false;
-	$scope.alertDanger = false;
 	$scope.responseResult = false;
 	$scope.showSearchBar = true;
 	$scope.showManualEntry = false;
 	var myMovies = [];
 	//$scope.LibraryName = localStorage.getItem("libraryId");
 	//$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("type");
+	
+	function showSuccessSnakbar() {
+	    var x = document.getElementById("snackbarGreen")
+	    x.className = "show";
+	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+	}
+	
+	function showFailSnakbar() {
+	    var x = document.getElementById("snackbarRed")
+	    x.className = "show";
+	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+	}
 	
 	$scope.lookUpClicked =  function(){
 		//$scope.response = "LookUp Clicked";
@@ -187,14 +196,12 @@ app.controller('addMovie', function($scope,$http) {
 	function showResult(){
 		$scope.nothingFound = false;
 		$scope.searchResult = true;
-		  $scope.result = true;
-		  $scope.movies = myMovies;
-		  $scope.showSearchBar = true;
-		  $scope.showManualEntry = false;
-		  $scope.response = "LookUp Clicked";
-		  $scope.alertSuccess = false;
-		  $scope.alertDanger = false;
-		  $scope.$apply();
+		$scope.result = true;
+		$scope.movies = myMovies;
+		$scope.showSearchBar = true;
+		$scope.showManualEntry = false;
+		$scope.response = "LookUp Clicked";
+		$scope.$apply();
 	}
 	
 	function showError(){
@@ -228,22 +235,14 @@ app.controller('addMovie', function($scope,$http) {
 					'Content-Type': 'application/json'
 				}
 			}).then(function successCallback(check) {
-				$scope.showAlertDiv = true;
-				$scope.response = check
-				$scope.alertSuccess = true
-				$scope.alertDanger = false
+				showSuccessSnakbar();
 				clearFields();
 			}, function errorCallback(check) {
-				$scope.showAlertDiv = true;
-				$scope.response = check
-				$scope.alertDanger = true
-				$scope.alertSuccess = false
+				showFailSnakbar();
 			});
 		}else{
-			$scope.showAlertDiv = true;
-			$scope.response = "Title must not be empty";
-			$scope.alertDanger = true;
-			$scope.alertSuccess = false;
+			//$scope.response = "Title must not be empty";
+			showFailSnakbar();
 		}
 	}
 	
@@ -272,31 +271,22 @@ app.controller('addMovie', function($scope,$http) {
 				}
 			}).then(function successCallback(check) {
 				//$scope.response = check;
-				$scope.showAlertDiv = true;
-				$scope.alertSuccess = true
-				$scope.alertDanger = false
+				showSuccessSnakbar();
 				clearFields();
 			}, function errorCallback(check) {
 				//$scope.responseResult = true;
 				//$scope.response = check;
-				$scope.showAlertDiv = true;
-				$scope.alertDanger = true
-				$scope.alertSuccess = false
+				showFailSnakbar();
 			});
 
 		}else{
 			//$scope.response = "Title must not be empty";
-			$scope.showAlertDiv = true;
-			$scope.alertDanger = true;
-			$scope.alertSuccess = false;
+			showFailSnakbar();
 		}
 		
 	}
 	
-	$scope.closeAlert = function() {
-		$scope.alertSuccess = false;
-		$scope.alertDanger = false;
-	}
+
 	
 	clearFields = function(){
 		$scope.title = null;
