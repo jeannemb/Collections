@@ -28,12 +28,6 @@ public class UserController {
     @Autowired
     private SecurityService security;
 	
-	@RequestMapping(value = "/details", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<User> getUserDetails( @RequestParam(required=true, value="username") String username) throws SQLException {
-		User user = userDAO.getUserDetails(username);
-		return new ResponseEntity<>(user, HttpStatus.OK);
-	}
-	
 	@RequestMapping(value = "/currentUser", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<User> getCurrentUser() throws SQLException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -51,10 +45,16 @@ public class UserController {
 		}else{
 			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);	
 		}
-		
-		
-		
-		//TODO: lets re-route to library page and throw a popup at the bottom of the page saying, user successfully logged in
+	}
+	
+	@RequestMapping(value = "/updateUser", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<String> updateUser(@RequestBody User user) throws SQLException {
+		String result = userDAO.updateUser(user);
+		if (result.equals("Successfully updated")){
+			return new ResponseEntity<>(HttpStatus.OK);	
+		}else{
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);	
+		}
 	}
 	
 }

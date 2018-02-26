@@ -13,5 +13,7 @@ public interface UserDAO {
 	User getUserDetails(String username) throws SQLException;
 
 	String createUser(User user) throws SQLException;
+	
+	String updateUser(User user) throws SQLException;
 
 }

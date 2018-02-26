@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.depaul.se491.domain.User;
@@ -69,6 +71,40 @@ public class UserDAOImpl implements UserDAO{
 				return "Unknown error";
 			}
 		}		
+	}
+
+	@Override
+	public String updateUser(User user) throws SQLException {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName();
+		String sql;
+		sql = "SELECT user_id FROM users WHERE username = ?";
+		Long userId = template.queryForObject(sql, new Object[]{username}, Long.class);
+		
+		try{
+			if(user.getEmail() !=null){
+				sql = "UPDATE users SET email = ?, username = ? WHERE userId = ?;";
+				int result = template.update(sql, new Object[]{user.getEmail(), user.getEmail(), userId});
+			}
+			if(user.getFirstName() !=null){
+				sql = "UPDATE users SET first_name = ? WHERE userId = ?;";
+				int result = template.update(sql, new Object[]{user.getFirstName(), userId});
+			}
+			if(user.getLastName() !=null){
+				sql = "UPDATE users SET last_name = ? WHERE userId = ?;";
+				int result = template.update(sql, new Object[]{user.getLastName(), userId});
+			}
+			if(user.getPassword() !=null){
+				String password = new BCryptPasswordEncoder().encode(user.getPassword());
+				sql = "UPDATE users SET password = ? WHERE userId = ?;";
+				int result = template.update(sql, new Object[]{password, userId});
+			}
+				
+			return "Successfully updated";
+		}
+		catch(Exception e){
+			return "Unkown error";
+		}
 	}
 
 }
