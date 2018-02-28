@@ -82,6 +82,29 @@ app.controller('setting', function($scope,$http) {
     	 } 
      }
 	 
+	 $scope.deleteAllItems = function(library){
+    	 console.log(library);
+    	 var r = confirm("All Items within the library will be deleted. Are you sure you wnat to continue?");
+    	 if (r == true) {
+    		 
+    		 $.ajax({
+    			 type : "DELETE",
+    	    	 url : "/manage/deleteAllItems?libraryId=" + library.libraryId,
+    	    	 success : function(result) {
+    	    	    console.log("Success");
+    	    	    reloadData();
+    	    	    $scope.libs = libs;
+    	    	    $scope.$apply();
+    	    	 },
+    	    	 error : function(e) {
+    	    	    console.log("FAILURE");
+    	    	 }
+    	     })
+         } else {
+    	     
+    	 } 
+     }
+	 
      function reloadData(){
      	libs = [];
      	index = 1;

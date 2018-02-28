@@ -222,6 +222,7 @@
       							<th>Library Name</th>
       							<th>Library Type</th>
       							<th>Edit Library</th>
+      							<th>Delete All Items</th>
     						</tr>
     						
   						</thead>
@@ -236,6 +237,9 @@
       							<td>{{lib.type}}</td>
      							<td>
 	     							<button type="button" class="btn btn-primary btn-sm" ng-click="editLibrary(lib)">Edit Library</button>
+     							</td>
+     							<td>
+	     							<button type="button" class="btn btn-danger btn-sm" ng-click="deleteAllItems(lib)">Delete All Items</button>
      							</td>
     						</tr>
     					</tbody>
