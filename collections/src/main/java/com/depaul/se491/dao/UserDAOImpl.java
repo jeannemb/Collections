@@ -80,23 +80,29 @@ public class UserDAOImpl implements UserDAO{
 		String sql;
 		sql = "SELECT user_id FROM users WHERE username = ?";
 		Long userId = template.queryForObject(sql, new Object[]{username}, Long.class);
-		
+		System.out.println(username);
+		System.out.println(userId);
+		System.out.println(user.toString());
 		try{
 			if(user.getEmail() !=null){
-				sql = "UPDATE users SET email = ?, username = ? WHERE userId = ?;";
+				System.out.println("Email");
+				sql = "UPDATE users SET email = ?, username = ? WHERE user_id = ?;";
 				int result = template.update(sql, new Object[]{user.getEmail(), user.getEmail(), userId});
 			}
 			if(user.getFirstName() !=null){
-				sql = "UPDATE users SET first_name = ? WHERE userId = ?;";
+				System.out.println("FirstName");
+				sql = "UPDATE users SET first_name = ? WHERE user_id = ?;";
 				int result = template.update(sql, new Object[]{user.getFirstName(), userId});
 			}
 			if(user.getLastName() !=null){
-				sql = "UPDATE users SET last_name = ? WHERE userId = ?;";
+				System.out.println("LastName");
+				sql = "UPDATE users SET last_name = ? WHERE user_id = ?;";
 				int result = template.update(sql, new Object[]{user.getLastName(), userId});
 			}
 			if(user.getPassword() !=null){
+				System.out.println("Password");
 				String password = new BCryptPasswordEncoder().encode(user.getPassword());
-				sql = "UPDATE users SET password = ? WHERE userId = ?;";
+				sql = "UPDATE users SET password = ? WHERE user_id = ?;";
 				int result = template.update(sql, new Object[]{password, userId});
 			}
 				

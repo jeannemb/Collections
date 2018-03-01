@@ -1,7 +1,9 @@
 var app = angular.module('collection', []);
 app.controller('setting', function($scope,$http) {
 	var libs = [];
-	var user;
+	var currentUser;
+	var first;
+	var last;
 	$scope.init = function () {
 		var index = 1;
 		$scope.accountSetting  = true;
@@ -29,14 +31,16 @@ app.controller('setting', function($scope,$http) {
 			url: "/user/currentUser"
 		}).then(function successCallback(response) {
 				console.log(response.data);
-            	user = new Object();
-            	user.userId = response.data.userId;
-            	user.firstName = response.data.firstName;
-            	user.lastName = response.data.lastName;
-            	user.email = response.data.email;
-            	user.password = response.data.password;
-            	console.log(user);
-            	$scope.user = user;
+            	currentUser = new Object();
+            	currentUser.userId = response.data.userId;
+            	currentUser.firstName = response.data.firstName;
+            	first = response.data.firstName;
+            	currentUser.lastName = response.data.lastName;
+            	last = response.data.lastName;
+            	currentUser.email = response.data.email;
+            	currentUser.password = response.data.password;
+            	console.log(currentUser);
+            	$scope.user = currentUser;
 		}, function errorCallback(response) {
 			$scope.statusResult = true;
 			$scope.status = response.statusText;
@@ -125,32 +129,136 @@ app.controller('setting', function($scope,$http) {
  			$scope.statusResult = true;
  			$scope.status = response.statusText;
  		});
+  		
+  		$http({
+			method : "GET",
+			url: "/user/currentUser"
+		}).then(function successCallback(response) {
+				console.log(response.data);
+            	currentUser = new Object();
+            	currentUser.userId = response.data.userId;
+            	currentUser.firstName = response.data.firstName;
+            	first = response.data.firstName;
+            	currentUser.lastName = response.data.lastName;
+            	last = response.data.lastName;
+            	currentUser.email = response.data.email;
+            	currentUser.password = response.data.password;
+            	console.log(currentUser);
+            	$scope.user = currentUser;
+		}, function errorCallback(response) {
+			$scope.statusResult = true;
+			$scope.status = response.statusText;
+		});
       }
      
      $scope.editLibrary  = function(lib){
     	 console.log(lib);
      }
 	 
-     $scope.updateName  = function(user){
-    	 console.log(user);
+     $scope.updateName  = function(firstName,lastName){
+    	 console.log(currentUser);
+    	 console.log(firstName);
+    	 console.log(lastName);
+    	 if(first != firstName || last != lastName){
+    		first = firstName;
+    		last = lastName;
+ 			var updatedUser = {
+					firstName : firstName,
+					lastName : lastName,
+					email : null,
+					password: null
+			}
+ 			updateInfo(updatedUser,"name");
+    	 }else{
+    		showFailSnakbar();
+    	 }
+    	 
      }
      
      $scope.updateEmail  = function(user, newEmail, confirmEmail){
-    	 console.log(user);
-    	 console.log(newEmail);
-    	 console.log(confirmEmail);
+    	 if(newEmail != null || confirmEmail != null){
+    		 if(newEmail == confirmEmail){
+    	    	 console.log(user);
+    	    	 console.log(newEmail);
+    	    	 console.log(confirmEmail);
+    	    	 var updatedUser = {
+    					firstName : null,
+    					lastName : null,
+    					email : newEmail,
+    					password: null
+    	    	 }
+    	    	 updateInfo(updatedUser,"Email Address");
+    		 }else{
+    			 showFailSnakbar();
+    		 }
+    	 }else{
+    		 showFailSnakbar();
+    	 }
      }
      
-     $scope.updatePassword = function(user, newPassword, confirmPassword){
-    	 console.log(user);
-    	 console.log(newPassword);
-    	 console.log(confirmPassword);
+     $scope.updatePassword = function(user, newPassword, confirmPassword){ 
+    	 if(newPassword != null || confirmPassword != null){
+    		 if(newPassword == confirmPassword){
+    	    	 console.log(user);
+    	    	 console.log(newPassword);
+    	    	 console.log(confirmPassword);
+    	    	 var updatedUser = {
+     					firstName : null,
+     					lastName : null,
+     					email : null,
+     					password: newPassword
+     	    	 }
+    	    	 updateInfo(updatedUser,"Password");
+    		 }else{
+    			 showFailSnakbar();
+    		 }
+    	 }else{
+    		 showFailSnakbar();
+    	 }
      }
      
      $scope.deleteAccount = function(user){
     	 console.log("Delete Account");
     	 console.log(user);
+    	 //showSuccessSnakbar("");
      }
+     
+     function updateInfo(user,message){
+    	 
+    	 $http({
+				method: "POST",
+				url: "/user/updateUser",
+				data : angular.toJson(user),
+				headers : {
+					'Content-Type': 'application/json'
+				}
+			}).then(_success, _error);
+			
+			
+			function _success(response){
+				showSuccessSnakbar(message);
+	    	    reloadData();
+	    	    $scope.$apply();
+			}
+			
+			function _error(response){
+				showFailSnakbar();
+			}
+    	 
+     }
+     
+     function showSuccessSnakbar(message) {
+    	$scope.message = message;
+ 	    var x = document.getElementById("snackbarGreen")
+ 	    x.className = "show";
+ 	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+ 	}
+ 	
+ 	function showFailSnakbar() {
+ 	    var x = document.getElementById("snackbarRed")
+ 	    x.className = "show";
+ 	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+ 	}
      
 	
 });

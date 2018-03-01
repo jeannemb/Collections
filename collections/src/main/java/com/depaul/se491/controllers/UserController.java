@@ -50,6 +50,7 @@ public class UserController {
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<String> updateUser(@RequestBody User user) throws SQLException {
 		String result = userDAO.updateUser(user);
+		System.out.println(result);
 		if (result.equals("Successfully updated")){
 			return new ResponseEntity<>(HttpStatus.OK);	
 		}else{

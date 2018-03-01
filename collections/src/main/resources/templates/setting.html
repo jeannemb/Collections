@@ -96,7 +96,69 @@
 			.aPanel {
   				margin: 1em;
 				}
-  
+#snackbarGreen {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #239B56;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+				#snackbarRed {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #E74C3C;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbarGreen.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbarRed.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}  
   		</style>  
 
 </head>
@@ -130,11 +192,13 @@
           </p>
           
          <h1><span class="glyphicon glyphicon-cog"></span> Setting</h1>
-          
          <ul class="nav nav-tabs" style = "margin-bottom: 10px;">
   			<li class="nav-item active show" style = "width: 50%;"><a align="center" class="nav-link active show" data-toggle="tab" ng-model="account" ng-click="accountClicked()">Account Setting</a></li>
   			<li class="nav-item" style = "width: 50%;"><a align="center" class="nav-link" data-toggle="tab" ng-model="library" ng-click="libraryClicked()">Library Setting</a></li>
  		</ul>
+     
+            <div id="snackbarGreen"><strong>Well done!</strong> You successfully updated your {{message}}.</div>
+			<div id="snackbarRed"><strong>Oh snap!</strong> Change a few things up and try updating again.</div>
      
      	<div ng-show = "accountSetting">
     	<div class="panel panel-default">	     
@@ -149,7 +213,7 @@
       						<label for="lastName">Last Name</label>
       						<input type="text" class="form-control input-sm" id="lastName" ng-required = "true" ng-model="user.lastName" style = "width: 80%;" placeholder="Last Name" value="{{user.lastName}}"/>
     					</div>
-    					<button type="button" class="btn btn-primary" ng-click="updateName(user)">Save</button>
+    					<button type="button" class="btn btn-primary" ng-click="updateName(user.firstName,user.lastName)">Save</button>
       				  </fieldset>
       				</form>
       			</div>
@@ -162,14 +226,14 @@
       				<form>
       				  <fieldset>
       				  	<div class="form-group">
-      				  	<label for="currentEmail">Current Email address</label>
-      						<input type="email" class="form-control input-sm" id="currentEmail" ng-required = "true" ng-model="user.email" style = "width: 80%;" placeholder="Current Password" value="{{user.email}}"/>
-     						<label for="newEmail">New Email address</label>
-      						<input type="email" class="form-control input-sm" id="newEmail" ng-required = "true" ng-model="newEmail" style = "width: 80%;" placeholder="Email"/>
-      						<label for="confirmEmail">Confirm Email address</label>
-      						<input type="email" class="form-control input-sm" id="confirmEmail" ng-required = "true" ng-model="confirmEmail" style = "width: 80%;" placeholder="Confirm Email"/>
+      				  		<label for="currentEmail">Current Email Address</label>
+      						<input type="email" class="form-control input-sm" id="currentEmail" ng-required = "true" ng-model="user.email" style = "width: 80%;" placeholder="Current Email Address" disabled = "true" value="{{user.email}}"/>
+     						<label for="newEmail">New Email Address</label>
+      						<input type="email" class="form-control input-sm" id="newEmail" ng-required = "true" ng-model="newEmail" style = "width: 80%;" placeholder="New Email"/>
+      						<label for="confirmEmail">Confirm Email Address</label>
+      						<input type="email" class="form-control input-sm" id="confirmEmail" ng-required = "true" ng-model="confirmNewEmail" style = "width: 80%;" placeholder="Confirm New Email"/>
     					</div>
-    					<button type="button" class="btn btn-primary" ng-click="updateEmail(user, newEmail, confirmEmail)">Save</button>
+    					<button type="button" class="btn btn-primary" ng-click="updateEmail(user, newEmail, confirmNewEmail)">Save</button>
       				  </fieldset>
       				</form>
       			</div>
@@ -183,12 +247,10 @@
 					<form>
       				  <fieldset>
       				  	<div class="form-group">
-     						<label for="currentPassword">Current Password</label>
-      						<input type="password" class="form-control input-sm" id="currentPassword" ng-required = "true" ng-model="user.password" style = "width: 80%;" placeholder="Current Password" value="{{user.password}}"/>
-      						<label for="newPassword">Current Password</label>
+      						<label for="newPassword">New Password</label>
       						<input type="password" class="form-control input-sm" id="newPassword" ng-required = "true" ng-model="newPassword" style = "width: 80%;" placeholder="New Password"/>
-      						<label for="confirmPassword">Confirm Email address</label>
-      						<input type="password" class="form-control input-sm" id="confirmPassword" ng-required = "true" ng-model="confirmPassword" style = "width: 80%;" placeholder="Confirm Password"/>
+      						<label for="confirmPassword">Confirm New Password</label>
+      						<input type="password" class="form-control input-sm" id="confirmPassword" ng-required = "true" ng-model="confirmPassword" style = "width: 80%;" placeholder="Confirm New Password"/>
     					</div>
     					<button type="button" class="btn btn-primary" ng-click="updatePassword(user, newPassword, confirmPassword)">Save</button>
       				  </fieldset>
@@ -210,7 +272,7 @@
  		</div>
  		
  		
- 		<div ng-show = "librarySetting">
+ 		<div ng-show = "librarySetting" class="ng-cloak">
     	<div class="panel panel-default">	     
       		<div class="panel-heading"><a data-toggle="collapse" href="#4" style="color:#ffffff">Edit Library</a></div>
        		<div id="4" class="panel-collapse collapse">		
