@@ -86,7 +86,7 @@ public class ItemDAOImpl implements ItemDAO{
 			item.setWantsToOwn(rs.getBoolean("wants_to_own"));
 			item.setComplete(rs.getBoolean("complete"));
 			item.setWantsToComplete(rs.getBoolean("wants_to_complete"));
-
+			item.setPosterUrl(rs.getString("poster_url"));
 			return item;
 		}
 		
@@ -150,11 +150,11 @@ public class ItemDAOImpl implements ItemDAO{
 	public String addGenericItemInLibrary(Item item) throws SQLException{
 		String sql;
 		try{
-		sql = "INSERT INTO generic_items (generic_library_id, title, description, owns, wants_to_own, complete, wants_to_complete) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		sql = "INSERT INTO generic_items (generic_library_id, title, description, owns, wants_to_own, complete, wants_to_complete, poster_url) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = template.update(sql, new Object[]{item.getGenericLibraryId(),item.getTitle(),
 				item.getDescription(),
-				item.getOwns(),item.getWantsToOwn(),item.getComplete(),item.getWantsToComplete()});
+				item.getOwns(),item.getWantsToOwn(),item.getComplete(),item.getWantsToComplete(),item.getPosterUrl()});
 		System.out.println(result);
 		return "SUCCESS";
 		}catch(Exception e){

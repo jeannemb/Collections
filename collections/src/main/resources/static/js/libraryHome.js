@@ -87,6 +87,11 @@ app.controller('navigationController', function($scope,$http) {
                 	itemGeneric.wantsToOwn = element.wantsToOwn;
                 	itemGeneric.complete = element.complete;
                 	itemGeneric.wantsToComplete = element.wantsToComplete;
+                	if (element.posterUrl == null){
+                		itemGeneric.posterUrl = "/images/placeholderImageItem.png";
+                	}else{
+                		itemGeneric.posterUrl = element.posterUrl;	
+                	}
                 	itemGeneric.type = type;
                 	items.push(itemGeneric);
                 	//libItems.push(itemGeneric);
