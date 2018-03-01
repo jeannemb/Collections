@@ -174,4 +174,15 @@ public class LibraryController {
 		}
     }
 	
+	@RequestMapping(value = "/updateLibrary", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<String> updateLibrary(@RequestBody Library library) throws SQLException {
+		String result = libraryDAO.updateLibrary(library);
+		System.out.println(result);
+		if (result.equals("Successfully updated")){
+			return new ResponseEntity<>(HttpStatus.OK);	
+		}else{
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);	
+		}
+	}
+	
 }

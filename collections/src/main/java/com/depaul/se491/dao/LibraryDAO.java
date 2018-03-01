@@ -17,5 +17,7 @@ public interface LibraryDAO {
 	// new Mohammed
 	String getLibraryTypeByLibraryId(Long libraryId) throws SQLException;
 	String deleteLibrary(Long libraryId) throws SQLException;
+	
+	String updateLibrary(Library library) throws SQLException;
 
 }

@@ -125,6 +125,8 @@ app.controller('setting', function($scope,$http) {
              	libs.push(library);
              	index++;
              });
+             $scope.libs = libs;
+             
  		}, function errorCallback(response) {
  			$scope.statusResult = true;
  			$scope.status = response.statusText;
@@ -152,7 +154,34 @@ app.controller('setting', function($scope,$http) {
       }
      
      $scope.editLibrary  = function(lib){
-    	 console.log(lib);
+    	 
+    	 var updatedLibrary = {
+    			libraryId : lib.libraryId,
+    			name : lib.name,
+				type : lib.type
+			}
+    	 var r = confirm("Are you sure you wnat to update the library?");
+    	 if (r == true) {
+    	 $http({
+				method: "POST",
+				url: "/manage/updateLibrary",
+				data : angular.toJson(updatedLibrary),
+				headers : {
+					'Content-Type': 'application/json'
+				}
+			}).then(_success, _error);
+			
+			
+			function _success(response){
+				showSuccessSnakbar(lib.name+"Library");
+	    	    reloadData();
+	    	    $scope.$apply();
+			}
+			
+			function _error(response){
+				showFailSnakbar();
+			}
+    	 }
      }
 	 
      $scope.updateName  = function(firstName,lastName){

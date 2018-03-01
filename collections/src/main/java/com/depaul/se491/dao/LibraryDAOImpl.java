@@ -107,5 +107,22 @@ public class LibraryDAOImpl implements LibraryDAO{
 			return "Deletion failed"+e;
 		}		
 	}
+	
+	@Override
+	public String updateLibrary(Library library) throws SQLException {
+		String sql;
+		System.out.println(library.toString());
+		try{
+			if(library.getName() !=null){
+				System.out.println("Library");
+				sql = "UPDATE libraries SET name = ? WHERE library_id = ?;";
+				int result = template.update(sql, new Object[]{library.getName(), library.getLibraryId()});
+			}	
+			return "Successfully updated";
+		}
+		catch(Exception e){
+			return "Unkown error";
+		}
+	}
 
 }
