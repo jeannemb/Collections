@@ -4,9 +4,22 @@ app.controller('setting', function($scope,$http) {
 	var currentUser;
 	var first;
 	var last;
-	$scope.init = function () {
+	
+	$scope.initAccount = function () {
+		$scope.librarySetting = false;
+		$scope.accountSetting = true;
+		init();
+	}
+	
+	$scope.initLibrary = function(){
+		$scope.accountSetting = false;
+		$scope.librarySetting = true;
+		init();
+	}
+	
+	function init() {
 		var index = 1;
-		$scope.accountSetting  = true;
+		//$scope.accountSetting  = true;
 		$http({
 			method : "GET",
 			url: "/manage/library"

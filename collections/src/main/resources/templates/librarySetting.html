@@ -164,7 +164,7 @@
 </head>
 <body>
 <div th:include = "index :: header"></div>
-<div class="container-fluid" ng-app="collection" ng-controller="setting" data-ng-init="init()">
+<div class="container-fluid" ng-app="collection" ng-controller="setting" data-ng-init="initLibrary()">
     <div class="row row-offcanvas row-offcanvas-left">
   	<!-- Left Navigation Bar Starts Here (First Column) -->
     <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" style = "height: 100%; background-color:#303030">
@@ -177,7 +177,8 @@
   						<li style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-home"></span> Collections</a></li>
   						<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
   						<li><a href="" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
-  						<li class="active" style = "width: 100%;"><a href="#" class="list-group-item list-group-item-action active"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
+  						<li class="active" style = "width: 100%;"><a href="librarySetting" class="list-group-item list-group-item-action active"> <span class="glyphicon glyphicon-cog"></span> Library Setting</a></li>
+  						<li><a href="accountSetting" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Account Setting</a></li>
   						<li><a href="/logout" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
   					</ul>
   				</div>
@@ -193,14 +194,14 @@
           
          <h1><span class="glyphicon glyphicon-cog"></span> Setting</h1>
          <ul class="nav nav-tabs" style = "margin-bottom: 10px;">
-  			<li class="nav-item active show" style = "width: 50%;"><a align="center" class="nav-link active show" data-toggle="tab" ng-model="account" ng-click="accountClicked()">Account Setting</a></li>
-  			<li class="nav-item" style = "width: 50%;"><a align="center" class="nav-link" data-toggle="tab" ng-model="library" ng-click="libraryClicked()">Library Setting</a></li>
+  			<li class="nav-item" style = "width: 50%;"><a align="center" class="nav-link active show" data-toggle="tab" ng-model="account" ng-click="accountClicked()">Account Setting</a></li>
+  			<li class="nav-item active show" style = "width: 50%;"><a align="center" class="nav-link active show" data-toggle="tab" ng-model="library" ng-click="libraryClicked()">Library Setting</a></li>
  		</ul>
      
             <div id="snackbarGreen"><strong>Well done!</strong> You successfully updated your {{message}}.</div>
 			<div id="snackbarRed"><strong>Oh snap!</strong> Change a few things up and try updating again.</div>
      
-     	<div ng-show = "accountSetting">
+     	<div ng-show = "accountSetting" class="ng-cloak">
     	<div class="panel panel-default">	     
       		<div class="panel-heading"><a data-toggle="collapse" href="#0" style="color:#ffffff">Change Name</a></div>
        		<div id="0" class="panel-collapse collapse">		

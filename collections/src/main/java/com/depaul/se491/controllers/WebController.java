@@ -62,8 +62,13 @@ public class WebController {
 	   return "addGeneric";
 	}
 	
-	@RequestMapping(value="/setting",method = RequestMethod.GET)
-	public String setting(){
-	   return "setting";
+	@RequestMapping(value="/accountSetting",method = RequestMethod.GET)
+	public String accountSetting(){
+	   return "accountSetting";
+	}
+	
+	@RequestMapping(value="/librarySetting",method = RequestMethod.GET)
+	public String librarySetting(){
+	   return "librarySetting";
 	}
 }

@@ -1,0 +1,357 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<title>Collectr</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.css"></link>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+	<script src="/js/index.js"></script>
+	<script src="/js/setting.js"></script>
+
+	<style>
+    		/*
+ 			* Style tweaks
+ 			* --------------------------------------------------
+ 			*/
+			footer {
+ 				padding-left: 15px;
+  				padding-right: 15px;
+			}
+
+			/*
+			 * Off Canvas
+			 * --------------------------------------------------
+			 */
+			@media screen and (max-width: 768px) {
+			  .row-offcanvas {
+			    position: relative;
+			    -webkit-transition: all 0.25s ease-out;
+			    -moz-transition: all 0.25s ease-out;
+			    transition: all 0.25s ease-out;
+			  }
+			
+			  .row-offcanvas-left
+			  .sidebar-offcanvas {
+			    left: -33%;
+			  }
+			
+			  .row-offcanvas-left.active {
+			    left: 33%;
+			  }
+			
+			  .sidebar-offcanvas {
+			    position: absolute;
+			    top: 0;
+			    width: 33%;
+			    margin-left: 10px;
+			  }
+			}
+			
+			
+			/* Sidebar navigation */
+			.nav-sidebar {
+			  margin-right: -15px;
+			  margin-bottom: 20px;
+			  margin-left: -15px;
+			}
+			.nav-sidebar > li > a {
+			  padding-right: 20px;
+			  padding-left: 20px;
+			}
+			.nav-sidebar > .active > a {
+			  color: #fff;
+			  background-color: #428bca;
+			}
+			
+			/*
+			 * Main content
+			 */
+			
+			.main {
+			  padding: 20px;
+			}
+			@media (min-width: 768px) {
+			  .main {
+			    padding-right: 40px;
+			    padding-left: 40px;
+			  }
+			}
+			.main .page-header {
+			  margin-top: 0;
+			}
+    		a.adisabled {
+  				cursor: not-allowed;
+  				opacity: .65;
+			}
+
+			a.adisabled:hover { text-decoration: none; }
+			a.adisabled:focus { text-decoration: none; }
+			a.adisabled:active { text-decoration: none; }
+
+			.aPanel {
+  				margin: 1em;
+				}
+#snackbarGreen {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #239B56;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+				#snackbarRed {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #E74C3C;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbarGreen.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbarRed.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}  
+  		</style>  
+
+</head>
+<body>
+<div th:include = "index :: header"></div>
+<div class="container-fluid" ng-app="collection" ng-controller="setting" data-ng-init="initAccount()">
+    <div class="row row-offcanvas row-offcanvas-left">
+  	<!-- Left Navigation Bar Starts Here (First Column) -->
+    <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" style = "height: 100%; background-color:#303030">
+        <ul class="nav nav-sidebar">
+       		<!-- SECOND BLOCK TO DISPALY NAVIGTION OPTIONS -->
+    		<div class = "jumbotron" style = "margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; padding-top:5px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
+    			<div class="list-group" style = "width: 100%;">
+    				<h4 style= "text-align: center">   Menu   </h4>
+    				<ul class="nav nav-pills nav-stacked">
+  						<li style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-home"></span> Collections</a></li>
+  						<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
+  						<li><a href="" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
+  						<li><a href="librarySetting" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Library Setting</a></li>
+  						<li class="active" style = "width: 100%;"><a href="accountSetting" class="list-group-item list-group-item-action active"> <span class="glyphicon glyphicon-cog"></span> Account Setting</a></li>
+  						<li><a href="/logout" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  					</ul>
+  				</div>
+  			</div>
+  		</ul>
+    </div>
+   <!-- Left Navigation Bar Ends Here (First Column) -->
+   <!-- Article View To Display Data Start Here -->
+   <div class="col-sm-9 col-md-10 main">
+          <p class="visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
+          </p>
+          
+         <h1><span class="glyphicon glyphicon-cog"></span> Setting</h1>
+         <ul class="nav nav-tabs" style = "margin-bottom: 10px;">
+  			<li class="nav-item active show" style = "width: 50%;"><a align="center" class="nav-link active show" data-toggle="tab" ng-model="account" ng-click="accountClicked()">Account Setting</a></li>
+  			<li class="nav-item" style = "width: 50%;"><a align="center" class="nav-link" data-toggle="tab" ng-model="library" ng-click="libraryClicked()">Library Setting</a></li>
+ 		</ul>
+     
+            <div id="snackbarGreen"><strong>Well done!</strong> You successfully updated your {{message}}.</div>
+			<div id="snackbarRed"><strong>Oh snap!</strong> Change a few things up and try updating again.</div>
+     
+     	<div ng-show = "accountSetting" class="ng-cloak">
+    	<div class="panel panel-default">	     
+      		<div class="panel-heading"><a data-toggle="collapse" href="#0" style="color:#ffffff">Change Name</a></div>
+       		<div id="0" class="panel-collapse collapse">		
+      			<div class="panel-body">
+      				<form>
+      				  <fieldset>
+      				  	<div class="form-group">
+      						<label for="firstName">First Name</label>
+      						<input type="text" class="form-control input-sm" id="firstName" ng-required = "true" ng-model="user.firstName"  style = "width: 80%;" placeholder="First Name" value="{{user.firstName}}"/>
+      						<label for="lastName">Last Name</label>
+      						<input type="text" class="form-control input-sm" id="lastName" ng-required = "true" ng-model="user.lastName" style = "width: 80%;" placeholder="Last Name" value="{{user.lastName}}"/>
+    					</div>
+    					<button type="button" class="btn btn-primary" ng-click="updateName(user.firstName,user.lastName)">Save</button>
+      				  </fieldset>
+      				</form>
+      			</div>
+			</div>
+      	</div>
+      	<div class="panel panel-default">    
+      		<div class="panel-heading"><a data-toggle="collapse" href="#1" style="color:#ffffff">Change Email</a></div>
+       		<div id="1" class="panel-collapse collapse">		
+      			<div class="panel-body">
+      				<form>
+      				  <fieldset>
+      				  	<div class="form-group">
+      				  		<label for="currentEmail">Current Email Address</label>
+      						<input type="email" class="form-control input-sm" id="currentEmail" ng-required = "true" ng-model="user.email" style = "width: 80%;" placeholder="Current Email Address" disabled = "true" value="{{user.email}}"/>
+     						<label for="newEmail">New Email Address</label>
+      						<input type="email" class="form-control input-sm" id="newEmail" ng-required = "true" ng-model="newEmail" style = "width: 80%;" placeholder="New Email"/>
+      						<label for="confirmEmail">Confirm Email Address</label>
+      						<input type="email" class="form-control input-sm" id="confirmEmail" ng-required = "true" ng-model="confirmNewEmail" style = "width: 80%;" placeholder="Confirm New Email"/>
+    					</div>
+    					<button type="button" class="btn btn-primary" ng-click="updateEmail(user, newEmail, confirmNewEmail)">Save</button>
+      				  </fieldset>
+      				</form>
+      			</div>
+			</div>
+      	</div>
+      	
+      	<div class="panel panel-default">    
+      		<div class="panel-heading"><a data-toggle="collapse" href="#2" style="color:#ffffff">Change Password</a></div>
+       		<div id="2" class="panel-collapse collapse">		
+      			<div class="panel-body">
+					<form>
+      				  <fieldset>
+      				  	<div class="form-group">
+      						<label for="newPassword">New Password</label>
+      						<input type="password" class="form-control input-sm" id="newPassword" ng-required = "true" ng-model="newPassword" style = "width: 80%;" placeholder="New Password"/>
+      						<label for="confirmPassword">Confirm New Password</label>
+      						<input type="password" class="form-control input-sm" id="confirmPassword" ng-required = "true" ng-model="confirmPassword" style = "width: 80%;" placeholder="Confirm New Password"/>
+    					</div>
+    					<button type="button" class="btn btn-primary" ng-click="updatePassword(user, newPassword, confirmPassword)">Save</button>
+      				  </fieldset>
+      				</form>
+      			</div>
+			</div>
+      	</div>
+      	
+      	 <div class="panel panel-default">    
+      		<div class="panel-heading"><a data-toggle="collapse" href="#3" style="color:#ffffff">Delete Account</a></div>
+       		<div id="3" class="panel-collapse collapse">		
+      			<div class="panel-body">
+      				<h3><strong>Delete Account will delete all your information...</strong></h3>
+					<button type="button" class="btn btn-danger" ng-click="deleteAccount(user)">Delete Account</button>
+      			</div>
+			</div>
+      	</div>
+      	
+ 		</div>
+ 		
+ 		
+ 		<div ng-show = "librarySetting" class="ng-cloak">
+    	<div class="panel panel-default">	     
+      		<div class="panel-heading"><a data-toggle="collapse" href="#4" style="color:#ffffff">Edit Library</a></div>
+       		<div id="4" class="panel-collapse collapse">		
+      			<div class="panel-body">
+					<table class="table info table-striped table-hover">
+						<thead>
+    						<tr>
+      							<th>#</th>
+      							<th>Library Name</th>
+      							<th>Library Type</th>
+      							<th>Edit Library</th>
+      							<th>Delete All Items</th>
+    						</tr>
+    						
+  						</thead>
+  						<tbody ng-repeat="lib in libs">
+    						<tr>
+      							<td>{{lib.index}}</td>
+      							<td>
+      							<form>
+      								<input type="text" class="form-control input-sm" ng-required = "true" ng-model="lib.name"></input>
+      							</form>
+      							</td>
+      							<td>{{lib.type}}</td>
+     							<td>
+	     							<button type="button" class="btn btn-primary btn-sm" ng-click="editLibrary(lib)">Edit Library</button>
+     							</td>
+     							<td>
+	     							<button type="button" class="btn btn-danger btn-sm" ng-click="deleteAllItems(lib)">Delete All Items</button>
+     							</td>
+    						</tr>
+    					</tbody>
+					</table> 
+      			</div>
+			</div>
+      	</div>
+      	<div class="panel panel-default">    
+      		<div class="panel-heading"><a data-toggle="collapse" href="#5" style="color:#ffffff">Delete Library</a></div>
+       		<div id="5" class="panel-collapse collapse">		
+      			<div class="panel-body">
+					<table class="table danger table-striped table-hover">
+						<thead>
+    						<tr>
+      							<th>#</th>
+      							<th>Library Name</th>
+      							<th>Library Type</th>
+      							<th>Delete Library</th>
+    						</tr>
+    						
+  						</thead>
+  						<tbody ng-repeat="lib in libs">
+    						<tr>
+      							<td>{{lib.index}}</td>
+      							<td>{{lib.name}}</td>
+      							<td>{{lib.type}}</td>
+     							<td><button type="button" class="btn btn-danger btn-sm" ng-click="deleteLibrary(lib)">Delete Library</button></td>
+    						</tr>
+    					</tbody>
+					</table> 
+      			</div>
+			</div>
+      	</div>
+      	
+ 		</div>
+ 		
+</div>
+</div>
+</div>
+<footer class="footer" style = "background-color:#303030">
+  	<div> <p> © 2018 - Collectr </p></div>
+  	<div><p> Developers: 
+  	<a href="">Jeanne Boggs</a>, 
+  	<a href="">Mark Wlodarski</a>, 
+  	<a href="https://www.linkedin.com/in/meharbi88/">Mohammed Alharbi</a>
+  	</p>
+  	</div>
+</footer>
+
+</body>
+
+</html>
