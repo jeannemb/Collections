@@ -9,7 +9,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-
+	<script src="https://unpkg.com/scandit-sdk"></script>
 	<script src="/js/index.js"></script>
 	<script src="/js/addItem.js"></script>
 	<style>
@@ -178,7 +178,8 @@
   						<li style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-home"></span> Collections</a></li>
   						<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
   						<li class="active" style = "width: 100%;"><a href="" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
-  						<li><a href="setting" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
+  						<li><a href="librarySetting" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Library Setting</a></li>
+  						<li><a href="accountSetting" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Account Setting</a></li>
   						<li><a href="/logout" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
   					</ul>
   				</div>
@@ -199,10 +200,49 @@
 	
 	<h2>Add Generic to <i ng-bind="libraryName"><strong></strong></i></h2>
 		<ul class="nav nav-tabs">
-  			<li class="nav-item active show" style = "width: 50%;"><a align="center" class="nav-link active show" data-toggle="tab">Manual Entry</a></li>
+  			<li class="nav-item active show" style = "width: 50%;"><a align="center" class="nav-link active show" data-toggle="tab" ng-model="lookUp" ng-click="lookUpClicked()">Look up</a></li>
+  			<li class="nav-item" style = "width: 50%;"><a align="center" class="nav-link" data-toggle="tab" ng-model="manual" ng-click="manualClicked()">Manual Entry</a></li>
  		</ul>
  		
-	<div ng-show = "showManualEntry" class="form-group">
+ 		
+	<div ng-show = "showSearchBar">
+	<!-- Search Bar -->
+	<h2 style = "text-align: center">Look Up</h2>
+	<div>Search By UPC OR EAN:</div>
+    <div style = "margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 5px; padding-top:0px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
+    	<button class="btn btn-info btn-sm" type="button" ng-click="onScanClick()">
+    		<span class="glyphicon glyphicon-barcode ng-cloak"> Scan</span>
+    	</button>
+    </div>
+    
+	<div class="input-group">
+  		<input type="text" class="form-control" placeholder="Look Up a Item .." ng-model="searchText"/>
+	  		<span class="input-group-btn">
+				<button id = "searchButton" class="btn btn-default" type="submit" ng-click="searchItem()"><span class="glyphicon glyphicon-search"></span></button>
+			</span>
+	</div>
+		<div id="scandit-barcode-picker" style="max-width: 1280px; max-height: 80%;"></div>
+		<div ng-show = "nothingFound" class= "ng-cloak"> Nothing Found </div>
+		<div ng-show = "searchResult" class= "ng-cloak"> Results:	
+		<div ng-repeat= "item in items">
+			<div class="col-xs-2">
+				<img src="{{item.posterUrl}}" alt="/images/placeholderImageItem.png" class="img-rounded" width="100" height="100"></img>
+			</div>
+ 			<div class="col-md-10 col-xs-12">
+ 				<div>Item Title: {{ item.title }}</div>
+				<div>Item Description: {{ item.description }}</div>
+				<div class="checkbox"><label><input type="checkbox" ng-model="item.owns"/> Own</label></div>
+				<div class="checkbox"><label><input type="checkbox" ng-model="item.wantsToOwn"/> Wants To Own</label></div>
+				<div class="checkbox"><label><input type="checkbox" ng-model="item.complete"/> Complete</label></div>
+				<div class="checkbox"><label><input type="checkbox" ng-model="item.wantsToComplete"/> Wants To Complete</label></div>
+				<button type="button" style = "margin: 10px" class="btn btn-default" ng-click="addItem(item)" >Add Item</button>
+			</div>
+		</div>	
+	</div>
+	</div>
+ 		
+ 		
+	<div ng-show = "showManualEntry" class="form-group ng-cloak">
 		<h2 style = "text-align: center">Manual Entry</h2>
 		<label for="Item Title">Item Title:</label>
 		<input type="text" class="form-control" placeholder="Item Title" ng-required = "true" ng-model="title"/>

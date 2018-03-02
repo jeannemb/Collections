@@ -9,8 +9,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-
-	<script src="/js/index.js"></script>
+ 	<script src="https://unpkg.com/scandit-sdk"></script>
+ 	<script src="/js/index.js"></script>
 	<script src="/js/addBook.js"></script>
 
 	<style>
@@ -179,7 +179,8 @@
   						<li style = "width: 100%;"><a href="libraryHome2" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-home"></span> Collections</a></li>
   						<li><a href="libraryCreation" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-plus"></span> Add Library</a></li>
   						<li class="active" style = "width: 100%;"><a href="" class="list-group-item list-group-item-action active"><span class="glyphicon glyphicon-plus"></span> Add Item</a></li>
-  						<li><a href="setting" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Setting</a></li>
+  						<li><a href="librarySetting" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Library Setting</a></li>
+  						<li><a href="accountSetting" class="list-group-item list-group-item-action"> <span class="glyphicon glyphicon-cog"></span> Account Setting</a></li>
   						<li><a href="/logout" class="list-group-item list-group-item-action"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
   					</ul>
   				</div>
@@ -212,22 +213,29 @@
 	<div>Search Options:</div>
 	<div class="form-group">
     <div class="custom-control custom-radio">
-      <input type="radio" id="searchByKeyword" value = "keyword" ng-model="search" class="custom-control-input" checked=""/>
+      <input type="radio" id="searchByKeyword" value = "keyword" ng-model="search" ng-click="keywordClick()" class="custom-control-input" checked=""/>
       <label class="custom-control-label" for="searchByKeyword">Search By Keyword</label>
     </div>
     <div class="custom-control custom-radio">
-      <input type="radio" id="searchByISBN" value = "isbn" ng-model="search" class="custom-control-input"/>
+      <input type="radio" id="searchByISBN" value = "isbn" ng-model="search" ng-click="ISBNClick()" class="custom-control-input"/>
       <label class="custom-control-label" for="searchByISBN">Search By ISBN</label>
     </div>
     </div>
+    <div style = "margin-top:0px; margin-right: 0px; margin-left: 0px; margin-bottom: 5px; padding-top:0px; padding-right: 0px; padding-left: 0px; padding-bottom:5px">
+    	<button class="btn btn-info btn-sm" type="button" ng-click="onScanClick()">
+    		<span class="glyphicon glyphicon-barcode ng-cloak"> Scan</span>
+    	</button>
+    </div>
+    
+	
 	
 	<div class="input-group">
   		<input type="text" class="form-control" placeholder="Look Up a Book .." ng-model="searchText"/>
 	  		<span class="input-group-btn">
-				<button class="btn btn-default" type="submit" ng-click="searchBook()"><span class="glyphicon glyphicon-search"></span></button>
+				<button id = "searchButton" class="btn btn-default" type="submit" ng-click="searchBook()"><span class="glyphicon glyphicon-search"></span></button>
 			</span>
-
 	</div>
+		<div id="scandit-barcode-picker" style="max-width: 1280px; max-height: 80%;"></div>
 		<div ng-show = "nothingFound" class= "ng-cloak"> Nothing Found </div>
 		<div ng-show = "searchResult" class= "ng-cloak"> Results:	
 		<div ng-repeat= "book in books">

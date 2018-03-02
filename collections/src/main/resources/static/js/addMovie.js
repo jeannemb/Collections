@@ -10,6 +10,23 @@ app.controller('addMovie', function($scope,$http) {
 	//$scope.LibraryName = localStorage.getItem("libraryId");
 	//$scope.LibraryName = $scope.LibraryName + " " + localStorage.getItem("type");
 	
+	$scope.movieClick = function(){
+		$scope.searchText = null;
+		$scope.showBarcode = false;
+		$scope.$apply();
+	}
+	
+	$scope.tvShowClick = function(){
+		$scope.searchText = null;
+		$scope.$apply();
+	}
+	
+	$scope.upcClick = function(){
+		$scope.searchText = null;
+		$scope.$apply();
+	}
+	
+	
 	function showSuccessSnakbar() {
 	    var x = document.getElementById("snackbarGreen")
 	    x.className = "show";
@@ -34,6 +51,46 @@ app.controller('addMovie', function($scope,$http) {
 		//$scope.response = "Manual Clicked";
 	}
 	
+	$scope.onScanClick = function(){
+		myMovies = [];
+		$scope.search = 'upc';
+		$scope.movies = myMovies;
+//		$scope.$apply();
+		ScanditSDK.configure("AVBrxQNdGAPiRWLNowlvS2k4Wd8rAfsiO3+ftc9lXFj9TqRgeET43tIi/QF7GJAgs3SE1WFGZW45d8ngJ0asZy0OPYD1YnIVL0YwnipOXX4Abi89zSpgg5oWHvrOoEubY8qakhc+ch56ujTqdo4/AvxNBV3NPkcQZqZl2JS/fz95HeKwkTs3GTsht4xL5N5TqwkJDIaqDAhNpDuEQHmKGNHzAKtGV2Jr/gXM+Hwydd+U6bf9eWeBDztH0/TFMyOnl6FjnAYqurXEd9zK82w5KwUA8FAy8owa1cIR8nEmfddys8egVbU06yfCAq/7Zkc3/DkaVwJJ5M2IJjQYh1zPGLxbWADHhlytoHYibgngt1Sn1YycKYnG8yl9n8R45Ums4H7MNkshZu4f/24KMNmoEvJ+fzCmdXdehP64VTUBUABbG1tsAKEWkDVrxK3oRTmQy0IwQyYFLOKfUHuJ7zVNp7Bbfo+H1e9MPMfYcKrhrfnTANryoDjlXl30uQrFnvA7g1lQYsSipRbl0Fq+uvGZsLkirmI0I6tHy0a6vUiK5IYtsBjVFr0hpX/7+/ROO5+HFMFprYzUSwhpl1z+Mcim774RNIXJp1O4huEmS/VLgaFvNp4XdTq2yoMX+z/y7hTwgN/yD2FJlAbfFOAzoufHW57xpzXV+3dxwI/YsV/AoXZsJBvRJw6c/wVL/M4cX6hkDpoOHk0YQRbUzkkgaWjQ6ogLZ4upi6H4aURWmreGQIk0B5FQSfhXQFRDqoWtv3pi5TfgA4QrakcoGJVsS7dEA4Arue6LFs5+BlA=", {
+			engineLocation: "https://unpkg.com/scandit-sdk/build",
+			preloadEngineLibrary: boolean = false,
+			preloadCameras: boolean = false
+		});
+		
+		ScanditSDK.BarcodePicker.create(document.getElementById("scandit-barcode-picker"), {
+			playSoundOnScan: true,
+			vibrateOnScan: true
+			}).then(function(barcodePicker) {
+				var scanSettings = new ScanditSDK.ScanSettings({
+					  enabledSymbologies: ["ean8", "ean13", "upca", "upce", "code128", "code39", "code93", "itf"],
+					  codeDuplicateFilter: 1000
+					});
+					barcodePicker.applyScanSettings(scanSettings);
+					$scope.responseResult = true;
+					barcodePicker.onScan(function(scanResult) {
+						
+//						var i = scanResult.barcodes.reduce(function(string, barcode) {
+//						    return string + ScanditSDK.Barcode.Symbology.toHumanizedName(barcode.symbology) + ": " + barcode.data + "\n";
+//						  }, "");
+						
+						var i = scanResult.barcodes.reduce(function(string, barcode) {
+						    return barcode.data;
+						  }, "");
+						console.log(i);
+						$scope.searchText = i;
+						$scope.$apply();
+						barcodePicker.destroy();
+						barcodePicker.removeScanListeners();
+						$('#searchButton').click();
+					});
+			});
+	}
+	
 	$scope.searchMovie = function(){
 		
 		if($scope.search == 'movies'){
@@ -42,7 +99,56 @@ app.controller('addMovie', function($scope,$http) {
 		}else if($scope.search == 'tvShows'){
 			url = "https://api.themoviedb.org/3/search/tv?api_key=188771a883b3cc1762e81ae2666c52fc&query="
 			performTvShowSerach(url);
+		}else if($scope.search == 'upc'){
+			console.log("UPC");
+			performUPCSearch();
 		}
+	}
+	
+	performUPCSearch =  function(){
+		myMovies = [];
+		var searchText = $scope.searchText;
+		console.log(searchText);
+		var url = "https://barcodelookup.com/restapi?category=Film&Television&barcode="+searchText+"&key=0m7gjzrn7gxzbtqmkb83sgqpj0wizz";
+		var settings = {
+				  "async": true,
+				  "crossDomain": true,
+				  "url": url,
+				  "method": "GET",
+				  "headers": {},
+				  "data": "{}"
+		}
+		$http({
+			method : "GET",
+			url: url,
+			data : settings
+		}).then(function successCallback(response) {
+			console.log(response);
+			response.data.result.forEach(function(element){
+				if(element.details.prod_details != "Media > Books"){
+					console.log(element);
+					var movie = new Object();
+					movie.title = element.details.product_name;
+					movie.upc = searchText;
+					movie.posterUrl = element.images[0];
+					movie.owns = false;
+					movie.wantsToOwn = false;
+					movie.complete = false;
+					movie.wantsToComplete = false;
+					console.log(movie);
+					myMovies.push(movie);
+				}
+			});
+			$scope.nothingFound = false;
+			$scope.searchResult = true;
+			//$scope.result = true;
+			$scope.movies = myMovies;
+			$scope.showSearchBar = true;
+			$scope.showManualEntry = false;
+			$scope.$apply();
+		}, function errorCallback(response) {
+			//showError();
+		});
 	}
 	
 	performMovieSerach = function(url){
