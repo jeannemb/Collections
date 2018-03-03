@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.css"></link>
 	<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
-		
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
@@ -15,6 +15,50 @@
 	<script src="/js/index.js"></script>
 	<script src="/js/libraryHome.js"></script>
 	    <style>
+	    
+	    .selectdiv {
+  position: relative;
+  width: 100%;  
+  float: left;
+  min-width: 200px;
+}
+
+.selectdiv:after {
+    content: '\f078';
+    font: normal normal normal 17px/1 FontAwesome;
+    color: #0ebeff;
+    right: 11px;
+    top: 6px;
+    height: 34px;
+    padding: 15px 0px 0px 8px;
+    border-left: 1px solid #0ebeff;
+    position: absolute;
+    pointer-events: none;
+}
+
+select::-ms-expand {
+display: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;  
+  display: block;
+  width: 100%;
+  height: 50px;
+  float: right;
+  margin: 5px 0px;
+  padding: 0px 24px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #0ebeff;
+  -ms-word-break: normal;
+  word-break: normal;
+}
     		/*
  			* Style tweaks
  			* --------------------------------------------------
@@ -133,13 +177,17 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
           </p>
      	<!-- Library Select  -->	 
-     	<div class="form-group">
-      		<label for="exampleSelect1">Library select</label>
+     	<div>
+      		<label>Library Select</label>
+      		<div class="selectdiv">
       		<select class="form-control" style = "padding-bottom:5px; margin-bottom: 10px;" ng-model="libraries.selected" ng-options="library.name for library in libraries.options track by library.libraryId" ng-change="selectedItemChanged()">
       		</select> 
-      		<label for="exampleSelect1">Library Management</label>
+      		</div>
+      		<div>
+      		<label>Library Management</label>
       		<div class = "form-inline">
-      			<a href="{{addLibrary}}" class="button btn btn-default" ng-class = "{'adisabled': !usable}" ng-click="doOperation()"><span class="glyphicon glyphicon-plus"></span> Add Item</a>
+      			<a href="{{addLibrary}}"  style = "padding-bottom:5px; margin-bottom: 10px;" class="button btn btn-default" ng-class = "{'adisabled': !usable}" ng-click="doOperation()"><span class="glyphicon glyphicon-plus"></span> Add Item</a>
+      		</div>
       		</div>
     	</div>
         
