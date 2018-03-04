@@ -109,7 +109,7 @@ app.controller('addMovie', function($scope,$http) {
 		myMovies = [];
 		var searchText = $scope.searchText;
 		console.log(searchText);
-		var url = "https://barcodelookup.com/restapi?category=Film&Television&barcode="+searchText+"&key=0m7gjzrn7gxzbtqmkb83sgqpj0wizz";
+		var url = "https://barcodelookup.com/restapi?category=Film&Television&barcode="+searchText+"&key=m9wpyat2ufk8k9kxtwq4o423k0oho7";
 		var settings = {
 				  "async": true,
 				  "crossDomain": true,

@@ -71,7 +71,7 @@ app.controller('addItem', function($scope,$http) {
 		var searchText = $scope.searchText;
 		console.log(searchText);
 		var index = 0;
-		var url = "https://barcodelookup.com/restapi?barcode="+searchText+"&key=0m7gjzrn7gxzbtqmkb83sgqpj0wizz";
+		var url = "https://barcodelookup.com/restapi?barcode="+searchText+"&key=m9wpyat2ufk8k9kxtwq4o423k0oho7";
 		var settings = {
 				  "async": true,
 				  "crossDomain": true,
