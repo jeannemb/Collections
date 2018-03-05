@@ -74,7 +74,7 @@ public class UserController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String username = auth.getName();
 		List<Library> libs = libraryDAO.getLibrariesByUser(username);
-		String result;
+		String result = null;
 		for(Library lib: libs){
 			Long libraryId = lib.getLibraryId();
 			String libraryType = libraryDAO.getLibraryTypeByLibraryId(libraryId);
