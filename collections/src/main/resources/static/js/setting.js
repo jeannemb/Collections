@@ -78,7 +78,7 @@ app.controller('setting', function($scope,$http) {
 	
 	 $scope.deleteLibrary = function(library){
     	 console.log(library);
-    	 var r = confirm("All Items within the library will be deleted. Are you sure you wnat to continue?");
+    	 var r = confirm("All Items within the library will be deleted. Are you sure you want to continue?");
     	 if (r == true) {
     		 
     		 $.ajax({
@@ -101,7 +101,7 @@ app.controller('setting', function($scope,$http) {
 	 
 	 $scope.deleteAllItems = function(library){
     	 console.log(library);
-    	 var r = confirm("All Items within the library will be deleted. Are you sure you wnat to continue?");
+    	 var r = confirm("All Items within the library will be deleted. Are you sure you want to continue?");
     	 if (r == true) {
     		 
     		 $.ajax({
@@ -173,7 +173,7 @@ app.controller('setting', function($scope,$http) {
     			name : lib.name,
 				type : lib.type
 			}
-    	 var r = confirm("Are you sure you wnat to update the library?");
+    	 var r = confirm("Are you sure you want to update the library?");
     	 if (r == true) {
     	 $http({
 				method: "POST",

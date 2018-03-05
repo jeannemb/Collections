@@ -113,4 +113,17 @@ public class UserDAOImpl implements UserDAO{
 		}
 	}
 
+	@Override
+	public String deleteUser(String username) throws SQLException {
+		String sql;
+		try{			
+			sql = "DELETE FROM users WHERE email = ?";
+			int result = template.update(sql, new Object[] { username });
+			System.out.println(result);
+		return "SUCCESS";
+		}catch(Exception e){
+			return "Deletion failed"+e;
+		}	
+	}
+
 }

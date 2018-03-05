@@ -16,4 +16,6 @@ public interface UserDAO {
 	
 	String updateUser(User user) throws SQLException;
 
+	String deleteUser(String username) throws SQLException;
+
 }
