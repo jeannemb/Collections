@@ -1,12 +1,27 @@
+	function display() {
+		console.log("Display Triggered");
+		if (document.getElementById("libType").value.toLowerCase() == "other" ){
+			document.getElementById("customType").style.visibility = "visible";
+			document.getElementById("customText").style.visibility = "visible";	
+		} else {
+			document.getElementById("customType").style.visibility = "hidden";
+			document.getElementById("customText").style.visibility = "hidden";
+		}
+	}
+
 $( document ).ready(function() {
+	console.log("enters funtion ");
 	
 	// SUBMIT FORM
     $("#libraryForm").submit(function(event) {
+    	console.log("enters submit ");
+
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
 		var libName = document.getElementById("libName");
 		var libType = document.getElementById("libType");
-		if (libName.value == null || libName.value == "" || libType.value == null || libType.value == ""){
+		var altType = document.getElementById("customType").value.toLowerCase();
+		if (libName.value == null || libName.value == "" || libType.value == null || libType.value == "" || (libType.value == "other" && altType.value == "")){
 			alert("Please Fill All Required Fields");
 		} else {
 			ajaxPost();

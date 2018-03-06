@@ -138,11 +138,13 @@
 	  	  <label for="Library Name">Library Name:</label>
 	      <input id="libName" type="text" class="form-control" placeholder="Library Name"/>
 	      <label for="Library Type">Type of Library:</label>
-	      <select id="libType" class="form-control">
+	      <select id="libType" class="form-control" onchange="display()">
 		      <option selected="" value="other">Other</option>
 		      <option value="books">Books</option>
 		      <option value="movies">Movies</option>
           </select>
+          <label id="customText" for="Library Type">Enter Custom Library Type:</label>
+	      <input id="customType" type="text" class="form-control" placeholder="Library Type"/>
 	      <button type="submit" class="btn btn-default">Create</button>
 	    
 </form>
